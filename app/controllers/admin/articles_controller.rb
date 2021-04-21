@@ -9,7 +9,7 @@ class Admin::ArticlesController < ApplicationController
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.limit(PER_PAGE)
+    @articles = Article.limit(PER_PAGE).eager_load(:category)
   end
 
   # GET /articles/1 or /articles/1.json
@@ -19,10 +19,12 @@ class Admin::ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+    set_categories
   end
 
   # GET /articles/1/edit
   def edit
+    set_categories
   end
 
   # POST /articles or /articles.json
@@ -64,6 +66,10 @@ class Admin::ArticlesController < ApplicationController
 
   private
 
+  def set_categories
+    @categories = Category.all.map { |category| [category.name, category.id] }
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_article
     @article = Article.find(params[:id])
@@ -71,6 +77,6 @@ class Admin::ArticlesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :category_id)
   end
 end

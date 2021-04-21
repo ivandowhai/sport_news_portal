@@ -21,6 +21,11 @@
     <%= form.text_area :body %>
   </div>
 
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.select :category_id, options_for_select(@categories, @article.category_id) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
