@@ -11,6 +11,27 @@
   </head>
 
   <body>
-    <%= yield %>
+  <div>
+    <div class="header">
+      <div class="header-element">
+        Sports Hub
+      </div>
+      <div class="header-element">
+        <input type="text" placeholder="Search by">
+      </div>
+    </div>
+
+    <div class="content-container">
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </nav>
+      <div>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
   </body>
 </html>

@@ -11,6 +11,29 @@
 </head>
 
 <body>
-<%= yield %>
+<div>
+  <div class="header">
+    <div class="header-element">
+      Sports Hub
+    </div>
+    <div class="header-element">
+      <input type="text" placeholder="Search by">
+    </div>
+  </div>
+
+  <div class="content-container">
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', admin_root_path %></li>
+        <li><%= link_to 'Articles', admin_articles_path %></li>
+        <li><%= link_to 'Categories', admin_categories_path %></li>
+      </ul>
+    </nav>
+    <div>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
