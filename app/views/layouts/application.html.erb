@@ -24,7 +24,10 @@
     <div class="content-container">
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><%= link_to 'Home', root_path %></li>
+          <% @categories.each do |category| %>
+            <li><%= link_to category.name, articles_by_category_url(category) %></li>
+          <% end %>
         </ul>
       </nav>
       <div>
