@@ -56,7 +56,7 @@ jobs:
       run: bin/rails db:create db:schema:load
 
     - name: Webpack
-      run: bundle exec rails webpacker:compile
+      run: rails webpacker:compile
 
     - name: Build and test with rspec
 #      working-directory: ${{env.api-dir}}
