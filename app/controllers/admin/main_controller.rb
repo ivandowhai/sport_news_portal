@@ -2,8 +2,9 @@
 
 module Admin
   class MainController < ApplicationController
-    layout 'admin'
+    layout "admin"
 
-    def index; end
+    def index
+    end
   end
 end
