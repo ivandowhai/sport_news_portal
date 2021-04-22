@@ -16,6 +16,21 @@
     <%= form.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.select :category_id, options_for_select(@categories, @category.category_id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enabled %>
+    <%= form.check_box :enabled %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.text_field :order %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

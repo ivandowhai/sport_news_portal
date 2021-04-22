@@ -5,7 +5,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.order(:order)
   end
 
   # GET /categories/1 or /categories/1.json
@@ -14,15 +14,18 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /categories/new
   def new
+    set_categories_for_list
     @category = Category.new
   end
 
   # GET /categories/1/edit
   def edit
+    set_categories_for_list
   end
 
   # POST /categories or /categories.json
   def create
+    set_categories_for_list
     @category = Category.new(category_params)
 
     respond_to do |format|
@@ -38,6 +41,7 @@ class Admin::CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
+    set_categories_for_list
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to admin_category_path @category, notice: "Category was successfully updated." }
@@ -60,6 +64,11 @@ class Admin::CategoriesController < ApplicationController
 
   private
 
+  def set_categories_for_list
+    @categories = Category.all.map { |category| [category.name, category.id] }
+    @categories.unshift ["None", nil]
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = Category.find(params[:id])
@@ -67,6 +76,6 @@ class Admin::CategoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def category_params
-    params.fetch(:category).permit(:name)
+    params.fetch(:category).permit(:name, :category_id, :enabled, :order)
   end
 end
