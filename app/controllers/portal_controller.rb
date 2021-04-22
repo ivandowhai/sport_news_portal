@@ -4,6 +4,6 @@ class PortalController < ApplicationController
   private
 
   def set_categories
-    @categories = Category.where(:enabled => true)
+    @categories = Category.where(enabled: true)
   end
 end
