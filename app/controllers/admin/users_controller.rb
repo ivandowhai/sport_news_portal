@@ -1,5 +1,4 @@
 class Admin::UsersController < Admin::AdminController
-
   PER_PAGE = 20
 
   def index
