@@ -1,40 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SportNewsPortal</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>SportNewsPortal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-  <div>
-    <div class="header">
-      <div class="header-element">
-        Sports Hub
-      </div>
-      <div class="header-element">
-        <input type="text" placeholder="Search by">
-      </div>
+<body>
+<div>
+  <div class="header">
+    <div class="header-element">
+      Sports Hub
     </div>
-
-    <div class="content-container">
-      <nav>
-        <ul>
-          <li><%= link_to 'Home', root_path %></li>
-          <% @categories.each do |category| %>
-            <li><%= link_to category.name, articles_by_category_url(category) %></li>
-          <% end %>
-        </ul>
-      </nav>
-      <div>
-        <%= yield %>
-      </div>
+    <div class="header-element">
+      <input type="text" placeholder="Search by">
+    </div>
+    <div class="header-element">
+    </div>
+    <div class="header-element">
+      <% if user_signed_in? %>
+        <% if current_user.is_admin? %>
+          <%= link_to 'Admin', admin_root_path %>
+        <% end %>
+        <%= current_user.email %>
+        <%= link_to 'Sign out', sign_out_path %>
+      <% else %>
+        <%= link_to 'Sign in', '/users/sign_in' %>
+        <%= link_to 'Sign up', '/users/sign_up' %>
+      <% end %>
     </div>
   </div>
 
-  </body>
+  <div class="content-container">
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', root_path %></li>
+        <% unless @categories.nil? %>
+          <% @categories.each do |category| %>
+            <li><%= link_to category.name, articles_by_category_url(category) %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </nav>
+    <div>
+      <%= yield %>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>

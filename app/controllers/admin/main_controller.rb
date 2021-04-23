@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
-module Admin
-  class MainController < ApplicationController
-    layout "admin"
-
-    def index
-    end
+class Admin::MainController < Admin::AdminController
+  def index
   end
 end
