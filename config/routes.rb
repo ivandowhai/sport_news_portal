@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   scope module: 'auth' do
     devise_scope :user do
       get '/sign_out', to: 'sessions#destroy'
+      get '/sign_up', to: 'registrations#sign_up'
+      get '/sign_in', to: 'sessions#sign_in'
     end
   end
 
