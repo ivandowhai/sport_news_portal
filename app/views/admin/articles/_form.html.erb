@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-group">
+    <%= form.label :title, class: 'label' %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+  <div class="form-group">
+    <%= form.label :body, class: 'label'  %>
+    <%= form.text_area :body, class: 'form-control'  %>
   </div>
 
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.select :category_id, options_for_select(@categories, @article.category_id) %>
+  <div class="form-group">
+    <%= form.label :category_id, class: 'label'  %>
+    <%= form.select :category_id, options_for_select(@categories, @article.category_id), {}, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>
