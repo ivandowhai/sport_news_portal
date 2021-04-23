@@ -1,40 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SportNewsPortal</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>SportNewsPortal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-  <div>
-    <div class="header">
-      <div class="header-element">
-        Sports Hub
-      </div>
-      <div class="header-element">
-        <input type="text" placeholder="Search by">
-      </div>
+<body>
+<div>
+
+  <%= render 'layouts/header' %>
+
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav flex-column">
+        <li class="nav-item"><%= link_to 'Home', root_path %></li>
+        <% @categories.each do |category| %>
+          <li><%= link_to category.name, articles_by_category_url(category) %></li>
+        <% end %>
+      </ul>
     </div>
-
-    <div class="content-container">
-      <nav>
-        <ul>
-          <li><%= link_to 'Home', root_path %></li>
-          <% @categories.each do |category| %>
-            <li><%= link_to category.name, articles_by_category_url(category) %></li>
-          <% end %>
-        </ul>
-      </nav>
-      <div>
+    <div class="col-md-9">
+      <div class="container">
         <%= yield %>
       </div>
     </div>
   </div>
+</div>
 
-  </body>
+</body>
 </html>
