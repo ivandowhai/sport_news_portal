@@ -1,80 +1,59 @@
-class Admin::CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show edit update destroy]
-
-  layout "admin"
-
-  # GET /categories or /categories.json
+class Admin::CategoriesController < Admin::AdminController
   def index
     @categories = Category.order(:order)
   end
 
-  # GET /categories/1 or /categories/1.json
   def show
+    @category = category
   end
 
-  # GET /categories/new
   def new
-    set_categories_for_list
+    @categories = categories_for_list
     @category = Category.new
   end
 
-  # GET /categories/1/edit
   def edit
-    set_categories_for_list
+    @categories = categories_for_list
+    @category = category
   end
 
-  # POST /categories or /categories.json
   def create
-    set_categories_for_list
+    @categories = categories_for_list
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to admin_category_path @category, notice: "Category was successfully created." }
-        format.json { render :show, status: :created, location: @category }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    if @category.save
+      redirect_to admin_category_path @category, notice: "Category was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /categories/1 or /categories/1.json
   def update
-    set_categories_for_list
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to admin_category_path @category, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
+    @categories = categories_for_list
+    @category = category
+    if @category.update(category_params)
+      redirect_to admin_category_path @category, notice: "Category was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /categories/1 or /categories/1.json
   def destroy
+    @category = category
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to admin_categories_url, notice: "Category was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to admin_categories_url, notice: "Category was successfully destroyed."
   end
 
   private
 
-  def set_categories_for_list
-    @categories = Category.all.map { |category| [category.name, category.id] }
-    @categories.unshift ["None", nil]
+  def categories_for_list
+    categories = Category.all.map { |category| [category.name, category.id] }
+    categories.unshift ["None", nil]
   end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_category
-    @category = Category.find(params[:id])
+  def category
+    Category.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def category_params
     params.fetch(:category).permit(:name, :category_id, :enabled, :order)
   end

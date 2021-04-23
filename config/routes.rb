@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'main#index'
+
+  devise_for :users
+
+  scope module: 'auth' do
+    devise_scope :user do
+      get '/sign_out', to: 'sessions#destroy'
+      get '/sign_up', to: 'registrations#sign_up'
+      get '/sign_in', to: 'sessions#sign_in'
+    end
+  end
 
   get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
   get '/articles/:article_id', to: 'articles#show', as: 'article'
@@ -11,5 +20,6 @@ Rails.application.routes.draw do
     root 'main#index'
     resources :categories
     resources :articles
+    resources :users
   end
 end
