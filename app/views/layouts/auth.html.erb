@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SportNewsPortal Admin</title>
+  <title>SportNewsPortal</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
@@ -13,14 +13,11 @@
 <body>
 <div>
 
-  <%= render 'layouts/header-admin' %>
+  <%= render 'layouts/header' %>
 
-  <div class="wrapper">
-    <div class="row">
-      <div class="col-md-2">
-        <%= render 'layouts/navbar-admin' %>
-      </div>
-      <div class="col-md-10">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="container">
         <%= yield %>
       </div>
     </div>

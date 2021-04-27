@@ -2,7 +2,7 @@
 
 <h1>Articles</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Title</th>
@@ -18,9 +18,9 @@
         <td><%= article.title %></td>
         <td><%= article.body %></td>
         <td><%= article.category.name %></td>
-        <td><%= link_to 'Show', admin_article_path(article) %></td>
-        <td><%= link_to 'Edit', edit_admin_article_path(article) %></td>
-        <td><%= link_to 'Destroy', admin_article_path(article), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', admin_article_path(article), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to 'Edit', edit_admin_article_path(article), class: 'btn btn-info btn-sm' %></td>
+        <td><%= link_to 'Destroy', admin_article_path(article), class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Article', new_admin_article_path %>
+<%= link_to 'New Article', new_admin_article_path, class: 'btn btn-primary' %>

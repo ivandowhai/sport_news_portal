@@ -1,0 +1,6 @@
+<ul class="nav flex-column">
+  <li class="nav-item"><%= link_to 'Home', root_path %></li>
+  <% @categories.each do |category| %>
+    <li><%= link_to category.name, articles_by_category_url(category) %></li>
+  <% end %>
+</ul>

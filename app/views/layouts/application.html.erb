@@ -6,48 +6,42 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
 <div>
-  <div class="header">
-    <div class="header-element">
-      Sports Hub
-    </div>
-    <div class="header-element">
-      <input type="text" placeholder="Search by">
-    </div>
-    <div class="header-element">
-    </div>
-    <div class="header-element">
-      <% if user_signed_in? %>
-        <% if current_user.is_admin? %>
-          <%= link_to 'Admin', admin_root_path %>
-        <% end %>
-        <%= current_user.email %>
-        <%= link_to 'Sign out', sign_out_path %>
-      <% else %>
-        <%= link_to 'Sign in', '/users/sign_in' %>
-        <%= link_to 'Sign up', '/users/sign_up' %>
-      <% end %>
+
+  <%= render 'layouts/header' %>
+
+  <div class="wrapper">
+    <div class="row">
+      <div class="col-md-2">
+        <%= render 'layouts/navbar' %>
+      </div>
+      <div class="col-md-10">
+        <%= yield %>
+
+        <div class="line"></div>
+
+        <%= render 'layouts/footer' %>
+
+      </div>
     </div>
   </div>
 
-  <div class="content-container">
-    <nav>
-      <ul>
-        <li><%= link_to 'Home', root_path %></li>
-        <% unless @categories.nil? %>
-          <% @categories.each do |category| %>
-            <li><%= link_to category.name, articles_by_category_url(category) %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    </nav>
-    <div>
-      <%= yield %>
+
+  <div class="container-fluid site-footer">
+    <div class="row">
+      <div class="col-md-2">
+        Sport Hub
+      </div>
+      <div class="col-md-8"></div>
+      <div class="col-md-2">
+        Copyright @2021 Sport Hub
+        Privacy/Terms
+      </div>
     </div>
   </div>
 </div>

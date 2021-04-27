@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.select :category_id, options_for_select(@categories, @category.category_id) %>
+  <div class="form-group">
+    <%= form.label :category_id, class: 'label' %>
+    <%= form.select :category_id, options_for_select(@categories, @category.category_id), {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :enabled %>
+  <div class="form-group">
+    <%= form.label :enabled, class: 'label' %>
     <%= form.check_box :enabled %>
   </div>
 
-  <div class="field">
-    <%= form.label :order %>
-    <%= form.text_field :order %>
+  <div class="form-group">
+    <%= form.label :order, class: 'label' %>
+    <%= form.text_field :order, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>

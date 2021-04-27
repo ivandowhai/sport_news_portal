@@ -1,0 +1,9 @@
+<ul>
+  <% pages.each do |page| %>
+    <% if page.enabled %>
+      <li>
+        <%= link_to page.name, '/pages/' + page.slug %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

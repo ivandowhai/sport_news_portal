@@ -1,0 +1,47 @@
+$primary: #D72130;
+
+@import "bootstrap";
+
+.switch-view {
+  border-radius: 100px;
+}
+
+.wrapper {
+  margin: 10px;
+}
+
+.header-wrapper {
+  display: flex;
+}
+
+.header-wrapper > div {
+  padding: 20px;
+}
+
+.logo {
+  background-color: $primary;
+  padding: 20px 30px;
+}
+.logo a, .logo a:hover, .logo a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+a {
+  color: #B2B2B2;
+}
+
+a:hover {
+  color: #B2B2B2;
+}
+
+.site-footer {
+  background-color: $primary;
+  color: white;
+  padding: 10px
+}
+
+.line {
+  border-top: 1px solid grey;
+  margin: 20px 0 40px;
+}

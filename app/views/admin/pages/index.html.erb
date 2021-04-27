@@ -1,0 +1,54 @@
+<%= render 'admin/pages/add-modal' %>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-3">
+    <h1>
+      Footer
+    </h1>
+  </div>
+  <div class="col-md-6"></div>
+  <div class="col-md-3">
+    <div>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#addFooter" id="addFooterButton">
+        + Add footer page
+      </button>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs" id="footers" role="tablist">
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <a class="nav-link"
+         data-category_id="<%= category.id %>"
+         href="#<%= category.slug %>"
+         id="<%= category.slug %>-tab"
+         data-toggle="tab"
+         role="tab"
+         aria-controls="<%= category.slug %>"
+         aria-selected="true">
+        <%= category.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+<div class="tab-content" id="footersContent">
+  <% @categories.each do |category| %>
+    <div class="tab-pane fade show" id="<%= category.slug %>" role="tabpanel" aria-labelledby="<%= category.slug %>-tab">
+      <%= render 'admin/pages/list', pages: @pages.select { |page| page.page_category.id == category.id } %>
+
+      <label class="label">
+        <input class="form-check-input enable-category"
+               type="checkbox"
+               placeholder="Enabled"
+               data-id="<%= category.id %>"
+               <% if category.enabled %> checked
+               <% end %> >
+        Enabled
+      </label>
+
+    </div>
+  <% end %>
+</div>
+
