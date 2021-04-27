@@ -21,5 +21,12 @@ Rails.application.routes.draw do
     resources :categories
     resources :articles
     resources :users
+
+    get '/pages', to: 'pages#index'
+    post '/pages', to: 'pages#create'
+    put '/pages/enable/:id', to: 'pages#enable'
+    delete '/pages/:id', to: 'pages#destroy'
+    get '/pages/edit/:id', to: 'pages#edit'
+    put '/pages/update/:id', to: 'pages#update'
   end
 end

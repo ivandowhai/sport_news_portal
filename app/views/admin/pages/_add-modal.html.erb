@@ -1,0 +1,25 @@
+<div class="modal fade" id="addFooter" tabindex="-1" aria-labelledby="addFooterLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <%= form_with url: admin_pages_path, method: :post do |form| %>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFooterLabel">Add footer</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group">
+            <%= form.label :name, "Name:", class: 'label' %>
+            <%= form.text_field :name, class: 'form-control' %>
+            <input type="hidden" name="category" id="category" />
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
