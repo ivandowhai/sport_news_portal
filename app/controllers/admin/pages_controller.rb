@@ -1,6 +1,6 @@
 class Admin::PagesController < Admin::AdminController
   def index
-    @categories = PageCategory.all
+    @categories = PageCategory.all.order("id")
     @pages = Page.all.eager_load(:page_category)
   end
 
@@ -32,16 +32,20 @@ class Admin::PagesController < Admin::AdminController
   def enable
     page = Page.find(params[:id])
     page.enabled = params[:enabled] == "true"
-    if page.save
-      render json: page
-    else
-      render json: {error: "Something went wrong."}
-    end
+    page.save
+    render json: page
   end
 
   def destroy
     page = Page.find(params[:id])
     page.destroy if page.can_delete?
     redirect_to admin_pages_path
+  end
+
+  def enable_category
+    page = PageCategory.find(params[:id])
+    page.enabled = params[:enabled] == "true"
+    page.save
+    render json: page
   end
 end

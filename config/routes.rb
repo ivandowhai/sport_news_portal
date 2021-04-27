@@ -29,5 +29,6 @@ Rails.application.routes.draw do
     delete '/pages/:id', to: 'pages#destroy'
     get '/pages/edit/:id', to: 'pages#edit'
     put '/pages/update/:id', to: 'pages#update'
+    put '/pages/enable_category/:id', to: 'pages#enable_category'
   end
 end

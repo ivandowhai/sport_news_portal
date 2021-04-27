@@ -37,6 +37,17 @@
   <% @categories.each do |category| %>
     <div class="tab-pane fade show" id="<%= category.slug %>" role="tabpanel" aria-labelledby="<%= category.slug %>-tab">
       <%= render 'admin/pages/list', pages: @pages.select { |page| page.page_category.id == category.id } %>
+
+      <label class="label">
+        <input class="form-check-input enable-category"
+               type="checkbox"
+               placeholder="Enabled"
+               data-id="<%= category.id %>"
+               <% if category.enabled %> checked
+               <% end %> >
+        Enabled
+      </label>
+
     </div>
   <% end %>
 </div>
