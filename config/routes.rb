@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
   get '/articles/:article_id', to: 'articles#show', as: 'article'
+  get '/pages/:slug', to: 'pages#show'
 
   namespace 'admin' do
     root 'main#index'

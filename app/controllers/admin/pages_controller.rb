@@ -1,11 +1,7 @@
 class Admin::PagesController < Admin::AdminController
 
   def index
-    page = Page.all
-    @pages = {
-      Page::CATEGORY_COMPANY_INFO => page.select{ |el| el.category == Page::CATEGORY_COMPANY_INFO },
-      Page::CATEGORY_CONTRIBUTORS => page.select{ |el| el.category == Page::CATEGORY_CONTRIBUTORS }
-    }
+    @pages = Page.get_all_by_categories
   end
 
   def create
@@ -18,7 +14,7 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def edit
-    @categories = Page.categories
+    @categories = Page.categories_for_select
     @page = Page.find(params[:id])
   end
 
