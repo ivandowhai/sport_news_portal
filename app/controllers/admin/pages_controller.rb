@@ -8,7 +8,7 @@ class Admin::PagesController < Admin::AdminController
     page = Page.new
     page.category = params[:category]
     page.name = params[:name]
-    page.slug = params[:name].downcase.sub(' ', '-')
+    page.slug = params[:name].downcase.gsub(' ', '-').gsub('/', '')
     page.save
     redirect_to admin_pages_path
   end
