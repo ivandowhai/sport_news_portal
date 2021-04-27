@@ -1,5 +1,5 @@
 <ul>
-  <% @pages[category].each do |page| %>
+  <% pages.each do |page| %>
     <% if page.enabled %>
       <li>
         <%= link_to page.name, '/pages/' + page.slug %>

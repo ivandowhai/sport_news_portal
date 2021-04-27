@@ -1,4 +1,6 @@
 class Page < ApplicationRecord
+  belongs_to :page_category, class_name: 'PageCategory', foreign_key: 'page_categories_id'
+
   CATEGORY_COMPANY_INFO = 'company_info'
   CATEGORY_CONTRIBUTORS = 'contributors'
 
@@ -18,14 +20,6 @@ class Page < ApplicationRecord
       ['Company info', CATEGORY_COMPANY_INFO],
       ['Contributors', CATEGORY_CONTRIBUTORS]
     ]
-  end
-
-  def self.get_all_by_categories
-    self.sort_by_category(self.all)
-  end
-
-  def self.get_enabled_by_categories
-    self.sort_by_category(self.where('enabled = %s', true))
   end
 
   def can_delete?

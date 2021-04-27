@@ -18,35 +18,26 @@
 </div>
 
 <ul class="nav nav-tabs" id="footers" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active"
-       href="#company_info"
-       id="company_info-tab"
-       data-toggle="tab"
-       role="tab"
-       aria-controls="company_info"
-       aria-selected="true">
-      Company info
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link"
-       href="#contributors"
-       id="contributors-tab"
-       data-toggle="tab"
-       role="tab"
-       aria-controls="contributors"
-       aria-selected="false">
-      Contributors
-    </a>
-  </li>
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <a class="nav-link"
+         data-category_id="<%= category.id %>"
+         href="#<%= category.slug %>"
+         id="<%= category.slug %>-tab"
+         data-toggle="tab"
+         role="tab"
+         aria-controls="<%= category.slug %>"
+         aria-selected="true">
+        <%= category.name %>
+      </a>
+    </li>
+  <% end %>
 </ul>
 <div class="tab-content" id="footersContent">
-  <div class="tab-pane fade show active" id="company_info" role="tabpanel" aria-labelledby="company_info-tab">
-    <%= render 'admin/pages/list', category: Page::CATEGORY_COMPANY_INFO %>
-  </div>
-  <div class="tab-pane fade" id="contributors" role="tabpanel" aria-labelledby="contributors-tab">
-    <%= render 'admin/pages/list', category: Page::CATEGORY_CONTRIBUTORS %>
-  </div>
+  <% @categories.each do |category| %>
+    <div class="tab-pane fade show" id="<%= category.slug %>" role="tabpanel" aria-labelledby="<%= category.slug %>-tab">
+      <%= render 'admin/pages/list', pages: @pages.select { |page| page.page_category.id == category.id } %>
+    </div>
+  <% end %>
 </div>
 

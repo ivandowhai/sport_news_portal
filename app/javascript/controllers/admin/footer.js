@@ -1,6 +1,9 @@
 import $ from "jquery";
 
 $(window).on('load', function () {
+    $('.nav-link').first().addClass('active')
+    $('.tab-pane').first().addClass('active')
+
     $('.enable-element').on('click', function (event) {
         $.ajax({
             url: `/admin/pages/enable/${event.target.dataset.id}`,
@@ -16,6 +19,6 @@ $(window).on('load', function () {
     })
 
     $("#addFooterButton").on('click', function () {
-        $('#category').val($('.tab-pane.active')[0].id)
+        $('#category').val($('.nav-link.active')[0].dataset.category_id)
     })
 })

@@ -8,7 +8,7 @@
     </tr>
   </th>
 
-  <% @pages[category].each do |page| %>
+  <% pages.each do |page| %>
     <tr>
       <td>
         <%= link_to page.name, '/admin/pages/edit/' + page.id.to_s %>

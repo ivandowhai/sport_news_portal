@@ -1,13 +1,11 @@
 class PortalController < ApplicationController
-  before_action :set_categories, :set_pages
+  before_action :set_links
 
   private
 
-  def set_categories
+  def set_links
     @categories = Category.where(enabled: true)
-  end
-
-  def set_pages
-    @pages = Page.get_enabled_by_categories
+    @pages = Page.where(enabled: true).order('"order"')
+    @page_categories = PageCategory.where(enabled: true)
   end
 end

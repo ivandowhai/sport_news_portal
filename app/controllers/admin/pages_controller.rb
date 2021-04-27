@@ -1,12 +1,13 @@
 class Admin::PagesController < Admin::AdminController
 
   def index
-    @pages = Page.get_all_by_categories
+    @categories = PageCategory.all
+    @pages = Page.all.eager_load(:page_category)
   end
 
   def create
     page = Page.new
-    page.category = params[:category]
+    page.page_category = PageCategory.find(params[:category_id])
     page.name = params[:name]
     page.slug = params[:name].downcase.gsub(' ', '-').gsub('/', '')
     page.save
@@ -14,7 +15,7 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def edit
-    @categories = Page.categories_for_select
+    @categories = PageCategory.all.map{ |category| [category.name, category.id] }
     @page = Page.find(params[:id])
   end
 
@@ -22,9 +23,9 @@ class Admin::PagesController < Admin::AdminController
     page = Page.find(params[:id])
     page.name = params[:page][:name]
     page.body = params[:page][:body]
-    page.slug = params[:page][:name].downcase.sub(' ', '-')
+    page.slug = params[:page][:name].downcase.gsub(' ', '-')
     page.order = params[:page][:order]
-    page.category = params[:page][:category]
+    page.page_category = PageCategory.find(params[:page][:category_id])
     page.save
     redirect_to admin_pages_path
   end
@@ -41,7 +42,7 @@ class Admin::PagesController < Admin::AdminController
 
   def destroy
     page = Page.find(params[:id])
-    page.destroy
+    page.destroy if page.can_delete?
     redirect_to admin_pages_path
   end
 end
