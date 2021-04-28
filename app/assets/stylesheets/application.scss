@@ -2,6 +2,10 @@ $primary: #D72130;
 
 @import "bootstrap";
 
+a {
+  text-decoration: none!important;
+}
+
 .switch-view {
   border-radius: 100px;
 }
@@ -24,7 +28,6 @@ $primary: #D72130;
 }
 .logo a, .logo a:hover, .logo a:visited {
   color: white;
-  text-decoration: none;
 }
 
 a {
@@ -44,4 +47,74 @@ a:hover {
 .line {
   border-top: 1px solid grey;
   margin: 20px 0 40px;
+}
+
+.header-username {
+  font-weight: bold;
+  font-size: small;
+}
+
+.header-container {
+  justify-content: flex-end !important;
+}
+
+.header-element-sport {
+  margin: 0 20px;
+}
+
+.articles-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.article-item {
+  width: 18rem;
+  margin: 0 20px;
+}
+
+.nav-sport {
+  font-weight: bold;
+  margin: 30px;
+}
+
+.nav-item-sport {
+  margin: 10px;
+  text-transform: uppercase;
+}
+
+.footer-item {
+  margin: 10px;
+  font-size: small;
+}
+
+.admin-categories-nav {
+  list-style-type: none;
+  justify-content: space-around;
+  display: flex;
+}
+
+.admin-categories-nav-item {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.admin-article {
+  display: flex; justify-content: flex-start; margin: 20px;
+}
+
+.admin-article-image {
+  width: 300px;
+}
+
+.admin-article-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-toggle-article {
+  cursor: pointer;
 }

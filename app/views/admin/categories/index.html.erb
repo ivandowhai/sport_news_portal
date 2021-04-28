@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Categories</h1>
+<%= render 'admin/title', title: 'Categories', link_text: '+ Add category', link_path: new_admin_category_path %>
+<%= render 'layouts/categories_list' %>
 
 <table class="table">
   <thead>
@@ -27,7 +28,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Category', new_admin_category_path, class: 'btn btn-primary' %>

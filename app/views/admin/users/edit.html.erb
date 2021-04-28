@@ -1,5 +1,7 @@
 <h1>Editing Article</h1>
 
+<%= render 'layouts/categories_list' %>
+
 <%= render 'form', user: @user, url: admin_user_path %>
 
 <%= link_to 'Show', admin_user_path(@user) %> |

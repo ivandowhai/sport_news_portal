@@ -1,4 +1,7 @@
 <h1>Editing page</h1>
+
+<%= render 'layouts/categories_list' %>
+
 <%= form_with(model: @page, url: '/admin/pages/update/' + @page.id.to_s, method: 'PUT') do |form| %>
   <% if @page.errors.any? %>
     <div id="error_explanation">

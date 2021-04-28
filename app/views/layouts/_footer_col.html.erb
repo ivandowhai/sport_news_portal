@@ -1,9 +1,9 @@
-<ul>
+<div>
   <% pages.each do |page| %>
     <% if page.enabled %>
-      <li>
+      <div class="footer-item">
         <%= link_to page.name, '/pages/' + page.slug %>
-      </li>
+      </div>
     <% end %>
   <% end %>
-</ul>
+</div>

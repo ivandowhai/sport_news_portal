@@ -1,6 +1,6 @@
 <h1>Editing Category</h1>
 
-<%= render 'form', category: @category, url: admin_category_path %>
+<%= render 'admin/title', title: 'Editing Category', link_text: '+ Add category', link_path: new_admin_category_path %>
+<%= render 'layouts/categories_list' %>
 
-<%= link_to 'Show', admin_category_path(@category) %> |
-<%= link_to 'Back', admin_categories_path %>
+<%= render 'form', category: @category, url: admin_category_path %>

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :articles
     resources :users
 
+    get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
+
     get '/pages', to: 'pages#index'
     post '/pages', to: 'pages#create'
     put '/pages/enable/:id', to: 'pages#enable'

@@ -4,7 +4,8 @@ class Admin::ArticlesController < Admin::AdminController
   PER_PAGE = 20
 
   def index
-    @articles = Article.limit(PER_PAGE).eager_load(:category)
+    @category = Category.find(params[:category_id])
+    @articles = @category.articles.load
   end
 
   def show
