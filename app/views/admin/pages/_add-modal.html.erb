@@ -1,6 +1,6 @@
 <div class="modal fade" id="addFooter" tabindex="-1" aria-labelledby="addFooterLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <%= form_with url: admin_pages_path, method: :post do |form| %>
+    <%= form_with scope: :page, url: admin_pages_path, method: :post do |form| %>
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addFooterLabel">Add footer</h5>
@@ -11,7 +11,7 @@
           <div class="form-group">
             <%= form.label :name, "Name:", class: 'label' %>
             <%= form.text_field :name, class: 'form-control' %>
-            <input type="hidden" name="category_id" id="category" />
+            <input type="hidden" name="page[page_categories_id]" id="category" />
           </div>
 
       </div>

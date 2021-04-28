@@ -1,8 +1,7 @@
 class Page < ApplicationRecord
-  belongs_to :page_category, class_name: "PageCategory", foreign_key: "page_categories_id"
-
-  CATEGORY_COMPANY_INFO = "company_info"
-  CATEGORY_CONTRIBUTORS = "contributors"
+  belongs_to :page_category
+  before_save :add_slug
+  scope :enabled, -> { where(enabled: true).order(:priority) }
 
   DELETE_FORBIDDEN = [
     "about-sports-hub",
@@ -11,18 +10,23 @@ class Page < ApplicationRecord
     "terms-and-conditions"
   ]
 
-  def self.categories
-    [CATEGORY_COMPANY_INFO, CATEGORY_CONTRIBUTORS]
-  end
-
-  def self.categories_for_select
-    [
-      ["Company info", CATEGORY_COMPANY_INFO],
-      ["Contributors", CATEGORY_CONTRIBUTORS]
-    ]
-  end
-
   def can_delete?
     DELETE_FORBIDDEN.include?(slug) == false
+  end
+
+  def enable
+    self.enabled = true
+    self.save
+  end
+
+  def disable
+    self.enabled = false
+    self.save
+  end
+
+  private
+
+  def add_slug
+    self.slug = name.downcase.tr(" ", "-").tr("/", "")
   end
 end

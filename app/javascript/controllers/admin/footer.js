@@ -9,19 +9,23 @@ $(window).on('load', function () {
     $('.tab-pane').first().addClass('active')
 
     $('.enable-element').on('click', function (event) {
+        let url = event.target.checked
+            ? `/admin/pages/enable/${event.target.dataset.id}`
+            : `/admin/pages/disable/${event.target.dataset.id}`
         $.ajax({
-            url: `/admin/pages/enable/${event.target.dataset.id}`,
+            url: url,
             type: 'PUT',
-            data: { enabled: event.target.checked },
             headers: headers
         })
     })
 
     $('.enable-category').on('click', function (event) {
+        let url = event.target.checked
+            ? `/admin/page_category/enable/${event.target.dataset.id}`
+            : `/admin/page_category/disable/${event.target.dataset.id}`
         $.ajax({
-            url: `/admin/pages/enable_category/${event.target.dataset.id}`,
+            url: url,
             type: 'PUT',
-            data: { enabled: event.target.checked },
             headers: headers
         })
     })

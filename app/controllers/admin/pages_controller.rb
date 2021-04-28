@@ -5,47 +5,58 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def create
-    page = Page.new
-    page.page_category = PageCategory.find(params[:category_id])
-    page.name = params[:name]
-    page.slug = params[:name].downcase.tr(" ", "-").tr("/", "")
-    page.save
-    redirect_to admin_pages_path
+    page = Page.new(page_params)
+    if page.save
+      redirect_to admin_pages_path page, notice: "Category was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
     @categories = PageCategory.all.map { |category| [category.name, category.id] }
-    @page = Page.find(params[:id])
+    page
   end
 
   def update
-    page = Page.find(params[:id])
-    page.name = params[:page][:name]
-    page.body = params[:page][:body]
-    page.slug = params[:page][:name].downcase.tr(" ", "-").tr("/", "")
-    page.order = params[:page][:order]
-    page.page_category = PageCategory.find(params[:page][:category_id])
-    page.save
-    redirect_to admin_pages_path
+    if page.update page_params
+      redirect_to admin_pages_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def enable
-    page = Page.find(params[:id])
-    page.enabled = params[:enabled] == "true"
-    page.save
-    render json: page
+    if page.enable
+      render json: page
+    else
+      render json: {error: 'Failed to save.'}
+    end
+  end
+
+  def disable
+    if page.disable
+      render json: page
+    else
+      render json: {error: 'Failed to save.'}
+    end
   end
 
   def destroy
-    page = Page.find(params[:id])
-    page.destroy if page.can_delete?
+    if page.can_delete?
+      page.destroy
+    end
+
     redirect_to admin_pages_path
   end
 
-  def enable_category
-    page = PageCategory.find(params[:id])
-    page.enabled = params[:enabled] == "true"
-    page.save
-    render json: page
+  def page_params
+    params.require(:page).permit(:name, :body, :enabled, :order, :page_categories_id)
+  end
+
+  private
+
+  def page
+    @page ||= Page.find(params[:id])
   end
 end

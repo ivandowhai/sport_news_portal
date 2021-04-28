@@ -9,7 +9,7 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def show
-    @article = article
+    article
   end
 
   def new
@@ -18,7 +18,7 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def edit
-    @article = article
+    article
     @categories = categories
   end
 
@@ -32,17 +32,15 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def update
-    @article = article
-    if @article.update(article_params)
-      redirect_to admin_article_path @article, notice: "Article was successfully updated."
+    if article.update(article_params)
+      redirect_to admin_article_path article, notice: "Article was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @article = article
-    @article.destroy
+    article.destroy
     redirect_to admin_articles_path, notice: "Article was successfully destroyed."
   end
 
@@ -53,7 +51,7 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def article
-    Article.find(params[:id])
+    @article ||= Article.find(params[:id])
   end
 
   def article_params
