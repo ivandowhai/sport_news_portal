@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<%= render 'admin/title', title: @article.title, link_text: '+ Add article', link_path: new_admin_article_path %>
 <%= render 'layouts/categories_list' %>
 
 <p>
@@ -16,6 +17,3 @@
   <strong>Category:</strong>
   <%= @article.category.name %>
 </p>
-
-<%= link_to 'Edit', edit_admin_article_path(@article) %> |
-<%= link_to 'Back', admin_articles_path %>

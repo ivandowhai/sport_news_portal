@@ -1,5 +1,4 @@
-<h1>New User</h1>
-
+<%= render 'admin/title', title: 'New User', link_text: '+ Add user', link_path: new_admin_user_path %>
 <%= render 'layouts/categories_list' %>
 
 <%= render 'form', user: @user, url: admin_users_path %>

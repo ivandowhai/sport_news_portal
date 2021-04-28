@@ -3,6 +3,10 @@ class Admin::UsersController < Admin::AdminController
 
   def index
     @users = User.limit(PER_PAGE)
+    @roles = [
+      {title: 'Users', slug: User::ROLE_USER},
+      {title: 'Admins', slug: User::ROLE_ADMIN}
+    ]
   end
 
   def show

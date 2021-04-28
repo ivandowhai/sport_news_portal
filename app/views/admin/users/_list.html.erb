@@ -1,0 +1,49 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% users.each do |user| %>
+    <tr>
+<!--      TODO: use name-->
+      <td><%= user.email %></td>
+      <td>
+<!--        TODO: real-->
+        <span class="badge badge-success">Active</span>
+      </td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton<%= user.id %>"
+                  data-toggle="dropdown"
+                  aria-expanded="false">
+            Dropdown button
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= user.id %>">
+            <li>
+<!--              TODO: real links-->
+              <% if role == 'admin' %>
+                <a class="dropdown-item" href="#">Remove from admin</a>
+              <% elsif role == 'user' %>
+<!--                TODO: block or activate-->
+                <a class="dropdown-item" href="#">Block</a>
+                <a class="dropdown-item bg-info" href="#">Make as admin</a>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'Delete', admin_user_path(user), class: 'dropdown-item text-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+            </li>
+          </ul>
+        </div>
+
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
