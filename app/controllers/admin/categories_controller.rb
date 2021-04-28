@@ -4,7 +4,7 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def show
-    @category = category
+    category
   end
 
   def new
@@ -29,17 +29,15 @@ class Admin::CategoriesController < Admin::AdminController
 
   def update
     @categories = categories_for_list
-    @category = category
-    if @category.update(category_params)
-      redirect_to admin_category_path @category, notice: "Category was successfully updated."
+    if category.update(category_params)
+      redirect_to admin_category_path category, notice: "Category was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @category = category
-    @category.destroy
+    category.destroy
     redirect_to admin_categories_url, notice: "Category was successfully destroyed."
   end
 
@@ -51,7 +49,7 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def category
-    Category.find(params[:id])
+    @category ||= Category.find(params[:id])
   end
 
   def category_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_115633) do
+ActiveRecord::Schema.define(version: 2021_04_26_092403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_115633) do
   create_table "page_categories", force: :cascade do |t|
     t.string "name"
     t.boolean "enabled"
+    t.index ["name"], name: "index_page_categories_on_name", unique: true
   end
 
   create_table "pages", force: :cascade do |t|
@@ -44,11 +45,12 @@ ActiveRecord::Schema.define(version: 2021_04_27_115633) do
     t.boolean "enabled"
     t.string "slug"
     t.text "body"
+    t.integer "priority", default: 1
+    t.bigint "page_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "order", default: 1
-    t.bigint "page_categories_id"
-    t.index ["page_categories_id"], name: "index_pages_on_page_categories_id"
+    t.index ["name"], name: "index_pages_on_name", unique: true
+    t.index ["page_category_id"], name: "index_pages_on_page_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_04_27_115633) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "role", default: "user"
+    t.string "role", default: "users"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

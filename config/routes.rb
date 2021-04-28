@@ -28,9 +28,12 @@ Rails.application.routes.draw do
     get '/pages', to: 'pages#index'
     post '/pages', to: 'pages#create'
     put '/pages/enable/:id', to: 'pages#enable'
+    put '/pages/disable/:id', to: 'pages#disable'
     delete '/pages/:id', to: 'pages#destroy'
     get '/pages/edit/:id', to: 'pages#edit'
     put '/pages/update/:id', to: 'pages#update'
-    put '/pages/enable_category/:id', to: 'pages#enable_category'
+
+    put '/page_category/enable/:id', to: 'page_categories#enable'
+    put '/page_category/disable/:id', to: 'page_categories#disable'
   end
 end
