@@ -1,7 +1,0 @@
-<ul class="admin-categories-nav">
-  <% @categories_for_nav.each do |category| %>
-    <li class="nav-item admin-categories-nav-item">
-      <%= link_to category.name, admin_articles_by_category_url(category) %>
-    </li>
-  <% end %>
-</ul>

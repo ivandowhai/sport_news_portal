@@ -1,0 +1,5 @@
+div
+  - pages.each do |page|
+    - if page.enabled
+      .footer-item
+        = link_to page.name, '/pages/' + page.slug

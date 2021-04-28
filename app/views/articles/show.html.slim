@@ -1,0 +1,6 @@
+h1
+  = @article.title
+h4
+  = link_to @article.category.name, articles_by_category_path(@article.category)
+div
+  = @article.body

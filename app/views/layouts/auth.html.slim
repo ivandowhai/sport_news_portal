@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title
+      | SportNewsPortal
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    div
+      = render 'layouts/header'
+      .row
+        .col-md-12
+          .container
+            = yield

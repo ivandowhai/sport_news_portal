@@ -1,0 +1,28 @@
+= render 'admin/pages/add-modal'
+p#notice
+  = notice
+.row
+  .col-md-3
+    h1
+      |  Footer 
+  .col-md-6
+  .col-md-3
+    div
+      button#addFooterButton.btn.btn-primary[data-toggle="modal" data-target="#addFooter"]
+        |  + Add footer page 
+= render 'layouts/categories_list'
+ul#footers.nav.nav-tabs[role="tablist"]
+  - @categories.each do |category|
+    li.nav-item
+      a.nav-link[data-category_id="#{category.id}" href="##{category.slug}" id="#{category.slug}-tab" data-toggle="tab" role="tab" aria-controls="#{category.slug}" aria-selected="true"]
+        = category.name
+#footersContent.tab-content
+  - @categories.each do |category|
+      div.tab-pane.fade.show[id="#{category.slug}" role="tabpanel" aria-labelledby="#{category.slug}-tab"]
+        = render 'admin/pages/list', pages: @pages.select { |page| page.page_category.id == category.id }
+
+        label.label
+          - if category.enabled
+            input.form-check-input.enable-category[type="checkbox" placeholder="Enabled" data-id="#{category.id}" checked="checked"] Enabled
+          - else
+            input.form-check-input.enable-category[type="checkbox" placeholder="Enabled" data-id="#{category.id}"] Enabled

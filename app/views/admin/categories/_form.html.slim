@@ -1,0 +1,24 @@
+= form_with(model: category, url: url) do |form|
+  - if category.errors.any?
+    #error_explanation
+      h2
+        = pluralize(category.errors.count, "error")
+        |  prohibited this category from being saved:
+      ul
+        - category.errors.each do |error|
+          li
+            = error.full_message
+  .form-group
+    = form.label :name, class: 'label'
+    = form.text_field :name, class: 'form-control'
+  .form-group
+    = form.label :category_id, class: 'label'
+    = form.select :category_id, options_for_select(@categories, @category.category_id), {}, class: 'form-control'
+  .form-group
+    = form.label :enabled, class: 'label'
+    = form.check_box :enabled
+  .form-group
+    = form.label :order, class: 'label'
+    = form.text_field :order, class: 'form-control'
+  .form-group
+    = form.submit nil, class: 'btn btn-primary'

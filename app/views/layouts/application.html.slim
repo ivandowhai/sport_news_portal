@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title
+      | SportNewsPortal
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    div
+      = render 'layouts/header'
+      .wrapper
+        .row
+          .col-md-2
+            = render 'layouts/navbar'
+          .col-md-10
+            = yield
+            .line
+            = render 'layouts/footer'
+      .container-fluid.site-footer
+        .row
+          .col-md-2
+            |  Sport Hub 
+          .col-md-8
+          .col-md-2
+            |  Copyright @2021 Sport Hub Privacy/Terms 

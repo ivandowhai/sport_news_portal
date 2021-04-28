@@ -1,0 +1,7 @@
+.footer
+  .row
+    - @page_categories.each do |page_category|
+      .col-md-4
+        h4
+          = page_category.name
+        = render 'layouts/footer_col', pages: @pages.select { |p| p.page_category.id == page_category.id }
