@@ -1,6 +1,6 @@
 class Admin::CategoriesController < Admin::AdminController
   def index
-    @categories = Category.order(:order)
+    @categories = Category.order(:priority)
   end
 
   def show
@@ -53,6 +53,6 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def category_params
-    params.fetch(:category).permit(:name, :category_id, :enabled, :order)
+    params.fetch(:category).permit(:name, :category_id, :enabled, :priority)
   end
 end

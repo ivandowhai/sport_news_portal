@@ -1,7 +1,7 @@
 class Page < ApplicationRecord
   belongs_to :page_category
   before_save :add_slug
-  scope :enabled, -> { where(enabled: true).order('"order"') }
+  scope :enabled, -> { where(enabled: true).order(:priority) }
 
   DELETE_FORBIDDEN = [
     "about-sports-hub",

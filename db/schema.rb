@@ -26,11 +26,11 @@ ActiveRecord::Schema.define(version: 2021_04_26_092403) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
     t.boolean "enabled", default: false
-    t.integer "order", default: 1
+    t.integer "priority", default: 1
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_categories_on_category_id"
   end
 
