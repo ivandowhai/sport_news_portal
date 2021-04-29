@@ -1,7 +1,7 @@
 categories = PageCategory.first_or_create(
   [
-    { name: "Company info", enabled: true },
-    { name: "Contributors", enabled: true }
+    {name: "Company info", enabled: true},
+    {name: "Contributors", enabled: true}
   ]
 )
 

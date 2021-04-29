@@ -30,7 +30,7 @@ class Admin::PagesController < Admin::AdminController
     if page.enable
       render json: page
     else
-      render json: {error: 'Failed to save.'}
+      render json: {error: "Failed to save."}
     end
   end
 
@@ -38,7 +38,7 @@ class Admin::PagesController < Admin::AdminController
     if page.disable
       render json: page
     else
-      render json: {error: 'Failed to save.'}
+      render json: {error: "Failed to save."}
     end
   end
 
