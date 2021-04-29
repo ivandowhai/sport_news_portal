@@ -8,11 +8,11 @@ class PageCategory < ApplicationRecord
 
   def enable
     self.enabled = true
-    self.save
+    save
   end
 
   def disable
     self.enabled = false
-    self.save
+    save
   end
 end

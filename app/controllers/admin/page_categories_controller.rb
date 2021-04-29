@@ -3,7 +3,7 @@ class Admin::PageCategoriesController < Admin::AdminController
     if page_category.enable
       render json: page_category
     else
-      render json: {error: 'Failed to save.'}
+      render json: {error: "Failed to save."}
     end
   end
 
@@ -11,7 +11,7 @@ class Admin::PageCategoriesController < Admin::AdminController
     if page_category.disable
       render json: page_category
     else
-      render json: {error: 'Failed to save.'}
+      render json: {error: "Failed to save."}
     end
   end
 
