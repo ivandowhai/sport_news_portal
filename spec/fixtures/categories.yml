@@ -1,0 +1,9 @@
+football:
+  name: "Football"
+  enabled: true
+  priority: 1
+
+tennis:
+  name: "Tennis"
+  enabled: true
+  priority: 2
