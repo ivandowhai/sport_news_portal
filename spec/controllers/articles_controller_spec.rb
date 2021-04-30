@@ -7,7 +7,7 @@ RSpec.describe ArticlesController, type: :controller do
   let(:second) { articles(:second) }
 
   describe "GET articles#index" do
-    let(:football) { categories(:football)}
+    let(:football) { categories(:football) }
 
     it "route" do
       should route(:get, "/articles/by_category/1").to(action: :index, category_id: 1)

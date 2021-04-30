@@ -4,7 +4,7 @@ RSpec.describe PagesController, type: :controller do
   fixtures :pages
 
   describe "GET pages#show" do
-    let(:page) { pages(:about_page)}
+    let(:page) { pages(:about_page) }
 
     it "routes" do
       should route(:get, "/pages/about-sports-hub").to(action: :show, slug: "about-sports-hub")
