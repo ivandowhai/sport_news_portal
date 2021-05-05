@@ -61,6 +61,23 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Database cleaner config
+  config.before(:suite) do 
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around do |example|
+    DatabaseCleaner.cleaning do 
+      example.run
+    end
+  end
+
+  # Factory bot
+  config.include FactoryBot::Syntax::Methods
+
+  config.include Capybara::DSL
 end
 
 Shoulda::Matchers.configure do |config|
