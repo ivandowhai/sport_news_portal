@@ -13,7 +13,7 @@ table.table
   - pages.each do |page|
     tr
       td
-        = link_to page.name, '/admin/pages/edit/' + page.id.to_s
+        = link_to page.name, "/admin/pages/#{page.id.to_s}/edit"
       td
         = page.priority
       td

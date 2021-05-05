@@ -1,7 +1,7 @@
 h1
   | Editing page
 = render 'layouts/categories_list'
-= form_with(model: @page, url: '/admin/pages/update/' + @page.id.to_s, method: 'PUT') do |form|
+= form_with(model: @page, url: "/admin/pages/#{@page.id.to_s}update", method: 'PUT') do |form|
   - if @page.errors.any?
     #error_explanation
       h2
@@ -18,10 +18,10 @@ h1
     = form.label :body, class: 'label'
     = form.text_area :body, class: 'form-control'
   .form-group
-    = form.label :order, class: 'label'
-    = form.text_field :order, class: 'form-control'
+    = form.label :priority, class: 'label'
+    = form.text_field :priority, class: 'form-control'
   .form-group
-    = form.label :category_id, class: 'label'
-    = form.select :category_id, options_for_select(@categories, @page.page_category), {}, class: 'form-control'
+    = form.label :page_category_id, class: 'label'
+    = form.select :page_category_id, options_for_select(@categories, @page.page_category_id), {}, class: 'form-control'
   .form-group
     = form.submit nil, class: 'btn btn-primary'

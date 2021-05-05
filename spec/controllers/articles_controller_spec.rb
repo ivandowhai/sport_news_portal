@@ -8,16 +8,15 @@ RSpec.describe ArticlesController, type: :request do
       visit articles_by_category_path(category.id)
 
       articles.each do |article|
-        page.should have_content(article.title)
+        expect(page).to have_content(article.title)
       end
     end
 
     it "Show one article" do
-      category = create(:category)
-      article = create(:article, category: category)
+      article = create(:article, category: create(:category))
       visit article_path(article.id)
-      page.should have_content(article.title)
-      page.should have_content(article.body)
+      expect(page).to have_content(article.title)
+      expect(page).to have_content(article.body)
     end
   end
 end
