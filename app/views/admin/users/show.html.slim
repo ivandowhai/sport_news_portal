@@ -1,0 +1,12 @@
+p#notice
+  = notice
+= render 'admin/title', title: @user.email, link_text: '+ Add user', link_path: new_admin_user_path
+= render 'layouts/categories_list'
+p
+  strong
+    | Email:
+  = @user.email
+p
+  strong
+    | Role:
+  = @user.role

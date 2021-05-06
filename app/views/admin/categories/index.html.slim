@@ -1,0 +1,33 @@
+p#notice
+  = notice
+= render 'admin/title', title: 'Categories', link_text: '+ Add category', link_path: new_admin_category_path
+= render 'layouts/categories_list'
+table.table
+  thead
+    tr
+      th
+        | Name
+      th
+        | Parent category
+      th
+        | Enabled
+      th
+        | Order
+      th[colspan="3"]
+  tbody
+    - @categories.each do |category|
+      tr
+        td
+          = category.name
+        td
+          = category.category.nil? ? 'None' : category.category.name
+        td
+          = category.enabled ? 'Yes' : 'No'
+        td
+          = category.priority
+        td
+          = link_to 'Show', admin_category_path(category), class: 'btn btn-primary btn-sm'
+        td
+          = link_to 'Edit', edit_admin_category_path(category), class: 'btn btn-info btn-sm'
+        td
+          = link_to 'Destroy', admin_category_path(category), class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }

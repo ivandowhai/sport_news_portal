@@ -11,7 +11,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ "*" ]
 
 jobs:
   test:
@@ -31,6 +31,14 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Use Node.js 13.10
+      uses: actions/setup-node@v1
+      with:
+        node-version: '13.10'
+    - name: Install yarn
+      run: yarn
+    - name: Webpack
+      run: RAILS_ENV=test bin/rails webpacker:clobber && RAILS_ENV=test bin/rails webpacker:compile
     - name: Run tests
       run: bundle exec rspec
     - name: Standard

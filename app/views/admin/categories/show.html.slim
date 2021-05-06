@@ -1,0 +1,20 @@
+p#notice
+  = notice
+= render 'admin/title', title: @category.name, link_text: '+ Add category', link_path: new_admin_category_path
+= render 'layouts/categories_list'
+p
+  strong
+    | Name:
+  = @category.name
+p
+  strong
+    | Parent category:
+  = @category.category.nil? ? 'None' : @category.category.name
+p
+  strong
+    | Enabled:
+  = @category.enabled ? 'Yes' : 'No'
+p
+  strong
+    | Order:
+  = @category.priority

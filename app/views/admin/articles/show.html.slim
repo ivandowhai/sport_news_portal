@@ -1,0 +1,16 @@
+p#notice
+  = notice
+= render 'admin/title', title: @article.title, link_text: '+ Add article', link_path: new_admin_article_path
+= render 'layouts/categories_list'
+p
+  strong
+    | Title:
+  = @article.title
+p
+  strong
+    | Body:
+  = @article.body[0..100]
+p
+  strong
+    | Category:
+  = @article.category.name

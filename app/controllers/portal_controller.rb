@@ -4,8 +4,8 @@ class PortalController < ApplicationController
   private
 
   def set_links
-    @categories = Category.where(enabled: true)
-    @pages = Page.where(enabled: true).order('"order"')
-    @page_categories = PageCategory.where(enabled: true).order("id")
+    @categories = Category.enabled
+    @pages = Page.enabled
+    @page_categories = PageCategory.enabled
   end
 end

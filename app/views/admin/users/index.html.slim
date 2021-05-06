@@ -1,0 +1,14 @@
+p#notice
+  = notice
+= render 'admin/title', title: 'Users', link_text: '+ Add user', link_path: new_admin_user_path
+= render 'layouts/categories_list'
+ul#footers.nav.nav-tabs[role="tablist"]
+  - @roles.each do |role|
+    li.nav-item
+      a.nav-link[data-category_id="#{role[:slug]}" href="##{role[:slug]}" id="#{role[:slug]}-tab" role="tab" data-toggle="tab" aria-controls="#{role[:slug]}" aria-selected="true"]
+        = role[:title]
+
+#footersContent.tab-content
+  - @roles.each do |role|
+      div.tab-pane.fade.show[id="#{role[:slug]}" role="tabpanel" aria-labelledby="#{role[:slug]}-tab"]
+        = render 'admin/users/list', users: @users.select { |user| user.role == role[:slug] }, role: role[:slug]

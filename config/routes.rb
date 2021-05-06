@@ -25,12 +25,12 @@ Rails.application.routes.draw do
 
     get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
 
-    get '/pages', to: 'pages#index'
-    post '/pages', to: 'pages#create'
+    resources :pages
     put '/pages/enable/:id', to: 'pages#enable'
-    delete '/pages/:id', to: 'pages#destroy'
-    get '/pages/edit/:id', to: 'pages#edit'
-    put '/pages/update/:id', to: 'pages#update'
-    put '/pages/enable_category/:id', to: 'pages#enable_category'
+    put '/pages/disable/:id', to: 'pages#disable'
+
+
+    put '/page_category/enable/:id', to: 'page_categories#enable'
+    put '/page_category/disable/:id', to: 'page_categories#disable'
   end
 end

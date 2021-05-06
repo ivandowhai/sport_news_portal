@@ -1,0 +1,18 @@
+#addFooter.modal.fade[tabindex="-1" aria-labelledby="addFooterLabel" aria-hidden="true"]
+  .modal-dialog
+    = form_with scope: :page, url: admin_pages_path, method: :post do |form|
+      .modal-content
+        .modal-header
+          h5#addFooterLabel.modal-title
+            | Add footer
+          button.btn-close[type="button" data-dismiss="modal" aria-label="Close"]
+        .modal-body
+          .form-group
+            = form.label :name, "Name:", class: 'label'
+            = form.text_field :name, class: 'form-control'
+            input#category[type="hidden" name="page[page_categories_id]"]
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-dismiss="modal"]
+            | Cancel
+          button.btn.btn-primary[type="submit"]
+            | Add

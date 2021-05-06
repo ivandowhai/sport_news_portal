@@ -4,13 +4,13 @@ class Admin::UsersController < Admin::AdminController
   def index
     @users = User.limit(PER_PAGE)
     @roles = [
-      {title: 'Users', slug: User::ROLE_USER},
-      {title: 'Admins', slug: User::ROLE_ADMIN}
+      {title: "Users", slug: User::ROLE_USER},
+      {title: "Admins", slug: User::ROLE_ADMIN}
     ]
   end
 
   def show
-    @user = user
+    user
   end
 
   def new
@@ -38,24 +38,22 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def update
-    @user = user
-    if @user.update(user_params)
-      redirect_to admin_user_path @user, notice: "User was successfully updated."
+    if user.update(user_params)
+      redirect_to admin_user_path user, notice: "User was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @user = user
-    @user.destroy
+    user.destroy
     redirect_to admin_users_path, notice: "User was successfully destroyed."
   end
 
   private
 
   def user
-    User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
   def user_params

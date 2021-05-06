@@ -1,0 +1,31 @@
+table.table
+  thead
+    tr
+      th
+        | Name
+      th
+        | Status
+      th
+  tbody
+    - users.each do |user|
+      tr
+        td
+          = user.email
+        td
+          span.badge.badge-success
+            | Active
+        td
+          .dropdown
+            button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton#{user.id}"] Dropdown button
+            ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+              li
+                - if role == 'admin'
+                  a.dropdown-item[href="#"]
+                    | Remove from admin
+                - elsif role == 'user'
+                  a.dropdown-item[href="#"]
+                    | Block
+                  a.dropdown-item.bg-info[href="#"]
+                    | Make as admin
+              li
+                = link_to 'Delete', admin_user_path(user), class: 'dropdown-item text-danger', method: :delete, data: { confirm: 'Are you sure?' }
