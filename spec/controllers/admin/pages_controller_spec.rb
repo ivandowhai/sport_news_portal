@@ -2,8 +2,10 @@ require "rails_helper"
 
 RSpec.describe Admin::PagesController, type: :request do
   context "Page" do
+    let(:user) { create(:user) }
+
     it "Pages list" do
-      sign_in create(:user)
+      sign_in user
       page_category = create(:page_category, enabled: true)
       pages = create_list(:page, 2, page_category: page_category, enabled: true)
       visit admin_pages_path
@@ -15,7 +17,7 @@ RSpec.describe Admin::PagesController, type: :request do
 
     it "Should create new page" do
       pending("I don't know how to select hidden field")
-      sign_in create(:user)
+      sign_in user
       page_category = create(:page_category, enabled: true)
       create_list(:page, 2, page_category: page_category, enabled: true)
       visit admin_pages_path
@@ -29,7 +31,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Should update an existing page" do
-      sign_in create(:user)
+      sign_in user
       page_categories = create_list(:page_category, 2, enabled: true)
       site_page = create(:page, page_category: page_categories[0], enabled: true)
       visit edit_admin_page_path(site_page)
@@ -48,7 +50,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Disable" do
-      sign_in create(:user)
+      sign_in user
       page_category = create(:page_category, enabled: true)
       site_page = create(:page, page_category: page_category, enabled: true)
 
@@ -58,7 +60,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Enable" do
-      sign_in create(:user)
+      sign_in user
       page_category = create(:page_category, enabled: true)
       site_page = create(:page, page_category: page_category, enabled: false)
 
@@ -68,7 +70,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Should delete page" do
-      sign_in create(:user)
+      sign_in user
       page_category = create(:page_category, enabled: true)
       pages = create_list(:page, 2, page_category: page_category, enabled: true)
       visit admin_pages_path

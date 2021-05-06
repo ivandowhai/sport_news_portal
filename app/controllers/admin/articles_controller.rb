@@ -5,7 +5,6 @@ class Admin::ArticlesController < Admin::AdminController
 
   def index
     @category = Category.find(params[:category_id])
-    cookies[:current_category_id] = params[:category_id]
     @articles = @category.articles.load
   end
 
@@ -42,7 +41,7 @@ class Admin::ArticlesController < Admin::AdminController
 
   def destroy
     article.destroy
-    redirect_to admin_articles_by_category_url(cookies[:current_category_id]), notice: "Article was successfully destroyed."
+    redirect_to admin_articles_by_category_url(article.category), notice: "Article was successfully destroyed."
   end
 
   private

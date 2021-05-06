@@ -2,8 +2,10 @@ require "rails_helper"
 
 RSpec.describe Admin::CategoriesController, type: :request do
   context "Categories" do
+    let(:user) { create(:user) }
+
     it "Categories list" do
-      sign_in create(:user)
+      sign_in user
       categories = create_list(:category, 3)
       visit admin_categories_path
 
@@ -13,14 +15,14 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Show one category" do
-      sign_in create(:user)
+      sign_in user
       category = create(:category)
       visit admin_category_path(category.id)
       expect(page).to have_content(category.name)
     end
 
     it "Should create new category" do
-      sign_in create(:user)
+      sign_in user
       categories = create_list(:category, 2)
       visit new_admin_category_path
 
@@ -31,7 +33,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Should update an existing category" do
-      sign_in create(:user)
+      sign_in user
       categories = create_list(:category, 2)
       current_category = create(:category)
       visit edit_admin_category_path(current_category)
@@ -46,7 +48,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Should delete category" do
-      sign_in create(:user)
+      sign_in user
       create_list(:category, 2)
       visit admin_categories_path
 

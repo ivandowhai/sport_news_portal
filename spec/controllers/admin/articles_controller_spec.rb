@@ -2,8 +2,10 @@ require "rails_helper"
 
 RSpec.describe Admin::ArticlesController, type: :request do
   context "Articles" do
+    let(:user) { create(:user) }
+
     it "Articles by category" do
-      sign_in create(:user)
+      sign_in user
       category = create(:category)
       articles = create_list(:article, 5, category: category)
       visit admin_articles_by_category_path(category.id)
@@ -14,7 +16,7 @@ RSpec.describe Admin::ArticlesController, type: :request do
     end
 
     it "Show one article" do
-      sign_in create(:user)
+      sign_in user
       article = create(:article, category: create(:category))
       visit admin_article_path(article.id)
       expect(page).to have_content(article.title)
@@ -22,36 +24,38 @@ RSpec.describe Admin::ArticlesController, type: :request do
     end
 
     it "Should create new article" do
-      sign_in create(:user)
+      sign_in user
       categories = create_list(:category, 2)
       visit new_admin_article_path
 
-      fill_in "article[title]", with: "New sport article"
-      fill_in "article[body]", with: "New sport article content"
+      fill_in "article[title]", with: Faker::Lorem.sentence
+      fill_in "article[body]", with: Faker::Lorem.paragraph
       select categories[0].name, from: "article[category_id]"
 
       expect { click_button "Create Article" }.to change(Article, :count).by(1)
     end
 
     it "Should update an existing article" do
-      sign_in create(:user)
+      sign_in user
       categories = create_list(:category, 2)
       article = create(:article, category: categories[0])
       visit edit_admin_article_path(article)
 
-      fill_in "article[title]", with: "Updated sport article"
-      fill_in "article[body]", with: "Updated sport article content"
+      new_title = Faker::Lorem.sentence
+      new_body = Faker::Lorem.paragraph
+      fill_in "article[title]", with: new_title
+      fill_in "article[body]", with: new_body
       select categories[1].name, from: "article[category_id]"
 
       click_button "Update Article"
 
-      expect(article.reload.title).to eq "Updated sport article"
-      expect(article.body).to eq "Updated sport article content"
+      expect(article.reload.title).to eq new_title
+      expect(article.body).to eq new_body
       expect(article.category.name).to eq categories[1].name
     end
 
     it "Should delete article" do
-      sign_in create(:user)
+      sign_in user
       category = create(:category)
       create_list(:article, 5, category: category)
       visit admin_articles_by_category_path(category.id)

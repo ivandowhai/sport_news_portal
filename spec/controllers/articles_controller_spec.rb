@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ArticlesController, type: :request do
   context "Articles" do
-    it "Articles by category" do
+    it "list by category" do
       category = create(:category)
       articles = create_list(:article, 5, category: category)
       visit articles_by_category_path(category.id)
