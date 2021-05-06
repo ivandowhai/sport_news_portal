@@ -3,16 +3,13 @@ require "rails_helper"
 RSpec.describe Admin::PagesController, type: :request do
   context "Signed as admin" do
     before(:each) { sign_in create(:user) }
-    let(:page_category) { create(:page_category) }
-    let(:pages) { create_list(:page, 2, page_category: page_category) }
-    let(:page_categories) { create_list(:page_category, 2) }
     let(:site_page) { create(:page) }
+    before(:all) { @pages = create_list(:page, 2) }
 
     it "Pages list" do
-      pages
       visit admin_pages_path
 
-      pages.each do |site_page|
+      @pages.each do |site_page|
         expect(page).to have_content(site_page.name)
       end
     end
@@ -31,6 +28,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Should update an existing page" do
+      page_categories = create_list(:page_category, 2)
       site_page = create(:page, page_category: page_categories[0])
       visit edit_admin_page_path(site_page)
 
@@ -62,10 +60,9 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Should delete page" do
-      pages
       visit admin_pages_path
 
-      expect { find("a[href='/admin/pages/#{pages[0].id}']").click }.to change(Page, :count).by(-1)
+      expect { find("a[href='/admin/pages/#{@pages[0].id}']").click }.to change(Page, :count).by(-1)
     end
   end
 end
