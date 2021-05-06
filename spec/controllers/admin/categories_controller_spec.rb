@@ -15,8 +15,8 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Shows one category" do
-      visit admin_category_path(current_category.id)
-      expect(page).to have_content(current_category.name)
+      visit admin_category_path(@categories.first.id)
+      expect(page).to have_content(@categories.first.name)
     end
 
     it "Should create new category" do
@@ -29,15 +29,15 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Should update an existing category" do
-      visit edit_admin_category_path(current_category)
+      visit edit_admin_category_path(@categories.first)
 
       fill_in "category[name]", with: "Updated category"
       select @categories[1].name, from: "category[category_id]"
 
       click_button "Update Category"
 
-      expect(current_category.reload.name).to eq "Updated category"
-      expect(current_category.category.name).to eq @categories[1].name
+      expect(@categories.first.reload.name).to eq "Updated category"
+      expect(@categories.first.category.name).to eq @categories[1].name
     end
 
     it "Should delete category" do
