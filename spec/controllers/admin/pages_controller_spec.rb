@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Admin::PagesController, type: :request do
-  context "Page" do
-    let(:user) { create(:user) }
+  context "Signed as admin" do
+    before(:each) { sign_in create(:user) }
+    let(:page_category) { create(:page_category) }
+    let(:pages) { create_list(:page, 2, page_category: page_category) }
+    let(:page_categories) { create_list(:page_category, 2) }
+    let(:site_page) { create(:page) }
 
     it "Pages list" do
-      sign_in user
-      page_category = create(:page_category, enabled: true)
-      pages = create_list(:page, 2, page_category: page_category, enabled: true)
+      pages
       visit admin_pages_path
 
       pages.each do |site_page|
@@ -17,23 +19,19 @@ RSpec.describe Admin::PagesController, type: :request do
 
     it "Should create new page" do
       pending("I don't know how to select hidden field")
-      sign_in user
-      page_category = create(:page_category, enabled: true)
-      create_list(:page, 2, page_category: page_category, enabled: true)
+      pages
       visit admin_pages_path
 
       click_button "Add footer page"
 
       fill_in "page[name]", with: "New page"
       fill_in "page[page_categories_id]", with: page_category.id
-      # find(:css, "#category", visible: false).set(page_category.id)
+
       expect { click_button "Add" }.to change(Page, :count).by(1)
     end
 
     it "Should update an existing page" do
-      sign_in user
-      page_categories = create_list(:page_category, 2, enabled: true)
-      site_page = create(:page, page_category: page_categories[0], enabled: true)
+      site_page = create(:page, page_category: page_categories[0])
       visit edit_admin_page_path(site_page)
 
       fill_in "page[name]", with: "Updated page"
@@ -50,19 +48,13 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Disable" do
-      sign_in user
-      page_category = create(:page_category, enabled: true)
-      site_page = create(:page, page_category: page_category, enabled: true)
-
       put "/admin/pages/disable/#{site_page.id}", xhr: true
 
       expect(site_page.reload.enabled).to eq false
     end
 
     it "Enable" do
-      sign_in user
-      page_category = create(:page_category, enabled: true)
-      site_page = create(:page, page_category: page_category, enabled: false)
+      site_page = create(:page, :disabled)
 
       put "/admin/pages/enable/#{site_page.id}", xhr: true
 
@@ -70,9 +62,7 @@ RSpec.describe Admin::PagesController, type: :request do
     end
 
     it "Should delete page" do
-      sign_in user
-      page_category = create(:page_category, enabled: true)
-      pages = create_list(:page, 2, page_category: page_category, enabled: true)
+      pages
       visit admin_pages_path
 
       expect { find("a[href='/admin/pages/#{pages[0].id}']").click }.to change(Page, :count).by(-1)

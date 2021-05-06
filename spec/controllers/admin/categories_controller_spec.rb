@@ -1,12 +1,13 @@
 require "rails_helper"
 
 RSpec.describe Admin::CategoriesController, type: :request do
-  context "Categories" do
-    let(:user) { create(:user) }
+  context "Signed as admin" do
+    before(:each) { sign_in create(:user) }
+    let(:categories) { create_list(:category, 3) }
+    let(:current_category) { create(:category) }
 
     it "Categories list" do
-      sign_in user
-      categories = create_list(:category, 3)
+      categories
       visit admin_categories_path
 
       categories.each do |category|
@@ -15,15 +16,12 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Show one category" do
-      sign_in user
-      category = create(:category)
-      visit admin_category_path(category.id)
-      expect(page).to have_content(category.name)
+      visit admin_category_path(current_category.id)
+      expect(page).to have_content(current_category.name)
     end
 
     it "Should create new category" do
-      sign_in user
-      categories = create_list(:category, 2)
+      categories
       visit new_admin_category_path
 
       fill_in "category[name]", with: "New category"
@@ -33,9 +31,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Should update an existing category" do
-      sign_in user
-      categories = create_list(:category, 2)
-      current_category = create(:category)
+      categories
       visit edit_admin_category_path(current_category)
 
       fill_in "category[name]", with: "Updated category"
@@ -48,8 +44,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
     end
 
     it "Should delete category" do
-      sign_in user
-      create_list(:category, 2)
+      categories
       visit admin_categories_path
 
       expect { click_link("Destroy", match: :first) }.to change(Category, :count).by(-1)

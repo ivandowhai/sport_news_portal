@@ -1,20 +1,18 @@
 require "rails_helper"
 
 RSpec.describe Admin::PageCategoriesController, type: :request do
-  context "Page Category" do
-    let(:user) { create(:user) }
+  context "Signed as admin" do
+    before(:each) { sign_in create(:user) }
 
     it "Disable" do
-      sign_in user
-      page_category = create(:page_category, enabled: true)
+      page_category = create(:page_category)
       put "/admin/page_category/disable/#{page_category.id}", xhr: true
 
       expect(page_category.reload.enabled).to eq false
     end
 
     it "Enable" do
-      sign_in user
-      page_category = create(:page_category, enabled: false)
+      page_category = create(:page_category, :disabled)
       put "/admin/page_category/enable/#{page_category.id}", xhr: true
 
       expect(page_category.reload.enabled).to eq true

@@ -1,13 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Admin::ArticlesController, type: :request do
-  context "Articles" do
-    let(:user) { create(:user) }
+  context "Signed as admin" do
+    before(:each) { sign_in create(:user) }
+    let(:category) { create(:category) }
+    let(:categories) { create_list(:category, 2) }
+    let(:article) { create(:article, category: category) }
+    let(:articles) { create_list(:article, 5, category: category) }
 
-    it "Articles by category" do
-      sign_in user
-      category = create(:category)
-      articles = create_list(:article, 5, category: category)
+    it "Show list articles by category" do
+      articles
       visit admin_articles_by_category_path(category.id)
 
       articles.each do |article|
@@ -16,16 +18,13 @@ RSpec.describe Admin::ArticlesController, type: :request do
     end
 
     it "Show one article" do
-      sign_in user
-      article = create(:article, category: create(:category))
       visit admin_article_path(article.id)
       expect(page).to have_content(article.title)
       expect(page).to have_content(article.body)
     end
 
     it "Should create new article" do
-      sign_in user
-      categories = create_list(:category, 2)
+      categories
       visit new_admin_article_path
 
       fill_in "article[title]", with: Faker::Lorem.sentence
@@ -36,9 +35,7 @@ RSpec.describe Admin::ArticlesController, type: :request do
     end
 
     it "Should update an existing article" do
-      sign_in user
-      categories = create_list(:category, 2)
-      article = create(:article, category: categories[0])
+      categories
       visit edit_admin_article_path(article)
 
       new_title = Faker::Lorem.sentence
@@ -55,9 +52,7 @@ RSpec.describe Admin::ArticlesController, type: :request do
     end
 
     it "Should delete article" do
-      sign_in user
-      category = create(:category)
-      create_list(:article, 5, category: category)
+      articles
       visit admin_articles_by_category_path(category.id)
 
       expect { click_link("Destroy", match: :first) }.to change(Article, :count).by(-1)

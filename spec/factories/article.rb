@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :article do
-    category_id { category.id }
+    category { association :category }
     title { Faker::Lorem.sentence }
     body { Faker::Lorem.paragraph }
   end
