@@ -32,7 +32,7 @@ class Admin::PagesController < Admin::AdminController
     if page.enable
       render json: page
     else
-      render json: {error: "Failed to save."}
+      render json: {error: "Failed to save."}, status: :bad_request
     end
   end
 
@@ -40,7 +40,7 @@ class Admin::PagesController < Admin::AdminController
     if page.disable
       render json: page
     else
-      render json: {error: "Failed to save."}
+      render json: {error: "Failed to save."}, status: :bad_request
     end
   end
 
@@ -53,7 +53,7 @@ class Admin::PagesController < Admin::AdminController
   end
 
   def page_params
-    params.require(:page).permit(:name, :body, :enabled, :order, :page_categories_id)
+    params.require(:page).permit(:name, :body, :enabled, :priority, :page_category_id)
   end
 
   private
