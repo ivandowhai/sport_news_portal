@@ -4,13 +4,17 @@ p#notice
 = render 'layouts/categories_list'
 p
   strong
-    | Title:
+    | Title: 
   = @article.title
 p
   strong
-    | Body:
+    | Body: 
   = @article.body[0..100]
 p
   strong
-    | Category:
+    | Category: 
   = @article.category.name
+p
+  strong
+    | Image: 
+  = image_tag @article.image.url

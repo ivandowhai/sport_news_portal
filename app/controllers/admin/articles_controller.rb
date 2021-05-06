@@ -14,15 +14,16 @@ class Admin::ArticlesController < Admin::AdminController
 
   def new
     @article = Article.new
-    @categories = categories
+    @categories = categories_for_list
   end
 
   def edit
+    @categories = categories_for_list
     article
-    @categories = categories
   end
 
   def create
+    @categories = categories_for_list
     @article = Article.new(article_params)
     if @article.save
       redirect_to admin_article_path @article, notice: "Article was successfully created."
@@ -32,6 +33,7 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def update
+    @categories = categories_for_list
     if article.update(article_params)
       redirect_to admin_article_path article, notice: "Article was successfully updated."
     else
@@ -46,8 +48,8 @@ class Admin::ArticlesController < Admin::AdminController
 
   private
 
-  def categories
-    Category.all.map { |category| [category.name, category.id] }
+  def categories_for_list
+    categories = Category.all.map { |category| [category.name, category.id] }
   end
 
   def article
@@ -55,6 +57,6 @@ class Admin::ArticlesController < Admin::AdminController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :category_id)
+    params.require(:article).permit(:title, :body, :category_id, :image)
   end
 end

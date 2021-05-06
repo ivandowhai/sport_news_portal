@@ -18,4 +18,7 @@
     = form.label :category_id, class: 'label'
     = form.select :category_id, options_for_select(@categories, @article.category_id), {}, class: 'form-control'
   .form-group
+    = form.label :image, class: 'label'
+    = form.file_field :image
+  .form-group
     = form.submit nil, class: 'btn btn-primary'
