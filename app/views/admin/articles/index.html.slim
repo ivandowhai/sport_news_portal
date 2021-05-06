@@ -6,7 +6,8 @@ p#notice
   .row
     - @articles.each do |article|
       .col-md-12.admin-article
-        = image_tag article.image.thumb.url
+        - unless article.image.file.nil?
+          = image_tag article.image.thumb.url
         .card-body
           h5.card-title.admin-article-title
 

@@ -17,4 +17,5 @@ p
 p
   strong
     | Image: 
-  = image_tag @article.image.url
+  - unless @article.image.file.nil?
+    = image_tag @article.image.url

@@ -39,7 +39,6 @@ gem "pundit"
 gem 'bootstrap-sass'
 
 gem 'carrierwave', '~> 2.0'
-gem "rmagick", "~> 2.13.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
