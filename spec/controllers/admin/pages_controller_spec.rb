@@ -6,7 +6,7 @@ RSpec.describe Admin::PagesController, type: :request do
     let(:site_page) { create(:page) }
     before(:all) { @pages = create_list(:page, 2) }
 
-    it "Pages list" do
+    it "Shows pages list" do
       visit admin_pages_path
 
       @pages.each do |site_page|

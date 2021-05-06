@@ -6,7 +6,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
     before(:all) { @categories = create_list(:category, 3) }
     let(:current_category) { create(:category) }
 
-    it "Categories list" do
+    it "Shows categories list" do
       visit admin_categories_path
 
       @categories.each do |category|
@@ -14,7 +14,7 @@ RSpec.describe Admin::CategoriesController, type: :request do
       end
     end
 
-    it "Show one category" do
+    it "Shows one category" do
       visit admin_category_path(current_category.id)
       expect(page).to have_content(current_category.name)
     end
