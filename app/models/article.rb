@@ -6,7 +6,12 @@ class Article < ApplicationRecord
   private
 
   def prepare_video_link
-    id = video_link.match(/watch\?v=([\w\-]*)/).captures
-    self.video_link = id.nil? ? nil : "https://www.youtube-nocookie.com/embed/#{id.first}"
+    return if video_link.nil?
+    matches = video_link.match(/watch\?v=([\w\-]*)/)
+    unless matches.nil?
+      self.video_link = matches.captures.nil? ?
+      nil :
+      "https://www.youtube-nocookie.com/embed/#{matches.captures.first}"
+    end
   end
 end
