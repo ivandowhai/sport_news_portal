@@ -4,9 +4,8 @@ h1
   - @articles.each do |article|
     = link_to article_url(article.id) do
       .card.article-item
-        |  <img src="
-        = image_url 'example.jpg'
-        | " class="card-img-top" alt="sport"> 
+        - unless article.image.file.nil?
+          = image_tag article.image.thumb.url, class: "card-img-top"
         .card-body
           h5.card-title
             = article.title
