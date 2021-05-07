@@ -49,7 +49,7 @@ class Admin::ArticlesController < Admin::AdminController
   private
 
   def categories_for_list
-    categories = Category.all.map { |category| [category.name, category.id] }
+    Category.all.map { |category| [category.name, category.id] }
   end
 
   def article
