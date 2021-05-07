@@ -17,18 +17,23 @@ Rails.application.routes.draw do
   get '/articles/:article_id', to: 'articles#show', as: 'article'
   get '/pages/:slug', to: 'pages#show'
 
+  get '/locale/:locale', to: 'main#locale'
+
   namespace 'admin' do
     root 'main#index'
     resources :categories
     resources :articles
     resources :users
+    resources :locales
+
+    put '/locales/enable/:id', to: 'locales#enable'
+    put '/locales/disable/:id', to: 'locales#disable'
 
     get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
 
     resources :pages
     put '/pages/enable/:id', to: 'pages#enable'
     put '/pages/disable/:id', to: 'pages#disable'
-
 
     put '/page_category/enable/:id', to: 'page_categories#enable'
     put '/page_category/disable/:id', to: 'page_categories#disable'

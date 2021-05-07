@@ -14,7 +14,8 @@ class Admin::AdminController < ApplicationController
       {title: "Home", url: admin_root_path},
       {title: "Categories", url: admin_categories_path},
       {title: "Users", url: admin_users_path},
-      {title: "Footer", url: admin_pages_path}
+      {title: "Footer", url: admin_pages_path},
+      {title: "Locales", url: admin_locales_path}
     ]
   end
 

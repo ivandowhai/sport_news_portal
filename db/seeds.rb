@@ -58,3 +58,10 @@ Page.first_or_create(
     }
   ]
 )
+
+Locale.first_or_create(
+  [
+    {code: "en", enabled: true},
+    {code: "ua", enabled: true}
+  ]
+)

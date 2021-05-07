@@ -1,0 +1,17 @@
+#addLocale.modal.fade[tabindex="-1" aria-labelledby="addLocaleLabel" aria-hidden="true"]
+  .modal-dialog
+    = form_with scope: :locale, url: admin_locales_path, method: :post do |form|
+      .modal-content
+        .modal-header
+          h5#addLocaleLabel.modal-title
+            | Add locale
+          button.btn-close[type="button" data-dismiss="modal" aria-label="Close"]
+        .modal-body
+          .form-group
+            = form.label :code, "Code:", class: 'label'
+            = form.text_field :code, class: 'form-control'
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-dismiss="modal"]
+            | Cancel
+          button.btn.btn-primary[type="submit"]
+            | Add
