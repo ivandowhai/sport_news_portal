@@ -19,3 +19,8 @@ p
     | Image: 
   - unless @article.image.file.nil?
     = image_tag @article.image.url
+p
+  strong
+    | Video: 
+  - if @article.video_link
+    iframe[width="560" height="315" src="#{@article.video_link}" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
