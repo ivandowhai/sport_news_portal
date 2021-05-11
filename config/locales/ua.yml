@@ -3,3 +3,7 @@ ua:
   sign_out: 'Вихід'
   sign_in: 'Вхід'
   sign_up: 'Реєстрація'
+  comments: 'Коментарі'
+  delete: 'Видалити'
+  edit: 'Редагувати'
+  submit: 'Подати'

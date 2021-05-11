@@ -1,0 +1,16 @@
+h5
+  strong
+    = comment.user.email
+p
+  strong
+    = comment.created_at.strftime('%b %e')
+p[id="comment_#{comment.id}"]
+  = comment.comment
+p
+  - if policy(comment).destroy?
+    = link_to "/comment/#{comment.id}", method: :delete
+      strong
+        = t('delete')
+  - if policy(comment).edit?
+    span.edit-comment[data-id="#{comment.id}"]
+      = t('edit')

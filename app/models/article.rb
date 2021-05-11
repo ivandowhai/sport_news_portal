@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :category
+  has_many :comments, dependent: :delete_all
   mount_uploader :image, ImageUploader
   before_save :prepare_video_link
 

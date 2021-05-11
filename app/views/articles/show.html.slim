@@ -15,3 +15,16 @@ h4
       iframe[width="560" height="315" src="#{@article.video_link}" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
 div
   = @article.body
+br
+div
+  h4
+    = t('comments')
+  .container
+    = form_with model: @comment, url: "/comment/#{@article.id}",  method: :post, id: 'form' do |form|
+      = form.text_field :comment, class: 'form-control', id: "comment_field"
+      = form.hidden_field :comment_id, id: "comment_id"
+      = form.hidden_field :article_id, id: "article_id", value: @article.id
+      = form.button t('cancel'), type: 'button', class: 'btn btn-info', hidden: true, id: 'cancel_button'
+      = form.button t('submit'), class: 'btn btn-primary', id: 'submit_button'
+    - @comments.each do |comment|
+      = render "articles/comment", comment: comment

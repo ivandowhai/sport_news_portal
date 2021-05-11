@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
   get '/articles/:article_id', to: 'articles#show', as: 'article'
   get '/pages/:slug', to: 'pages#show'
+  
+  post '/comment/:article_id', to: 'comments#create'
+  put '/comment/:id', to: 'comments#update'
+  delete '/comment/:id', to: 'comments#destroy'
 
   get '/locale/:locale', to: 'main#locale'
 

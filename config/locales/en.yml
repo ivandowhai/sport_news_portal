@@ -35,3 +35,7 @@ en:
   sign_out: 'Sign out'
   sign_in: 'Sign in'
   sign_up: 'Sign up'
+  comments: 'Comments'
+  delete: 'Delete'
+  edit: 'Edit'
+  submit: 'Submit'
