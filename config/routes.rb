@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   post '/comment/:article_id', to: 'comments#create'
   put '/comment/:id', to: 'comments#update'
   delete '/comment/:id', to: 'comments#destroy'
+  post '/reaction', to: 'reactions#create'
+  delete '/reaction/:comment_id', to: 'reactions#destroy'
 
   get '/locale/:locale', to: 'main#locale'
 

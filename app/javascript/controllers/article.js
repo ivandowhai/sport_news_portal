@@ -31,7 +31,6 @@ $(window).on('load', function () {
         },
         headers: headers,
         success: function(response) {
-          console.log(response)
           window.location.reload()
         }
       }
@@ -46,5 +45,38 @@ $(window).on('load', function () {
 
       $.ajax(params)
     })
+
+    $('.like').on('click', function (event) {
+      $.ajax(makeParams(true, event.delegateTarget.dataset, headers))
+    })
+
+    $('.dislike').on('click', function (event) {
+      $.ajax(makeParams(false, event.delegateTarget.dataset, headers))
+    })
   }
 )
+
+function makeParams(reaction_type, options, headers) {
+  const params = {
+    headers: headers,
+    success: function() {
+      window.location.reload()
+    }
+  }
+
+  if (options.reacted == 1) {
+    params.type = 'DELETE'
+    params.url = `/reaction/${options.comment_id}`
+  } else {
+    params.type = 'POST'
+    params.url = '/reaction'
+    params.data = { 
+      reaction: {
+        comment_id: options.comment_id,
+        like: reaction_type
+      }
+    }
+  }
+
+  return params
+}
