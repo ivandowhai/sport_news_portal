@@ -10,7 +10,7 @@ class Comment < ApplicationRecord
     created_at < updated_at
   end
 
-  def self.comments_with_reactions(article_id, user_id)
+  def self.comments_with_reactions(article_id)
     Comment.left_outer_joins(:likes, :dislikes)
       .distinct
       .select("comments.*, count(reactions.id) as likes, count(dislikes_comments.id) as dislikes")
