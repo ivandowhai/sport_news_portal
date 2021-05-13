@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
 class Admin::ArticlesController < Admin::AdminController
-  PER_PAGE = 20
-
   def index
     @category = Category.find(params[:category_id])
-    @articles = @category.articles.load
+    @articles = @category.articles
   end
 
   def show
@@ -15,6 +13,7 @@ class Admin::ArticlesController < Admin::AdminController
   def new
     @article = Article.new
     @categories = categories_for_list
+    @category = Category.find(params[:category_id])
   end
 
   def edit
@@ -26,7 +25,7 @@ class Admin::ArticlesController < Admin::AdminController
     @categories = categories_for_list
     @article = Article.new(article_params)
     if @article.save
-      redirect_to admin_article_path @article, notice: "Article was successfully created."
+      redirect_to admin_category_article_path @article.category, @article, notice: "Article was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -35,7 +34,7 @@ class Admin::ArticlesController < Admin::AdminController
   def update
     @categories = categories_for_list
     if article.update(article_params)
-      redirect_to admin_article_path article, notice: "Article was successfully updated."
+      redirect_to admin_category_article_path article.category, article, notice: "Article was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -43,7 +42,7 @@ class Admin::ArticlesController < Admin::AdminController
 
   def destroy
     article.destroy
-    redirect_to admin_articles_by_category_url(article.category), notice: "Article was successfully destroyed."
+    redirect_to admin_category_articles_path article.category, notice: "Article was successfully destroyed."
   end
 
   private

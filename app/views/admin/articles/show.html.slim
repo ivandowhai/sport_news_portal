@@ -1,6 +1,6 @@
 p#notice
   = notice
-= render 'admin/title', title: @article.title, link_text: '+ Add article', link_path: new_admin_article_path
+= render 'admin/title', title: @article.title, link_text: '+ Add article', link_path: new_admin_category_article_path(@article.category_id)
 = render 'layouts/categories_list'
 p
   strong

@@ -27,15 +27,14 @@ Rails.application.routes.draw do
 
   namespace 'admin' do
     root 'main#index'
-    resources :categories
-    resources :articles
+    resources :categories do
+      resources :articles
+    end
     resources :users
     resources :locales
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'
-
-    get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
 
     resources :pages
     put '/pages/enable/:id', to: 'pages#enable'

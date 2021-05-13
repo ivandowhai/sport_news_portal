@@ -1,6 +1,6 @@
 p#notice
   = notice
-= render 'admin/title', title: @category.name, link_text: '+ Add article', link_path: new_admin_article_path
+= render 'admin/title', title: @category.name, link_text: '+ Add article', link_path: new_admin_category_article_path
 = render 'layouts/categories_list'
 .articles-container
   .row
@@ -10,15 +10,14 @@ p#notice
           = image_tag article.image.thumb.url
         .card-body
           h5.card-title.admin-article-title
-
           div
-            = link_to link_to article.title, admin_article_path(article)
+            = link_to link_to article.title, admin_category_article_path(@category, article)
           .dropdown-toggle-article[data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" data-reference="parent"]
             span
               svg.bi.bi-three-dots[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"]
                 path[d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"]
           .dropdown-menu.dropdown-menu-right
-            = link_to 'Destroy', admin_article_path(article), class: 'dropdown-item', method: :delete, data: { confirm: 'Are you sure?' }
-            = link_to 'Edit', edit_admin_article_path(article), class: 'dropdown-item'
+            = link_to 'Destroy', admin_category_article_path(@category, article), class: 'dropdown-item', method: :delete, data: { confirm: 'Are you sure?' }
+            = link_to 'Edit', edit_admin_category_article_path(@category, article), class: 'dropdown-item'
           p.card-text
             = article.body[0..200]
