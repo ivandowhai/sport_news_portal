@@ -7,10 +7,12 @@ class CommentPolicy
   end
 
   def edit?
+    return false if user.nil?
     user.id == comment.user_id
   end
 
   def destroy?
+    return false if user.nil?
     user.id == comment.user_id || user.is_admin?
   end
 end

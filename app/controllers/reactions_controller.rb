@@ -1,4 +1,6 @@
 class ReactionsController < PortalController
+  before_action :is_user_logged
+
   def create
     delete_old_reaction
 
@@ -20,6 +22,13 @@ class ReactionsController < PortalController
   end
 
   private
+
+  def is_user_logged
+    if current_user.nil?
+      render json: {}, status: :unauthorized
+      return
+    end
+  end
 
   def reaction
     @reaction ||= Reaction.find_by(comment_id: params[:comment_id], user_id: current_user.id)

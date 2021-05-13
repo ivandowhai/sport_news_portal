@@ -6,7 +6,11 @@ class CommentsController < PortalController
     @comment.article = article
     @comment.user = current_user
     if @comment.save
-      redirect_to article_path @comment.article, notice: "Comment was added."
+      redirect_to category_article_path(
+        @comment.article.category,
+        @comment.article,
+        notice: "Comment was added."
+      )
     else
       redirect_back(fallback_location: root_path)
     end
@@ -24,7 +28,11 @@ class CommentsController < PortalController
     authorize comment
     comment.destroy
 
-    redirect_to article_path @comment.article, notice: "Comment was deleted."
+    redirect_to category_article_path(
+      @comment.article.category,
+      @comment.article,
+      notice: "Comment was deleted."
+    )
   end
 
   private

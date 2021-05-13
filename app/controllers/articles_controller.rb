@@ -7,8 +7,10 @@ class ArticlesController < PortalController
   end
 
   def show
-    @article = Article.find(params[:article_id])
-    @comments = Comment.comments_with_reactions(params[:article_id])
+    @article = Article.find(params[:id])
+    @comments = @article.comments
+    @user_likes_comments = current_user.nil? ? [] : Reaction.user_likes(current_user.id).pluck(:comment_id)
+    @user_dislikes_comments = current_user.nil? ? [] : Reaction.user_dislikes(current_user.id).pluck(:comment_id)
     @comment = Comment.new
   end
 end
