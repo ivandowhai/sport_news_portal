@@ -2,6 +2,6 @@
 
 class Admin::MainController < Admin::AdminController
   def index
-    redirect_to admin_category_articles_url(Category.first)
+    redirect_to admin_category_articles_url(Category.enabled.first)
   end
 end

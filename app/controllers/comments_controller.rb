@@ -1,15 +1,10 @@
 class CommentsController < PortalController
-  include Pundit
-
   def create
-    @comment = Comment.new(comment_params)
-    @comment.article = article
-    @comment.user = current_user
+    @comment = current_user.comments.new(comment_params.merge(article: article))
     if @comment.save
       redirect_to category_article_path(
-        @comment.article.category,
-        @comment.article,
-        notice: "Comment was added."
+        @comment.article.category_id,
+        @comment.article
       )
     else
       redirect_back(fallback_location: root_path)
@@ -29,9 +24,8 @@ class CommentsController < PortalController
     comment.destroy
 
     redirect_to category_article_path(
-      @comment.article.category,
-      @comment.article,
-      notice: "Comment was deleted."
+      @comment.article.category_id,
+      @comment.article
     )
   end
 

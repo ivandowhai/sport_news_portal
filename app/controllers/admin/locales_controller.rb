@@ -1,6 +1,4 @@
 class Admin::LocalesController < Admin::AdminController
-  include Pundit
-
   def index
     @locales = Locale.all
   end

@@ -1,6 +1,4 @@
 class ArticlesController < PortalController
-  include Pundit
-
   def index
     @category = Category.find(params[:category_id])
     @articles = @category.articles.load
@@ -8,9 +6,10 @@ class ArticlesController < PortalController
 
   def show
     @article = Article.find(params[:id])
-    @comments = @article.comments
-    @user_likes_comments = current_user.nil? ? [] : Reaction.user_likes(current_user.id)
-    @user_dislikes_comments = current_user.nil? ? [] : Reaction.user_dislikes(current_user.id)
-    @comment = Comment.new
+    @comments = @article.comments.eager_load(:user)
+    comment_ids = @comments.pluck(:id)
+    @user_likes_comments = current_user.nil? ? [] : current_user.likes.where(comment_id: comment_ids)
+    @user_dislikes_comments = current_user.nil? ? [] : current_user.dislikes.where(comment_id: comment_ids)
+    @comment = current_user.nil? ? nil : current_user.comments.new
   end
 end

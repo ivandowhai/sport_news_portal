@@ -1,12 +1,15 @@
 class ReactionsController < PortalController
-  before_action :is_user_logged
+  before_action :authenticate_user!
 
   def create
-    delete_old_reaction
+    reaction = current_user.reactions.find_by(comment_id: params[:reaction][:comment_id])
+    if reaction.nil?
+      reaction = current_user.reactions.create(reaction_params)
+    else
+      reaction.like = params[:reaction][:like]
+    end
 
-    new_reaction = Reaction.new(reaction_params)
-    new_reaction.user = current_user
-    if new_reaction.save
+    if reaction.save
       render json: {}, status: :ok
     else
       render json: {}, status: :bad_request
@@ -23,21 +26,11 @@ class ReactionsController < PortalController
 
   private
 
-  def is_user_logged
-    if current_user.nil?
-      render json: {}, status: :unauthorized
-    end
-  end
-
   def reaction
-    @reaction ||= Reaction.find(params[:id])
+    @reaction ||= current_user.reactions.find(params[:id])
   end
 
   def reaction_params
     params.require(:reaction).permit(:comment_id, :like)
-  end
-
-  def delete_old_reaction
-    Reaction.find_by(comment_id: params[:reaction][:comment_id], user_id: current_user.id)&.destroy
   end
 end
