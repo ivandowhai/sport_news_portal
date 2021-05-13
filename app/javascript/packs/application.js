@@ -10,6 +10,7 @@ import "channels"
 import "bootstrap"
 import "../../assets/stylesheets/application.scss"
 import "../controllers/admin/footer"
+import "../controllers/admin/locales"
 
 Rails.start()
 Turbolinks.start()

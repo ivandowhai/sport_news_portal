@@ -7,5 +7,6 @@ class PortalController < ApplicationController
     @categories = Category.enabled
     @pages = Page.enabled
     @page_categories = PageCategory.enabled
+    @locales = Locale.enabled
   end
 end
