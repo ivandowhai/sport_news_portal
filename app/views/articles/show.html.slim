@@ -2,5 +2,16 @@ h1
   = @article.title
 h4
   = link_to @article.category.name, articles_by_category_path(@article.category)
+- unless @article.image.file.nil?
+  .row
+    .col-md-12
+      = image_tag @article.image.url
+.row
+  .col-md-12
+    br
+- if @article.video_link
+  .row
+    .col-md-12
+      iframe[width="560" height="315" src="#{@article.video_link}" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
 div
   = @article.body

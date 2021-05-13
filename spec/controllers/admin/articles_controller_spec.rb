@@ -46,16 +46,19 @@ RSpec.describe Admin::ArticlesController, type: :request do
       it "Should update an existing article" do
         visit edit_admin_article_path(@article)
 
+        video_id = Faker::Internet.password(min_length: 11)
         new_title = Faker::Lorem.sentence
         new_body = Faker::Lorem.paragraph
         fill_in "article[title]", with: new_title
         fill_in "article[body]", with: new_body
+        fill_in "article[video_link]", with: "https://www.youtube.com/watch?v=#{video_id}"
         select @categories[1].name, from: "article[category_id]"
 
         click_button "Update Article"
 
         expect(@article.reload.title).to eq new_title
         expect(@article.body).to eq new_body
+        expect(@article.video_link).to eq "https://www.youtube-nocookie.com/embed/#{video_id}"
         expect(@article.category.name).to eq @categories[1].name
       end
     end
