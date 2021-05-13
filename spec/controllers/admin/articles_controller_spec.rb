@@ -11,12 +11,12 @@ RSpec.describe Admin::ArticlesController, type: :request do
       end
 
       it "Shows list articles by category" do
-        visit admin_articles_by_category_path(@category.id)
+        visit admin_category_articles_path(@category.id)
         @articles.each { |article| expect(page).to have_content(article.title) }
       end
 
       it "Should delete article" do
-        visit admin_articles_by_category_path(@category.id)
+        visit admin_category_articles_path(@category.id)
         expect { click_link("Destroy", match: :first) }.to change(Article, :count).by(-1)
       end
     end
@@ -28,13 +28,13 @@ RSpec.describe Admin::ArticlesController, type: :request do
       end
 
       it "Shows one article" do
-        visit admin_article_path(@article.id)
+        visit admin_category_article_path(@article.category, @article)
         expect(page).to have_content(@article.title)
         expect(page).to have_content(@article.body)
       end
 
       it "Should create new article" do
-        visit new_admin_article_path
+        visit new_admin_category_article_path(@article.category)
 
         fill_in "article[title]", with: Faker::Lorem.sentence
         fill_in "article[body]", with: Faker::Lorem.paragraph
@@ -44,7 +44,7 @@ RSpec.describe Admin::ArticlesController, type: :request do
       end
 
       it "Should update an existing article" do
-        visit edit_admin_article_path(@article)
+        visit edit_admin_category_article_path(@article.category, @article)
 
         video_id = Faker::Internet.password(min_length: 11)
         new_title = Faker::Lorem.sentence
