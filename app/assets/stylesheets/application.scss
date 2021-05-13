@@ -118,3 +118,31 @@ a:hover {
 .dropdown-toggle-article {
   cursor: pointer;
 }
+
+.comments-block {
+  border-top: 1px solid #B2B2B2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-button {
+  font-weight: bold;
+  color: #B2B2B2;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.date-block {
+  color: #B2B2B2;
+  font-size: small;
+}
+
+.date {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.comment {
+  margin: 20px;
+  padding: 10px;
+}

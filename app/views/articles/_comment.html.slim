@@ -1,0 +1,32 @@
+.comment
+  h5
+    strong
+      = comment.user.email
+  .date-block
+    span.date
+      = comment.created_at.strftime('%b %e')
+    - if comment.edited?
+      = t('edited')
+  p[id="comment_#{comment.id}"]
+    = comment.comment
+  div.comments-block
+    .comment-button
+      - if comment.likes.any? { |reaction| reaction.user_id == current_user.id }
+        = render 'components/liked', comment: comment
+      - else
+        = render 'components/like', comment: comment
+      = comment.likes.count
+    .comment-button
+      - if comment.dislikes.any? { |reaction| reaction.user_id == current_user.id }
+        = render 'components/disliked', comment: comment
+      - else
+        = render 'components/dislike', comment: comment
+      = comment.dislikes.count
+    - if policy(comment).destroy?
+      .comment-button
+        = link_to "/comment/#{comment.id}", method: :delete
+          = t('delete')
+    - if policy(comment).edit?
+      .comment-button
+        span.edit-comment[data-id="#{comment.id}"]
+          = t('edit')
