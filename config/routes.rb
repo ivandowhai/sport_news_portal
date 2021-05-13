@@ -3,15 +3,15 @@
 Rails.application.routes.draw do
   root 'main#index'
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'auth/sessions' }
 
-  scope module: 'auth' do
-    devise_scope :user do
-      get '/sign_out', to: 'sessions#destroy'
-      get '/sign_up', to: 'registrations#new'
-      get '/sign_in', to: 'sessions#new'
-    end
-  end
+  # scope module: 'auth' do
+  #   devise_scope :user do
+  #     get '/sign_out', to: 'sessions#destroy'
+  #     get '/sign_up', to: 'registrations#new'
+  #     get '/sign_in', to: 'sessions#new'
+  #   end
+  # end
 
   resources :categories do
     resources :articles do
