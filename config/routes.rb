@@ -19,10 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/pages/:slug', to: 'pages#show'
+  resources :reactions
 
-  post '/reaction', to: 'reactions#create'
-  delete '/reaction/:comment_id', to: 'reactions#destroy'
+  get '/pages/:slug', to: 'pages#show'
 
   get '/locale/:locale', to: 'main#locale'
 

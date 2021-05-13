@@ -66,10 +66,10 @@ function makeParams(reaction_type, options, headers) {
 
   if (options.reacted == 1) {
     params.type = 'DELETE'
-    params.url = `/reaction/${options.comment_id}`
+    params.url = `/reactions/${options.reaction_id}`
   } else {
     params.type = 'POST'
-    params.url = '/reaction'
+    params.url = '/reactions'
     params.data = { 
       reaction: {
         comment_id: options.comment_id,

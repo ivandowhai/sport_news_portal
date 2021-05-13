@@ -26,12 +26,11 @@ class ReactionsController < PortalController
   def is_user_logged
     if current_user.nil?
       render json: {}, status: :unauthorized
-      return
     end
   end
 
   def reaction
-    @reaction ||= Reaction.find_by(comment_id: params[:comment_id], user_id: current_user.id)
+    @reaction ||= Reaction.find(params[:id])
   end
 
   def reaction_params
