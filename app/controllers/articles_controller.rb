@@ -10,6 +10,6 @@ class ArticlesController < PortalController
     comment_ids = @comments.pluck(:id)
     @user_likes_comments = current_user.nil? ? [] : current_user.likes.where(comment_id: comment_ids)
     @user_dislikes_comments = current_user.nil? ? [] : current_user.dislikes.where(comment_id: comment_ids)
-    @comment = current_user.nil? ? nil : current_user.comments.new
+    @comment = current_user.nil? ? Comment.new : current_user.comments.new
   end
 end

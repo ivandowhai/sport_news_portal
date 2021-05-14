@@ -20,7 +20,7 @@ div
   h4
     = t('comments')
   .container
-    - unless current_user.nil?
+    - if policy(@comment).create?
       = form_with model: @comment, url: category_article_comments_path(@article.category, @article),  method: :post, id: 'form' do |form|
         = form.text_field :comment, class: 'form-control', id: "comment_field"
         = form.hidden_field :edit_comment_url, id: "edit_comment_url"

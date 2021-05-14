@@ -6,6 +6,10 @@ class CommentPolicy
     @comment = comment
   end
 
+  def create?
+    user.nil? == false
+  end
+
   def update?
     return false if user.nil?
     user.id == comment.user_id
