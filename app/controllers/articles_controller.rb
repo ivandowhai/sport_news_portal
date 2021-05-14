@@ -11,5 +11,6 @@ class ArticlesController < PortalController
     @user_likes_comments = current_user.nil? ? [] : current_user.likes.where(comment_id: comment_ids)
     @user_dislikes_comments = current_user.nil? ? [] : current_user.dislikes.where(comment_id: comment_ids)
     @comment = current_user.nil? ? Comment.new : current_user.comments.new
+    @article.article_views.create
   end
 end

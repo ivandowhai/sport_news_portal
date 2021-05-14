@@ -8,8 +8,12 @@ p
   = @article.title
 p
   strong
+    | Caption:
+  = @article.caption
+p
+  strong
     | Body: 
-  = @article.body[0..100]
+  = @article.body
 p
   strong
     | Category: 
