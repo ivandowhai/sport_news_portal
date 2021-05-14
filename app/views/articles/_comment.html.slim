@@ -25,7 +25,7 @@
     - if policy(comment).destroy?
       .comment-button
         = link_to t('delete'), category_article_comment_path(@article.category, @article, comment), method: :delete
-    - if policy(comment).edit?
+    - if policy(comment).update?
       .comment-button
         span.edit-comment[data-url="#{category_article_comment_path(@article.category, @article, comment)}" data-id="#{comment.id}"]
           = t('edit')

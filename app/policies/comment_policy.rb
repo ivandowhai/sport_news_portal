@@ -6,7 +6,7 @@ class CommentPolicy
     @comment = comment
   end
 
-  def edit?
+  def update?
     return false if user.nil?
     user.id == comment.user_id
   end

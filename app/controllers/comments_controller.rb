@@ -1,4 +1,6 @@
 class CommentsController < PortalController
+  after_action :verify_authorized, except: :create
+
   def create
     @comment = current_user.comments.new(comment_params.merge(article: article))
     if @comment.save
@@ -12,6 +14,7 @@ class CommentsController < PortalController
   end
 
   def update
+    authorize comment
     if comment.update(comment_params)
       render json: {}, status: :ok
     else
