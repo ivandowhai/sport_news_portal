@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get '/locale/:locale', to: 'main#locale'
 
   namespace 'admin' do
-    root 'main#index'
+    root 'home#index'
+    put '/settings/:key', to: 'home#update'
     resources :categories do
       resources :articles
     end

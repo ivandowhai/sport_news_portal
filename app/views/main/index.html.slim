@@ -12,3 +12,11 @@ div
         | Some quick example text to build on the card title and make up the bulk of the card's content.
       a.btn.btn-primary[href="#"]
         | Go somewhere
+
+  .row
+    .col-md-6
+      - if @site_settings[:most_popular].settings['enabled']
+        = t('most_popular')
+    .col-md-6
+      - if @site_settings[:most_commented].settings['enabled']
+        = t('most_commented')

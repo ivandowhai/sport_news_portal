@@ -2,6 +2,7 @@
 
 class MainController < PortalController
   def index
+    @site_settings = SiteSetting.settings_by_keys
   end
 
   def locale

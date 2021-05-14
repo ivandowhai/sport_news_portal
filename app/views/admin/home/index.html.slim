@@ -1,0 +1,35 @@
+.row
+  .col-md-6
+    div[style="display: flex; justify-content: space-between;"]
+      div
+        strong
+          | MOST POPULAR
+      div
+        .form-check.form-switch
+          - if @site_settings[:most_popular].settings['enabled']
+            input.form-check-input.enable[type="checkbox" checked="checked" data-key="most_popular"]
+          - else
+            input.form-check-input.enable[type="checkbox" data-key="most_popular"]
+    br
+    .row
+      .col-md-12
+        .form-group
+          label.label FROM THE PERIOD
+          = select_tag :period, options_for_select(@periods, @site_settings[:most_popular].settings['period']), {class: 'form-control', id: 'most_popular'}
+  .col-md-6
+    div[style="display: flex; justify-content: space-between;"]
+      div
+        strong
+          | MOST COMMENTED
+      div
+        .form-check.form-switch
+          - if @site_settings[:most_commented].settings['enabled']
+            input.form-check-input.enable[type="checkbox" checked="checked" data-key="most_commented"]
+          - else
+            input.form-check-input.enable[type="checkbox" data-key="most_commented"]
+    br
+    .row
+      .col-md-12
+        .form-group
+          label.label FROM THE PERIOD
+          = select_tag :period, options_for_select(@periods, @site_settings[:most_commented].settings['period']), { class: 'form-control', id: 'most_commented' }
