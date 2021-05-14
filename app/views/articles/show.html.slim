@@ -9,23 +9,24 @@ h4
 .row
   .col-md-12
     br
-- if @article.video_link
+- unless @article.video_link.nil? || @article.video_link == ''
   .row
     .col-md-12
       iframe[width="560" height="315" src="#{@article.video_link}" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
 div
   = @article.body
 br
-div
-  h4
-    = t('comments')
-  .container
+.comments
+  .comments-header
+    = t('comments') + "(#{@comments.count})"
+  div.comments-wrapper
     - if policy(@comment).create?
-      = form_with model: @comment, url: category_article_comments_path(@article.category, @article),  method: :post, id: 'form' do |form|
-        = form.text_field :comment, class: 'form-control', id: "comment_field"
+      = form_with model: @comment, url: category_article_comments_path(@article.category, @article),  method: :post, id: 'form', class: 'add-comment' do |form|
+        = form.text_field :comment, class: 'form-control', id: "comment_field", required: true
         = form.hidden_field :edit_comment_url, id: "edit_comment_url"
         = form.hidden_field :article_id, id: "article_id", value: @article.id
         = form.button t('cancel'), type: 'button', class: 'btn btn-info', hidden: true, id: 'cancel_button'
         = form.button t('submit'), class: 'btn btn-primary', id: 'submit_button'
-    - @comments.each do |comment|
-      = render "articles/comment", comment: comment
+    div.comments-wrapper
+      - @comments.each do |comment|
+        = render "articles/comment", comment: comment

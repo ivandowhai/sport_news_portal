@@ -2,6 +2,10 @@ $primary: #D72130;
 
 @import "bootstrap";
 
+html {
+  font-family: "Open Sans";
+}
+
 a {
   text-decoration: none!important;
 }
@@ -46,7 +50,7 @@ a:hover {
 
 .line {
   border-top: 1px solid grey;
-  margin: 20px 0 40px;
+  margin: 60px 0;
 }
 
 .header-username {
@@ -84,7 +88,7 @@ a:hover {
 
 .footer-item {
   margin: 10px;
-  font-size: small;
+  font-size: 12px;
 }
 
 .admin-categories-nav {
@@ -120,7 +124,7 @@ a:hover {
 }
 
 .comments-block {
-  border-top: 1px solid #B2B2B2;
+  border-top: 1px solid #D8D8D8;
   display: flex;
   justify-content: flex-end;
 }
@@ -142,7 +146,31 @@ a:hover {
   margin-right: 5px;
 }
 
+.comments-wrapper {
+  border: 1px solid #D8D8D8;
+}
+
+.comments-header {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .comment {
   margin: 20px;
   padding: 10px;
+}
+
+.comments {
+  margin-top: 40px;
+}
+
+.add-comment {
+  margin: 20px;
+  justify-content: flex-end;
+  display: flex;
+}
+
+.add-comment > button {
+  margin-left: 10px;
 }
