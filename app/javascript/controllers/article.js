@@ -12,19 +12,19 @@ $(window).on('load', function () {
     $('.edit-comment').on('click', function (event) {
       const id = event.target.dataset.id
       $('#comment_field').val($(`#comment_${id}`).html())
-      $('#comment_id').val(id)
+      $('#edit_comment_url').val(event.delegateTarget.dataset.url)
       document.getElementById('cancel_button').hidden = false
     })
 
     $('#cancel_button').on('click', function () {
       $('#comment_field').val('')
-      $('#comment_id').val('')
+      $('#edit_comment_url').val('')
       document.getElementById('cancel_button').hidden = true
     })
 
     $('#form').on('submit', function (event) {
       event.preventDefault()
-      const id = $('#comment_id').val()
+      const url = $('#edit_comment_url').val()
       const params = {
         data: {
           comment: {comment: $('#comment_field').val()}
@@ -34,12 +34,12 @@ $(window).on('load', function () {
           window.location.reload()
         }
       }
-      if (id) {
-        params.url = `/comment/${id}`
+      if (url) {
+        params.url = url
         params.type = 'PUT'
 
       } else {
-        params.url = `/comment/${$('#article_id').val()}`
+        params.url = event.target.action
         params.type = 'POST'
       }
 
@@ -66,10 +66,10 @@ function makeParams(reaction_type, options, headers) {
 
   if (options.reacted == 1) {
     params.type = 'DELETE'
-    params.url = `/reaction/${options.comment_id}`
+    params.url = `/reactions/${options.reaction_id}`
   } else {
     params.type = 'POST'
-    params.url = '/reaction'
+    params.url = '/reactions'
     params.data = { 
       reaction: {
         comment_id: options.comment_id,

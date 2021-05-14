@@ -1,18 +1,20 @@
 class CommentsController < PortalController
-  include Pundit
+  after_action :verify_authorized, except: :create
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.article = article
-    @comment.user = current_user
+    @comment = current_user.comments.new(comment_params.merge(article: article))
     if @comment.save
-      redirect_to article_path @comment.article, notice: "Comment was added."
+      redirect_to category_article_path(
+        @comment.article.category_id,
+        @comment.article
+      )
     else
       redirect_back(fallback_location: root_path)
     end
   end
 
   def update
+    authorize comment
     if comment.update(comment_params)
       render json: {}, status: :ok
     else
@@ -24,7 +26,10 @@ class CommentsController < PortalController
     authorize comment
     comment.destroy
 
-    redirect_to article_path @comment.article, notice: "Comment was deleted."
+    redirect_to category_article_path(
+      @comment.article.category_id,
+      @comment.article
+    )
   end
 
   private

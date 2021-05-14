@@ -3,39 +3,33 @@
 Rails.application.routes.draw do
   root 'main#index'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'auth/sessions',
+    registrations: 'auth/registrations'
+  }
 
-  scope module: 'auth' do
-    devise_scope :user do
-      get '/sign_out', to: 'sessions#destroy'
-      get '/sign_up', to: 'registrations#new'
-      get '/sign_in', to: 'sessions#new'
+  resources :categories do
+    resources :articles do
+      resources :comments
     end
   end
 
-  get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
-  get '/articles/:article_id', to: 'articles#show', as: 'article'
+  resources :reactions
+
   get '/pages/:slug', to: 'pages#show'
-  
-  post '/comment/:article_id', to: 'comments#create'
-  put '/comment/:id', to: 'comments#update'
-  delete '/comment/:id', to: 'comments#destroy'
-  post '/reaction', to: 'reactions#create'
-  delete '/reaction/:comment_id', to: 'reactions#destroy'
 
   get '/locale/:locale', to: 'main#locale'
 
   namespace 'admin' do
     root 'main#index'
-    resources :categories
-    resources :articles
+    resources :categories do
+      resources :articles
+    end
     resources :users
     resources :locales
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'
-
-    get '/articles/by_category/:category_id', to: 'articles#index', as: 'articles_by_category'
 
     resources :pages
     put '/pages/enable/:id', to: 'pages#enable'

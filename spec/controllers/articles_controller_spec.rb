@@ -5,7 +5,7 @@ RSpec.describe ArticlesController, type: :request do
 
   it "Shows articles list by category" do
     articles = create_list(:article, 5, category: category)
-    visit articles_by_category_path(category.id)
+    visit category_articles_path(category)
 
     articles.each do |article|
       expect(page).to have_content(article.title)
@@ -14,7 +14,7 @@ RSpec.describe ArticlesController, type: :request do
 
   it "Shows one article" do
     article = create(:article, category: category)
-    visit article_path(article.id)
+    visit category_article_path(category, article)
     expect(page).to have_content(article.title)
     expect(page).to have_content(article.body)
   end

@@ -3,4 +3,4 @@ ul.nav.flex-column.nav-sport
     = link_to 'Home', root_path
   - @categories.each do |category|
     li.nav-item.nav-item-sport
-      = link_to category.name, articles_by_category_url(category)
+      = link_to category.name, category_articles_url(category)

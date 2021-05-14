@@ -1,6 +1,4 @@
 class Admin::PagesController < Admin::AdminController
-  include Pundit
-
   def index
     @categories = PageCategory.all.order("id")
     @pages = Page.all.eager_load(:page_category)

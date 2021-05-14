@@ -11,22 +11,21 @@
     = comment.comment
   div.comments-block
     .comment-button
-      - if comment.likes.any? { |reaction| reaction.user_id == current_user.id }
-        = render 'components/liked', comment: comment
+      - if @user_likes_comments.any? { |reaction| reaction.comment_id == comment.id }
+        = render 'components/liked', comment: comment, reaction: @user_likes_comments.first { |reaction| reaction.comment_id == comment.id }
       - else
         = render 'components/like', comment: comment
-      = comment.likes.count
+      = comment.likes_count
     .comment-button
-      - if comment.dislikes.any? { |reaction| reaction.user_id == current_user.id }
-        = render 'components/disliked', comment: comment
+      - if @user_dislikes_comments.any? { |reaction| reaction.comment_id == comment.id }
+        = render 'components/disliked', comment: comment, reaction: @user_dislikes_comments.first { |reaction| reaction.comment_id == comment.id }
       - else
         = render 'components/dislike', comment: comment
-      = comment.dislikes.count
+      = comment.dislikes_count
     - if policy(comment).destroy?
       .comment-button
-        = link_to "/comment/#{comment.id}", method: :delete
-          = t('delete')
-    - if policy(comment).edit?
+        = link_to t('delete'), category_article_comment_path(@article.category, @article, comment), method: :delete
+    - if policy(comment).update?
       .comment-button
-        span.edit-comment[data-id="#{comment.id}"]
+        span.edit-comment[data-url="#{category_article_comment_path(@article.category, @article, comment)}" data-id="#{comment.id}"]
           = t('edit')

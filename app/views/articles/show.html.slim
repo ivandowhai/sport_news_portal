@@ -1,7 +1,7 @@
 h1
   = @article.title
 h4
-  = link_to @article.category.name, articles_by_category_path(@article.category)
+  = link_to @article.category.name, category_articles_url(@article.category)
 - unless @article.image.file.nil?
   .row
     .col-md-12
@@ -20,11 +20,12 @@ div
   h4
     = t('comments')
   .container
-    = form_with model: @comment, url: "/comment/#{@article.id}",  method: :post, id: 'form' do |form|
-      = form.text_field :comment, class: 'form-control', id: "comment_field"
-      = form.hidden_field :comment_id, id: "comment_id"
-      = form.hidden_field :article_id, id: "article_id", value: @article.id
-      = form.button t('cancel'), type: 'button', class: 'btn btn-info', hidden: true, id: 'cancel_button'
-      = form.button t('submit'), class: 'btn btn-primary', id: 'submit_button'
+    - unless current_user.nil?
+      = form_with model: @comment, url: category_article_comments_path(@article.category, @article),  method: :post, id: 'form' do |form|
+        = form.text_field :comment, class: 'form-control', id: "comment_field"
+        = form.hidden_field :edit_comment_url, id: "edit_comment_url"
+        = form.hidden_field :article_id, id: "article_id", value: @article.id
+        = form.button t('cancel'), type: 'button', class: 'btn btn-info', hidden: true, id: 'cancel_button'
+        = form.button t('submit'), class: 'btn btn-primary', id: 'submit_button'
     - @comments.each do |comment|
       = render "articles/comment", comment: comment

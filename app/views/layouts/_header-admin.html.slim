@@ -13,5 +13,5 @@
           | Vasya pupkin
         a.dropdown-item[href="#"]
           | Profile
-        = link_to 'Sign out', sign_out_path, class: 'dropdown-item'
+        = link_to 'Sign out', destroy_user_session_path, class: 'dropdown-item', method: :delete
       - #= current_user.email

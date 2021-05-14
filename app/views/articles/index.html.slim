@@ -2,7 +2,7 @@ h1
   = @category.name
 .articles-container
   - @articles.each do |article|
-    = link_to article_url(article.id) do
+    = link_to category_article_url(@category.id, article.id) do
       .card.article-item
         - unless article.image.file.nil?
           = image_tag article.image.thumb.url, class: "card-img-top"

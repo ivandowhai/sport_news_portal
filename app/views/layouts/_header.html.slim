@@ -19,12 +19,12 @@
             | Vasya pupkin
           a.dropdown-item[href="#"]
             = t('profile')
-          = link_to t('sign_out'), sign_out_path, class: 'dropdown-item'
+          = link_to t('sign_out'), destroy_user_session_path, class: 'dropdown-item', method: :delete
     - else
       .header-element.header-element-sport
-        = link_to t('sign_in'), sign_in_path, class: 'btn btn-primary'
+        = link_to t('sign_in'), new_user_session_path, class: 'btn btn-primary'
       .header-element.header-element-sport
-        = link_to t('sign_up'), sign_up_path, class: 'btn btn-primary'
+        = link_to t('sign_up'), new_user_registration_path, class: 'btn btn-primary'
     .header-element.header-element-sport
       .dropdown-toggle[data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" data-reference="parent"]
         |  EN 
