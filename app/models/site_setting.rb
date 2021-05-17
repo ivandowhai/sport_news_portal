@@ -3,13 +3,13 @@ class SiteSetting < ApplicationRecord
   MOST_COMMENTED = :most_commented
 
   PERIOD_DAY = :day
-  PERIOD_WEAK = :weak
+  PERIOD_WEEK = :week
   PERIOD_MONTH = :month
   PERIOD_YEAR = :year
 
   PERIODS = [
     PERIOD_DAY,
-    PERIOD_WEAK,
+    PERIOD_WEEK,
     PERIOD_MONTH,
     PERIOD_YEAR
   ]

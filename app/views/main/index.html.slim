@@ -1,22 +1,14 @@
 div
-  h1
-    | Main page
-  .card[style="width: 18rem;"]
-    |  <img src="
-    = image_url 'example.jpg'
-    | " class="card-img-top" alt="sport"> 
-    .card-body
-      h5.card-title
-        | Card title
-      p.card-text
-        | Some quick example text to build on the card title and make up the bulk of the card's content.
-      a.btn.btn-primary[href="#"]
-        | Go somewhere
-
   .row
     .col-md-6
       - if @site_settings[:most_popular].settings['enabled']
-        = t('most_popular')
+        h4.main-page-header
+          = t('most_popular')
+        - @most_popular_articles.each do |article|
+          = render "article_card", article: article
     .col-md-6
       - if @site_settings[:most_commented].settings['enabled']
-        = t('most_commented')
+        h4.main-page-header
+          = t('most_commented')
+        - @most_commented_articles.each do |article|
+          = render "article_card", article: article

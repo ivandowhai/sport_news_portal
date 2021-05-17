@@ -3,6 +3,8 @@
 class MainController < PortalController
   def index
     @site_settings = SiteSetting.settings_by_keys
+    @most_popular_articles = Article.most_popular
+    @most_commented_articles = Article.most_commented
   end
 
   def locale
