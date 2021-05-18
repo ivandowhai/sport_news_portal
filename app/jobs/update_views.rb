@@ -13,5 +13,6 @@ class UpdateViews
       article.update_attribute(:views_count, views.find { |view| view.article_id == article.id }.count)
     end
     Article.reset_views(views.pluck(:article_id))
+    ArticleView.delete_by("created_at < ?", Date.today.prev_year)
   end
 end
