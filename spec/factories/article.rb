@@ -1,7 +1,10 @@
 FactoryBot.define do
   factory :article do
     category { association :category }
-    title { Faker::Lorem.sentence }
+    sequence(:title) { |n| Faker::Lorem.sentence + " (#{n})" }
+    sequence(:caption) { |n| Faker::Lorem.sentence + " (#{n})" }
     body { Faker::Lorem.paragraph }
+    views_count { Faker::Number.number }
+    comments_count { Faker::Number.number }
   end
 end

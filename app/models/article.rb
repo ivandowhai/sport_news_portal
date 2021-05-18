@@ -10,17 +10,17 @@ class Article < ApplicationRecord
 
   def self.reset_views(article_ids)
     if article_ids.empty?
-      self.update_all(views_count: 0)
+      update_all(views_count: 0)
     else
-      self.where("id not in (?)", article_ids).update_all(views_count: 0)
+      where("id not in (?)", article_ids).update_all(views_count: 0)
     end
   end
 
   def self.reset_comments(article_ids)
     if article_ids.empty?
-      self.update_all(comments_count: 0)
+      update_all(comments_count: 0)
     else
-      self.where("id not in (?)", article_ids).update_all(comments_count: 0)
+      where("id not in (?)", article_ids).update_all(comments_count: 0)
     end
   end
 

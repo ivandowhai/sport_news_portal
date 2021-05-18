@@ -7,12 +7,11 @@ class Admin::HomeController < Admin::AdminController
   end
 
   def update
-    # TODO: validations
     if params[:enabled]
-      site_setting.settings['enabled'] = ActiveRecord::Type::Boolean.new.cast(params[:enabled])
+      site_setting.settings["enabled"] = ActiveRecord::Type::Boolean.new.cast(params[:enabled])
     end
     if params[:period]
-      site_setting.settings['period'] = params[:period]
+      site_setting.settings["period"] = params[:period]
     end
     if site_setting.save
       render json: site_setting
