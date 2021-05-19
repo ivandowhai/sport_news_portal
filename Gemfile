@@ -40,6 +40,8 @@ gem 'bootstrap-sass'
 
 gem 'carrierwave', '~> 2.0'
 
+gem 'fog-aws'
+
 gem 'counter_culture', '~> 2.0'
 
 group :development, :test do
@@ -52,6 +54,7 @@ group :development, :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 4.0'
   gem 'rails-controller-testing'
+  gem 'dotenv-rails'
 end
 
 group :development do
