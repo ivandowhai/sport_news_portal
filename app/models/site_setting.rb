@@ -13,12 +13,4 @@ class SiteSetting < ApplicationRecord
     PERIOD_MONTH,
     PERIOD_YEAR
   ]
-
-  def self.settings_by_keys
-    site_settings = all.to_ary
-    {
-      most_popular: site_settings.find { |model| model.key == SiteSetting::MOST_POPULAR.to_s },
-      most_commented: site_settings.find { |setting| setting.key == SiteSetting::MOST_COMMENTED.to_s }
-    }
-  end
 end

@@ -1,13 +1,13 @@
 div
   .row
     .col-md-6
-      - if @site_settings[:most_popular].settings['enabled']
+      - if @site_settings[:most_popular].parameters['enabled']
         h4.main-page-header
           = t('most_popular')
         - @most_popular_articles.each do |article|
           = render "article_card", article: article
     .col-md-6
-      - if @site_settings[:most_commented].settings['enabled']
+      - if @site_settings[:most_commented].parameters['enabled']
         h4.main-page-header
           = t('most_commented')
         - @most_commented_articles.each do |article|

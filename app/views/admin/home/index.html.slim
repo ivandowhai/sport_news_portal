@@ -6,7 +6,7 @@
           | MOST POPULAR
       div
         .form-check.form-switch
-          - if @site_settings[:most_popular].settings['enabled']
+          - if @site_settings[:most_popular].parameters['enabled']
             input.form-check-input.enable[type="checkbox" checked="checked" data-key="most_popular"]
           - else
             input.form-check-input.enable[type="checkbox" data-key="most_popular"]
@@ -15,7 +15,7 @@
       .col-md-12
         .form-group
           label.label FROM THE PERIOD
-          = select_tag :period, options_for_select(@periods, @site_settings[:most_popular].settings['period']), {class: 'form-control', id: 'most_popular'}
+          = select_tag :period, options_for_select(@periods, @site_settings[:most_popular].parameters['period']), {class: 'form-control', id: 'most_popular'}
   .col-md-6
     div[style="display: flex; justify-content: space-between;"]
       div
@@ -23,7 +23,7 @@
           | MOST COMMENTED
       div
         .form-check.form-switch
-          - if @site_settings[:most_commented].settings['enabled']
+          - if @site_settings[:most_commented].parameters['enabled']
             input.form-check-input.enable[type="checkbox" checked="checked" data-key="most_commented"]
           - else
             input.form-check-input.enable[type="checkbox" data-key="most_commented"]
@@ -32,4 +32,4 @@
       .col-md-12
         .form-group
           label.label FROM THE PERIOD
-          = select_tag :period, options_for_select(@periods, @site_settings[:most_commented].settings['period']), { class: 'form-control', id: 'most_commented' }
+          = select_tag :period, options_for_select(@periods, @site_settings[:most_commented].parameters['period']), { class: 'form-control', id: 'most_commented' }

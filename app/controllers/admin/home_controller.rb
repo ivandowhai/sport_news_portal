@@ -2,16 +2,16 @@
 
 class Admin::HomeController < Admin::AdminController
   def index
-    @site_settings = SiteSetting.settings_by_keys
+    @site_settings = SettingsHelper.format_settings(SiteSetting.all)
     @periods = SiteSetting::PERIODS
   end
 
   def update
     if params[:enabled]
-      site_setting.settings["enabled"] = ActiveRecord::Type::Boolean.new.cast(params[:enabled])
+      site_setting.parameters["enabled"] = ActiveRecord::Type::Boolean.new.cast(params[:enabled])
     end
     if params[:period]
-      site_setting.settings["period"] = params[:period]
+      site_setting.parameters["period"] = params[:period]
     end
     if site_setting.save
       render json: site_setting

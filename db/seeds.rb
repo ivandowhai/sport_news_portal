@@ -70,14 +70,14 @@ SiteSetting.first_or_create(
   [
     {
       key: SiteSetting::MOST_POPULAR,
-      settings: {
+      parameters: {
         period: SiteSetting::PERIOD_MONTH,
         enabled: true
       }
     },
     {
       key: SiteSetting::MOST_COMMENTED,
-      settings: {
+      parameters: {
         period: SiteSetting::PERIOD_MONTH,
         enabled: true
       }

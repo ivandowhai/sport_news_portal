@@ -12,7 +12,7 @@ class Article < ApplicationRecord
     if article_ids.empty?
       update_all(views_count: 0)
     else
-      where("id not in (?)", article_ids).update_all(views_count: 0)
+      where.not(id: article_ids).update_all(views_count: 0)
     end
   end
 
@@ -20,7 +20,7 @@ class Article < ApplicationRecord
     if article_ids.empty?
       update_all(comments_count: 0)
     else
-      where("id not in (?)", article_ids).update_all(comments_count: 0)
+      where.not(id: article_ids).update_all(comments_count: 0)
     end
   end
 

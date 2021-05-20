@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_112831) do
 
   create_table "site_settings", force: :cascade do |t|
     t.string "key"
-    t.json "settings"
+    t.json "parameters"
   end
 
   create_table "users", force: :cascade do |t|
