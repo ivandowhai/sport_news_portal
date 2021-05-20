@@ -7,7 +7,6 @@ class Article < ApplicationRecord
   scope :most_popular, -> { order(views_count: :desc).limit(3) }
   scope :most_commented, -> { order(comments_count: :desc).limit(3) }
 
-
   def self.search(query)
     where("lower(title) like :query or lower(body) like :query ", query: "%#{query}%")
       .eager_load(:category)

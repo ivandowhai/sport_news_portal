@@ -16,24 +16,20 @@ class ArticlesController < PortalController
 
   def search
     @query = params[:query]
-    if params[:query]
-      @articles = format_articles_to_search(Article.search(@query.downcase), @query.downcase)
-    else
-      @articles = []
-    end
+    @articles = params[:query] ? format_articles_to_search(Article.search(@query.downcase), @query.downcase) : []
   end
-end
 
-private
+  private
 
-def format_articles_to_search(articles, query)
-  articles.map do |article|
-    text = article.title.downcase.include?(query) ? article.title.downcase : article.body.downcase
-    position = text.index(query)
-    start = position - 100 > 0 ? position - 100 : 0
-    finish = position + 100 + query.length
-    text = text.gsub!(query, "<strong>#{query}</strong>")
-    article.body = text[start..finish]
-    article
+  def format_articles_to_search(articles, query)
+    articles.map do |article|
+      text = article.title.downcase.include?(query) ? article.title.downcase : article.body.downcase
+      position = text.index(query)
+      start = position - 100 > 0 ? position - 100 : 0
+      finish = position + 100 + query.length
+      text = text.gsub!(query, "<strong>#{query}</strong>")
+      article.body = text[start..finish]
+      article
+    end
   end
 end
