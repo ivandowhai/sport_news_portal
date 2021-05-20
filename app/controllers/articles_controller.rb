@@ -14,14 +14,12 @@ class ArticlesController < PortalController
   end
 
   def search
-    query = params[:query].downcase
+    @query = params[:query]
     if params[:query]
-      @articles = format_articles_to_search(Article.search(query), query)
+      @articles = format_articles_to_search(Article.search(@query.downcase), @query.downcase)
     else
       @articles = []
     end
-    @query = params[:query]
-
   end
 end
 
