@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/search', to: 'articles#search'
+
   resources :reactions
 
   get '/pages/:slug', to: 'pages#show'

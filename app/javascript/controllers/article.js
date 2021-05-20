@@ -5,6 +5,12 @@ $(window).on('load', function () {
       'X-CSRF-Token': document.getElementsByName('csrf-token')[0].content
     }
 
+    $('#search').keypress(function (event) {
+        if (event.originalEvent.key === 'Enter') {
+            window.location.replace(encodeURI(`/search?query=${event.target.value}`))
+        }
+    })
+
     $('#comment_field').on('focus', function () {
       document.getElementById('cancel_button').hidden = false
     })
@@ -70,7 +76,7 @@ function makeParams(reaction_type, options, headers) {
   } else {
     params.type = 'POST'
     params.url = '/reactions'
-    params.data = { 
+    params.data = {
       reaction: {
         comment_id: options.comment_id,
         like: reaction_type

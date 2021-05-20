@@ -4,6 +4,11 @@ class Article < ApplicationRecord
   mount_uploader :image, ImageUploader
   before_save :prepare_video_link
 
+  def self.search(query)
+    where("lower(title) like :query or lower(body) like :query ", query: "%#{query}%")
+      .eager_load(:category)
+  end
+
   private
 
   def prepare_video_link

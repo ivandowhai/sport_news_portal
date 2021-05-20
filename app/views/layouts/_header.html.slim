@@ -3,7 +3,7 @@
     = link_to 'Sports Hub', root_path
   .container-fluid.header-container
     .header-element.header-element-sport
-      input.form-control.me-2[type="text" placeholder="Search by" aria-label="Search by"]
+      input.form-control.me-2#search[type="text" placeholder="Search by" aria-label="Search by"]
     - if user_signed_in?
       - if current_user.is_admin?
         .header-element.header-element-sport

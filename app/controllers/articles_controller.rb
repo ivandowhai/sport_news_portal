@@ -12,4 +12,29 @@ class ArticlesController < PortalController
     @user_dislikes_comments = current_user.nil? ? [] : current_user.dislikes.where(comment_id: comment_ids)
     @comment = current_user.nil? ? Comment.new : current_user.comments.new
   end
+
+  def search
+    query = params[:query].downcase
+    if params[:query]
+      @articles = format_articles_to_search(Article.search(query), query)
+    else
+      @articles = []
+    end
+    @query = params[:query]
+
+  end
+end
+
+private
+
+def format_articles_to_search(articles, query)
+  articles.map do |article|
+    text = article.title.downcase.include?(query) ? article.title.downcase : article.body.downcase
+    position = text.index(query)
+    start = position - 100 > 0 ? position - 100 : 0
+    finish = position + 100 + query.length
+    text = text.gsub!(query, "<strong>#{query}</strong>")
+    article.body = text[start..finish]
+    article
+  end
 end
