@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :page do
     page_category { association :page_category }
-    name { Faker::Lorem.word }
+    sequence(:name) { |n| Faker::Lorem.word + " (#{n})" }
     body { Faker::Lorem.paragraph }
     enabled { true }
     priority { Faker::Number.between(from: 1, to: 10) }

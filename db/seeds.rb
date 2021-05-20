@@ -65,3 +65,22 @@ Locale.first_or_create(
     {code: "ua", enabled: true}
   ]
 )
+
+SiteSetting.first_or_create(
+  [
+    {
+      key: SiteSetting::MOST_POPULAR,
+      parameters: {
+        period: SiteSetting::PERIOD_MONTH,
+        enabled: true
+      }
+    },
+    {
+      key: SiteSetting::MOST_COMMENTED,
+      parameters: {
+        period: SiteSetting::PERIOD_MONTH,
+        enabled: true
+      }
+    }
+  ]
+)

@@ -1,0 +1,9 @@
+:schedule:
+  UpdateViews:
+    every: 1h
+    class: UpdateViews
+    enabled: true
+  UpdateComments:
+    every: 1h
+    class: UpdateComments
+    enabled: true

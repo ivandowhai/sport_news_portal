@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :page_category do
-    name { Faker::Lorem.word }
+    sequence(:name) { |n| Faker::Lorem.word + " (#{n})" }
     enabled { true }
 
     trait :disabled do

@@ -14,19 +14,6 @@ RSpec.describe Admin::PagesController, type: :request do
       end
     end
 
-    it "Should create new page" do
-      pending("I don't know how to select hidden field")
-      pages
-      visit admin_pages_path
-
-      click_button "Add footer page"
-
-      fill_in "page[name]", with: "New page"
-      fill_in "page[page_categories_id]", with: page_category.id
-
-      expect { click_button "Add" }.to change(Page, :count).by(1)
-    end
-
     it "Should update an existing page" do
       page_categories = create_list(:page_category, 2)
       site_page = create(:page, page_category: page_categories[0])
