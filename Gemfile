@@ -40,7 +40,10 @@ gem 'bootstrap-sass'
 
 gem 'carrierwave', '~> 2.0'
 
+gem 'fog-aws'
+
 gem 'counter_culture', '~> 2.0'
+gem 'dotenv-rails'
 
 gem 'sidekiq'
 gem 'sidekiq-scheduler'

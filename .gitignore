@@ -47,3 +47,5 @@ sport_news-2
 sport_news-3
 
 /public/uploads/*
+
+.env
