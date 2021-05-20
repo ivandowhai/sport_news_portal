@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :site_setting do
     key { "most_popular" }
-    settings { {enabled: true, period: "day"} }
+    parameters { {enabled: true, period: "day"} }
   end
 
   trait :most_popular do
@@ -13,6 +13,6 @@ FactoryBot.define do
   end
 
   trait :disabled do
-    settings { {enabled: false, period: "day"} }
+    parameters { {enabled: false, period: "day"} }
   end
 end
