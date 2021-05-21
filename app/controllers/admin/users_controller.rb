@@ -2,12 +2,8 @@ class Admin::UsersController < Admin::AdminController
   PER_PAGE = 20
 
   def index
-    #TODO: pagination
-    if params[:filter_by]
-      @users = User.filter(params[:filter_by], params[:value])
-    else
-      @users = User.limit(PER_PAGE)
-    end
+    # TODO: pagination
+    @users = params[:filter_by] ? User.filter(params[:filter_by], params[:value]) : User.limit(PER_PAGE)
 
     @roles = [
       {title: "Users", slug: User::ROLE_USER},
