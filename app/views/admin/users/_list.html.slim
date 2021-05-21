@@ -6,6 +6,8 @@ table.table
       th
         | Status
       th
+        | Online
+      th
   tbody
     - users.each do |user|
       tr
@@ -18,6 +20,13 @@ table.table
           - else
             span.badge.badge-danger
               | Blocked
+        td
+          - if user.online
+            span.badge.badge-success
+              | Online
+          - else
+            span.badge.badge-secondary
+              | Offline
         td
           .dropdown
             button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton#{user.id}"] Actions
