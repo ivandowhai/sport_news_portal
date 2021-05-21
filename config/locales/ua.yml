@@ -11,3 +11,7 @@ ua:
   edited: 'відредаговано'
   most_popular: 'Найпопулярніші статті'
   most_commented: 'Більше всього коментарів'
+  first_name: 'Ім''я'
+  last_name: 'Прізвище'
+  avatar: 'Аватар'
+  save: 'Зберегти'

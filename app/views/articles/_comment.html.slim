@@ -1,7 +1,9 @@
 .comment
   h5
     strong
-      = comment.user.email
+      - unless comment.user.avatar.file.nil?
+        = image_tag comment.user.avatar.tiny.url, class: 'avatar-tiny'
+      = comment.user.full_name
   .date-block
     span.date
       = comment.created_at.strftime('%b %e')

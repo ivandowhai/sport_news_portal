@@ -12,13 +12,15 @@
               path[fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"]
       .header-element.header-element-sport
         .dropdown-toggle[data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" data-reference="parent"]
+          - unless current_user.avatar.file.nil?
+            = image_tag current_user.avatar.tiny.url, class: 'avatar-tiny'
           span.header-username
-            |  Vasya pupkin 
+            = current_user.full_name
         .dropdown-menu.dropdown-menu-right
           h6.dropdown-header
-            | Vasya pupkin
+            = current_user.full_name
           a.dropdown-item[href="#"]
-            = t('profile')
+          = link_to t('profile'), '/profile', class: 'dropdown-item'
           = link_to t('sign_out'), destroy_user_session_path, class: 'dropdown-item', method: :delete
     - else
       .header-element.header-element-sport
@@ -27,7 +29,7 @@
         = link_to t('sign_up'), new_user_registration_path, class: 'btn btn-primary'
     .header-element.header-element-sport
       .dropdown-toggle[data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false" data-reference="parent"]
-        |  EN 
+        = I18n.locale.upcase
       .dropdown-menu.dropdown-menu-right
         - @locales.each do |locale|
           = link_to locale.code.upcase, "/locale/#{locale.code}", class: 'dropdown-item'

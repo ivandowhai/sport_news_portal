@@ -1,0 +1,29 @@
+h1
+  = t('profile')
+= form_with(model: @user, url: '/profile', method: 'PUT') do |form|
+  - if @user.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@user.errors.count, "error")
+        |  prohibited this article from being saved:
+      ul
+        - @user.errors.each do |error|
+          li
+            = error.full_message
+  .form-group
+    = form.label :first_name, class: 'label'
+      = t('first_name')
+    = form.text_field :first_name, class: 'form-control'
+  .form-group
+    = form.label :last_name, class: 'label'
+      = t('last_name')
+    = form.text_field :last_name, class: 'form-control'
+  .form-group
+    = form.label :email, class: 'label'
+    = form.text_field :email, class: 'form-control'
+  .form-group
+    = form.label :avatar, class: 'label'
+      = t('avatar')
+    = form.file_field :avatar
+  .form-group
+    = form.submit t('save'), class: 'btn btn-primary'

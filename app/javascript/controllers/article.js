@@ -6,9 +6,9 @@ $(window).on('load', function () {
     }
 
     $('#search').keypress(function (event) {
-        if (event.originalEvent.key === 'Enter') {
-            window.location.replace(encodeURI(`/search?query=${event.target.value}`))
-        }
+      if (event.originalEvent.key === 'Enter') {
+        window.location.replace(encodeURI(`/search?query=${event.target.value}`))
+      }
     })
 
     $('#comment_field').on('focus', function () {
@@ -36,7 +36,7 @@ $(window).on('load', function () {
           comment: {comment: $('#comment_field').val()}
         },
         headers: headers,
-        success: function(response) {
+        success: function (response) {
           window.location.reload()
         }
       }
@@ -65,7 +65,7 @@ $(window).on('load', function () {
 function makeParams(reaction_type, options, headers) {
   const params = {
     headers: headers,
-    success: function() {
+    success: function () {
       window.location.reload()
     }
   }

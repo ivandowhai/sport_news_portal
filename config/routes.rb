@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :reactions
 
+  get '/profile', to: 'users#edit'
+  put '/profile', to: 'users#update'
+
   get '/pages/:slug', to: 'pages#show'
 
   get '/locale/:locale', to: 'main#locale'
