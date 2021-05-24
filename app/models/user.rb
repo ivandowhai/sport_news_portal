@@ -9,8 +9,6 @@ class User < ApplicationRecord
   has_many :dislikes, -> { where reactions: {like: false} }, class_name: "Reaction"
   scope :subscribed, -> { where("subscription_email is not null or subscription_email != ''") }
 
-  validates :subscription_email, presence: true
-
   mount_uploader :avatar, AvatarUploader
 
   ROLE_ADMIN = "admin"
