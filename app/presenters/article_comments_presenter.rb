@@ -1,4 +1,6 @@
 class ArticleCommentsPresenter
+  attr_reader :comments
+
   def initialize(article, current_user)
     @comments = article.comments.eager_load(:user)
     article.article_views.create
@@ -14,9 +16,5 @@ class ArticleCommentsPresenter
 
   def user_dislikes_comments
     @user_dislikes_comments || []
-  end
-
-  def comments
-    @comments
   end
 end
