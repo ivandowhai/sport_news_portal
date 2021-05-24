@@ -13,14 +13,14 @@
     = comment.comment
   div.comments-block
     .comment-button
-      - if @user_likes_comments.any? { |reaction| reaction.comment_id == comment.id }
-        = render 'components/liked', comment: comment, reaction: @user_likes_comments.first { |reaction| reaction.comment_id == comment.id }
+      - if @comments_details.user_likes_comments.any? { |reaction| reaction.comment_id == comment.id }
+        = render 'components/liked', comment: comment, reaction: @comments_details.user_likes_comments.first { |reaction| reaction.comment_id == comment.id }
       - else
         = render 'components/like', comment: comment
       = comment.likes_count
     .comment-button
-      - if @user_dislikes_comments.any? { |reaction| reaction.comment_id == comment.id }
-        = render 'components/disliked', comment: comment, reaction: @user_dislikes_comments.first { |reaction| reaction.comment_id == comment.id }
+      - if @comments_details.user_dislikes_comments.any? { |reaction| reaction.comment_id == comment.id }
+        = render 'components/disliked', comment: comment, reaction: @comments_details.user_dislikes_comments.first { |reaction| reaction.comment_id == comment.id }
       - else
         = render 'components/dislike', comment: comment
       = comment.dislikes_count

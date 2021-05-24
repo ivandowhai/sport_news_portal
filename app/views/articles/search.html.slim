@@ -8,4 +8,4 @@ div
           = link_to category_article_url(article.category_id, article.id) do
             = "#{article.category.name} > #{article.title}"
         p
-          = sanitize article.body
+          = sanitize get_search_fragment(article, @query)
