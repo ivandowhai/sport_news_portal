@@ -21,3 +21,4 @@ p#notice
             = link_to 'Edit', edit_admin_category_article_path(@category, article), class: 'dropdown-item'
           p.card-text
             = article.caption
+= will_paginate @articles

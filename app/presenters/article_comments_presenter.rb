@@ -1,8 +1,10 @@
 class ArticleCommentsPresenter
+  PER_PAGE = 20
+
   attr_reader :comments
 
-  def initialize(article, current_user)
-    @comments = article.comments.eager_load(:user)
+  def initialize(article, current_user, page)
+    @comments = article.comments.eager_load(:user).paginate(page: page, per_page: PER_PAGE)
     article.article_views.create
     return unless current_user
     comment_ids = article.comments.pluck(:id)

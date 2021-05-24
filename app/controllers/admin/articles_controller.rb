@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 class Admin::ArticlesController < Admin::AdminController
+  PER_PAGE = 10
+
   def index
     @category = Category.find(params[:category_id])
-    @articles = @category.articles
+    @articles = @category.articles.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def show

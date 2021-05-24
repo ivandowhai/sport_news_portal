@@ -1,13 +1,15 @@
 class ArticlesController < PortalController
+  PER_PAGE = 20
+
   def index
     @category = Category.find(params[:category_id])
-    @articles = @category.articles.load
+    @articles = @category.articles.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def show
     article
     @article.article_views.create
-    @comments_details = ArticleCommentsPresenter.new(article, current_user)
+    @comments_details = ArticleCommentsPresenter.new(article, current_user, params[:page])
     @comment = current_user.nil? ? Comment.new : current_user.comments.new
   end
 

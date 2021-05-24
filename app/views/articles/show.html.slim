@@ -30,3 +30,4 @@ br
     div.comments-wrapper
       - @comments_details.comments.each do |comment|
         = render "articles/comment", comment: comment
+      = will_paginate @comments_details.comments
