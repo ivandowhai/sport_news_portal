@@ -47,3 +47,6 @@ en:
   last_name: 'Last name'
   avatar: 'Avatar'
   save: 'Save'
+  newsletter: 'Newsletter'
+  subscription_text: 'Sign up to receive the latest sport news'
+  subscribe: 'Subscribe'

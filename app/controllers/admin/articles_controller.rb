@@ -25,6 +25,7 @@ class Admin::ArticlesController < Admin::AdminController
     @categories = categories_for_list
     @article = Article.new(article_params)
     if @article.save
+      SendNewsletters.perform_later(@article)
       redirect_to admin_category_article_path @article.category, @article, notice: "Article was successfully created."
     else
       render :new, status: :unprocessable_entity

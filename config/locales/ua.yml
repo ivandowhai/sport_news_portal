@@ -15,3 +15,6 @@ ua:
   last_name: 'Прізвище'
   avatar: 'Аватар'
   save: 'Зберегти'
+  newsletter: 'Підписка'
+  subscription_text: 'Підпишіться, щоб отримувати останні спортивні новини'
+  subscribe: 'Підписатись'
