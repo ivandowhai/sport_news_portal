@@ -1,0 +1,21 @@
+= form_with(model: banner, url: url) do |form|
+  - if banner.errors.any?
+    #error_explanation
+      h2
+        = pluralize(banner.errors.count, "error")
+        |  prohibited this banner from being saved:
+      ul
+        - banner.errors.each do |error|
+          li
+            = error.full_message
+  .form-group
+    = form.label :name, class: 'label'
+    = form.text_field :name, class: 'form-control'
+  .form-group
+    = form.label :category_id, class: 'label'
+    = form.select :category_id, options_for_select(@categories), {}, class: 'form-control'
+  .form-group
+    = form.label :image, class: 'label'
+    = form.file_field :image
+  .form-group
+    = form.submit nil, class: 'btn btn-primary'

@@ -1,0 +1,44 @@
+p#notice
+  = notice
+= render 'admin/title', title: 'Banners', link_text: '+ Add banner', link_path: new_admin_banner_path
+= render 'layouts/categories_list'
+= link_to admin_banners_path(status: 'opened'), class: 'nav-sport'
+  = "Opened (#{@opened})"
+= link_to admin_banners_path(status: 'closed'), class: 'nav-sport'
+  = "Closed (#{@closed})"
+div
+  .row
+    - unless @banners.nil?
+      table.table
+        thead
+          tr
+            th
+              | Name
+            - if @status_opened
+              th
+                | Status
+            th
+              | Published in
+            - unless @status_opened
+              th
+                | Close date
+            th
+              br
+        tbody
+          - @banners.each do |banner|
+            tr
+              td
+                = banner.name
+              - if @status_opened
+                td
+                  = render 'admin/banners/status', banner: banner
+              td
+                = banner.category.name
+              - unless @status_opened
+                td
+                  = banner.closed.strftime('%y/%m/%d')
+              td
+                = link_to admin_banner_path(banner), class: 'btn btn-sm', method: :delete, data: { confirm: 'Are you sure?' }
+                  svg.bi.bi-basket-fill[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"]
+                    path[d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z"]
+  = will_paginate @banners

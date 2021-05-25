@@ -1,0 +1,13 @@
+.dropdown
+  - if banner.status == Banner::STATUS_PENDING || banner.status == Banner::STATUS_PUBLISHED
+    button[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton#{banner.id}" class=" btn dropdown-toggle #{status(banner)[:class]}"]
+      = status(banner)[:text]
+    ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+      - if banner.status == Banner::STATUS_PENDING
+        li
+          span.banner.dropdown-item[data-id="#{banner.id}" data-action="publish"]
+            | Publish
+      li
+        span.banner.dropdown-item[data-id="#{banner.id}" data-action="close"]
+          | Close
+  - else
