@@ -14,6 +14,8 @@ class User < ApplicationRecord
   ROLE_ADMIN = "admin"
   ROLE_USER = "user"
 
+  PER_PAGE = 20
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -26,8 +28,17 @@ class User < ApplicationRecord
     [ROLE_ADMIN, ROLE_USER]
   end
 
-  def self.filter(filter_by, value)
-    return all unless %w[enabled].include? filter_by
-    where(filter_by => value)
+  def self.filtered_list(params)
+    query = self.order(:created_at)
+    unless params[:role].nil? || ![ROLE_ADMIN, ROLE_USER].include?(params[:role])
+      query = query.where(:role => params[:role])
+    end
+    unless params[:enabled].nil?
+      query = query.where(:enabled => params[:enabled])
+    end
+    unless params[:online].nil?
+      query = query.where(:online => params[:online])
+    end
+    query.paginate(page: params[:page], per_page: PER_PAGE)
   end
 end

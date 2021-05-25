@@ -3,23 +3,33 @@ p#notice
 = render 'admin/title', title: 'Users', link_text: '+ Add user', link_path: new_admin_user_path
 = render 'layouts/categories_list'
 
-.dropdown
-  button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButtonFilter"] Filter
-  ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
-    li.nav-item
-      a.dropdown-item.nav-link[href="/admin/users?filter_by=enabled&value=1"]
-        | Active
-    li.nav-item
-      a.dropdown-item.nav-link[href="/admin/users?filter_by=enabled&value=0"]
-        | Blocked
-
-ul#footers.nav.nav-tabs[role="tablist"]
-  - @roles.each do |role|
-    li.nav-item
-      a.nav-link[data-category_id="#{role[:slug]}" href="##{role[:slug]}" id="#{role[:slug]}-tab" role="tab" data-toggle="tab" aria-controls="#{role[:slug]}" aria-selected="true"]
-        = role[:title]
-
-#footersContent.tab-content
-  - @roles.each do |role|
-    div.tab-pane.fade.show[id="#{role[:slug]}" role="tabpanel" aria-labelledby="#{role[:slug]}-tab"]
-      = render 'admin/users/list', users: @users.select { |user| user.role == role[:slug] }, role: role[:slug]
+.row
+  .dropdown[style="margin: 10px;"]
+    button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButtonStatusFilter"] Filter by status
+    ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+      li.nav-item
+        = link_to 'Active', admin_users_path(enabled: 1, role: @params[:role] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'Blocked', admin_users_path(enabled: 0, role: @params[:role] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'All', admin_users_path(enabled: nil, role: @params[:role] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+  .dropdown[style="margin: 10px;"]
+    button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButtonRoleFilter"] Filter by role
+    ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+      li.nav-item
+        = link_to 'Admin', admin_users_path(role: 'admin', enabled: @params[:enabled] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'User', admin_users_path(role: 'user', enabled: @params[:enabled] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'All', admin_users_path(role: nil, enabled: @params[:enabled] || nil, online: @params[:online] || nil), class: 'dropdown-item'
+  .dropdown[style="margin: 10px;"]
+    button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButtonOnlineFilter"] Filter by online/offline
+    ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+      li.nav-item
+        = link_to 'Online', admin_users_path(online: 1, enabled: @params[:enabled] || nil, role: @params[:role] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'Offline', admin_users_path(online: 0, enabled: @params[:enabled] || nil, role: @params[:role] || nil), class: 'dropdown-item'
+      li.nav-item
+        = link_to 'All', admin_users_path(online: nil, enabled: @params[:enabled] || nil, role: @params[:role] || nil), class: 'dropdown-item'
+= render 'admin/users/list', users: @users
+= will_paginate @users

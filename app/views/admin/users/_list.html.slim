@@ -32,10 +32,10 @@ table.table
             button.btn.btn-secondary.dropdown-toggle[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton#{user.id}"] Actions
             ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
               li
-                - if role == 'admin'
+                - if user.role == 'admin'
                   span.remove-from-admin.dropdown-item[data-id="#{user.id}"]
                     | Remove from admin
-                - elsif role == 'user'
+                - elsif user.role == 'user'
                   -if user.enabled
                     span.block-user.dropdown-item[data-id="#{user.id}"]
                       | Block
