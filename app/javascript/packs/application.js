@@ -14,6 +14,7 @@ import "../controllers/admin/locales"
 import "../controllers/admin/home"
 import "../controllers/admin/users"
 import "../controllers/admin/banners"
+import "../controllers/admin/surveys"
 import "../controllers/article"
 
 Rails.start()

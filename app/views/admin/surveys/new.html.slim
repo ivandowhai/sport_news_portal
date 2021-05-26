@@ -1,0 +1,30 @@
+= render 'admin/title', title: 'New Banner', link_text: '+ Add banner', link_path: new_admin_survey_path
+= render 'layouts/categories_list'
+= form_with(model: @survey, url: admin_surveys_path) do |form|
+  - if @survey.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@survey.errors.count, "error")
+        |  prohibited this banner from being saved:
+      ul
+        - @survey.errors.each do |error|
+          li
+            = error.full_message
+  .form-group
+    = form.label :question, class: 'label'
+    = form.text_field :question, class: 'form-control'
+  .form-group
+    = form.label :start, class: 'label'
+    input.form-control[type="date" name="survey[start]"]
+  .form-group
+    = form.label :end, class: 'label'
+    input.form-control[type="date" name="survey[end]"]
+  = form.label 'Answers', class: 'label'
+  #answers
+    .form-group
+      input.form-control[type="text" name="survey[answers][]"]
+  .form-group
+    button.btn.btn-primary#add-answer[type="button"]
+      | + Add
+  .form-group
+    = form.submit nil, class: 'btn btn-primary'

@@ -35,9 +35,13 @@ Rails.application.routes.draw do
     resources :users
     resources :locales
     resources :banners
+    resources :surveys
 
     put '/banners/publish/:id', to: 'banners#publish'
     put '/banners/close/:id', to: 'banners#close'
+
+    put '/surveys/publish/:id', to: 'surveys#publish'
+    put '/surveys/close/:id', to: 'surveys#close'
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'
