@@ -7,3 +7,7 @@
     every: 1h
     class: UpdateComments
     enabled: true
+  UpdateSurveysStatus:
+    every: 1d
+    class: UpdateSurveysStatus
+    enabled: true
