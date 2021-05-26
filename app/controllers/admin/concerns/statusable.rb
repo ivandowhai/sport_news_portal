@@ -5,7 +5,7 @@ module Admin::Concerns::Statusable
     if model.publish
       render json: model
     else
-      render json: { error: "Failed to save." }, status: :bad_request
+      render json: {error: "Failed to save."}, status: :bad_request
     end
   end
 
@@ -13,7 +13,7 @@ module Admin::Concerns::Statusable
     if model.close
       render json: model
     else
-      render json: { error: "Failed to save." }, status: :bad_request
+      render json: {error: "Failed to save."}, status: :bad_request
     end
   end
 end
