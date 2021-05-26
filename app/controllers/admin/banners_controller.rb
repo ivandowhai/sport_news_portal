@@ -27,7 +27,6 @@ class Admin::BannersController < Admin::AdminController
     end
   end
 
-
   def destroy
     model.destroy
     redirect_to admin_banners_path, notice: "Banner was successfully destroyed."

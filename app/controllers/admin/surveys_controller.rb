@@ -26,6 +26,11 @@ class Admin::SurveysController < Admin::AdminController
     end
   end
 
+  def destroy
+    model.destroy
+    redirect_to admin_surveys_path, notice: "Survey was successfully destroyed."
+  end
+
   private
 
   def survey_params
