@@ -17,6 +17,6 @@ class CommentPolicy
 
   def destroy?
     return false if user.nil?
-    (user.id == comment.user_id && user.enabled) || user.is_admin?
+    (user.id == comment.user_id && user.enabled) || user.admin?
   end
 end

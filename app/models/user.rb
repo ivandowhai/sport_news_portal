@@ -17,7 +17,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def is_admin?
+  def admin?
     role == ROLE_ADMIN
   end
 
@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def self.filter(filter_by, value)
-    return all unless %w[enabled].include? filter_by
+    return all unless "enabled" == filter_by
     where(filter_by => value)
   end
 end

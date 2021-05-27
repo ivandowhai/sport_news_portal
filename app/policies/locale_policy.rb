@@ -7,6 +7,6 @@ class LocalePolicy
   end
 
   def delete?
-    user.is_admin? && !locale.is_default?
+    user.admin? && !locale.is_default?
   end
 end
