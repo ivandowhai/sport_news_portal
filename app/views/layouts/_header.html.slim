@@ -5,7 +5,7 @@
     .header-element.header-element-sport
       input.form-control.me-2#search[type="text" placeholder="Search by" aria-label="Search by"]
     - if user_signed_in?
-      - if current_user.is_admin?
+      - if current_user.admin?
         .header-element.header-element-sport
           = link_to admin_root_path, class: 'btn btn-primary switch-view' do
             svg.bi.bi-arrow-left-right[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"]

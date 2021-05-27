@@ -7,7 +7,7 @@ class UsersController < PortalController
 
   def update
     if user.update(user_params)
-      redirect_to "/profile"
+      redirect_to profile_path
     else
       render :edit, status: :unprocessable_entity
     end
