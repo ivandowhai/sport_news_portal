@@ -66,21 +66,27 @@ Locale.first_or_create(
   ]
 )
 
-SiteSetting.first_or_create(
-  [
-    {
-      key: SiteSetting::MOST_POPULAR,
-      parameters: {
-        period: SiteSetting::PERIOD_MONTH,
-        enabled: true
-      }
-    },
-    {
-      key: SiteSetting::MOST_COMMENTED,
-      parameters: {
-        period: SiteSetting::PERIOD_MONTH,
-        enabled: true
-      }
+[
+  {
+    key: SiteSetting::MOST_POPULAR,
+    parameters: {
+      period: SiteSetting::PERIOD_MONTH,
+      enabled: true
     }
-  ]
-)
+  },
+  {
+    key: SiteSetting::MOST_COMMENTED,
+    parameters: {
+      period: SiteSetting::PERIOD_MONTH,
+      enabled: true
+    }
+  },
+  {
+    key: SiteSetting::NEWSLETTERS_SUBSCRIPTION,
+    parameters: {
+      enabled: true
+    }
+  }
+].each do |setting|
+  SiteSetting.where(key: setting[:key]).first_or_create(setting)
+end

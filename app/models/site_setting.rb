@@ -1,6 +1,7 @@
 class SiteSetting < ApplicationRecord
   MOST_POPULAR = :most_popular
   MOST_COMMENTED = :most_commented
+  NEWSLETTERS_SUBSCRIPTION = :newsletter_subscription
 
   PERIOD_DAY = :day
   PERIOD_WEEK = :week
@@ -13,4 +14,8 @@ class SiteSetting < ApplicationRecord
     PERIOD_MONTH,
     PERIOD_YEAR
   ]
+
+  def self.newsletter_subscription
+    where(key: NEWSLETTERS_SUBSCRIPTION)
+  end
 end

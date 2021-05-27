@@ -13,6 +13,11 @@ class UsersController < PortalController
     end
   end
 
+  def subscribe_to_newsletter
+    user.update(subscription_params)
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def user
@@ -21,5 +26,9 @@ class UsersController < PortalController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :avatar)
+  end
+
+  def subscription_params
+    params.require(:user).permit(:subscription_email)
   end
 end

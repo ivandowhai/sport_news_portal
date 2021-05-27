@@ -2,6 +2,7 @@ class Admin::PagesController < Admin::AdminController
   def index
     @categories = PageCategory.all.order("id")
     @pages = Page.all.eager_load(:page_category)
+    @newsletter_subscription = SiteSetting.newsletter_subscription
   end
 
   def create

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#edit'
   put '/profile', to: 'users#update'
+  patch '/newsletter/subscribe', to: 'users#subscribe_to_newsletter'
 
   get '/pages/:slug', to: 'pages#show'
 
