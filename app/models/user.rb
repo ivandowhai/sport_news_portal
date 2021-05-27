@@ -26,7 +26,7 @@ class User < ApplicationRecord
   end
 
   def self.filter(filter_by, value)
-    return all unless "enabled" == filter_by
+    return all unless filter_by == "enabled"
     where(filter_by => value)
   end
 end
