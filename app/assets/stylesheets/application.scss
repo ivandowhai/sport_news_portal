@@ -209,3 +209,24 @@ a:hover {
   border-color: #D8D8D8;
   color: #D8D8D8;
 }
+
+.survey-answers {
+  list-style: none;
+}
+
+.survey-answers input {
+  margin-right: 10px;
+}
+
+.survey-wrapper {
+  padding: 10px;
+  background-color: #D8D8D8;
+}
+
+.survey-body {
+  margin: 10px;
+}
+
+.survey-open {
+  cursor: pointer;
+}

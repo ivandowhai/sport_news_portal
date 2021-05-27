@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :reactions, dependent: :delete_all
   has_many :likes, -> { where reactions: {like: true} }, class_name: "Reaction"
   has_many :dislikes, -> { where reactions: {like: false} }, class_name: "Reaction"
-  has_many :answers, through: AnswerUser
+  has_and_belongs_to_many :answers
   scope :subscribed, -> { where("subscription_email is not null or subscription_email != ''") }
 
   mount_uploader :avatar, AvatarUploader

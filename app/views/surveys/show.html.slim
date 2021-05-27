@@ -1,0 +1,23 @@
+div.survey-wrapper
+  .survey-body
+    h5
+      = @survey.start.strftime('%d %^b') + ' - ' + @survey.end.strftime('%d %^b')
+    h6
+      = @survey.question
+    - if @user_answer.nil? && @survey.published?
+      = form_with model: @survey, url: survey_url(@survey) do |f|
+        ul.survey-answers
+          - @answers.each do |answer|
+            li
+              = f.radio_button :answer_id, answer.id
+              = answer.answer
+        = f.submit t('vote'), class: 'btn btn-primary'
+    - else
+      - @answers.each do |answer|
+        div[style="display: flex; justify-content: space-between;"]
+          div
+            = answer.answer
+          div
+            = answer.percent_votes(@total).to_s + '%'
+        .progress
+          .progress-bar[role="progressbar" style="width: #{answer.percent_votes(@total)}%" aria-valuenow="#{answer.percent_votes(@total)}" aria-valuemin="0" aria-valuemax="100"]

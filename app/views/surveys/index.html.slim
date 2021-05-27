@@ -1,0 +1,37 @@
+.row
+  .col-md-6
+    = link_to surveys_path(status: 'published'), class: 'nav-sport'
+      | OPENED
+    = link_to surveys_path(status: 'closed'), class: 'nav-sport'
+      | CLOSED
+  .col-md-6
+    input.form-control.me-2#search-survey[type="text" placeholder="Search" aria-label="Search"]
+.row
+  - unless @surveys.nil?
+    table.table
+      thead
+        tr
+          th
+            | Question
+          th
+            | Due date
+          th
+            - if @status == 'published'
+              .dropdown
+                .dropdown-toggle[data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButtonStatusFilter"] Sort by
+                ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
+                  li.nav-item
+                    = link_to 'Newest', surveys_path(status: @status, sort_by: 'newest'), class: 'dropdown-item'
+                  li.nav-item
+                    = link_to 'About to expire', surveys_path(status: @status, sort_by: 'about_to_expire'), class: 'dropdown-item'
+      tbody
+        - @surveys.each do |survey|
+          tr
+            td
+              span.survey-open[data-id="#{survey.id}"]
+                = survey.question
+            td
+              = survey.end.strftime('%y/%m/%d')
+            td
+              span
+= will_paginate @surveys

@@ -20,7 +20,8 @@
           h6.dropdown-header
             = current_user.full_name
           a.dropdown-item[href="#"]
-          = link_to t('profile'), '/profile', class: 'dropdown-item'
+          = link_to t('profile'), profile_path, class: 'dropdown-item'
+          = link_to t('surveys'), surveys_path, class: 'dropdown-item'
           = link_to t('sign_out'), destroy_user_session_path, class: 'dropdown-item', method: :delete
     - else
       .header-element.header-element-sport

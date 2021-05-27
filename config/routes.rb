@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/search', to: 'articles#search'
 
   resources :reactions
+  resources :surveys
 
   get '/profile', to: 'users#edit'
   put '/profile', to: 'users#update'

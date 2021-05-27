@@ -15,4 +15,19 @@ class Survey < ApplicationRecord
       .joins("left join answers on answers.survey_id = surveys.id left join answers_users on answers_users.answer_id = answers.id")
       .group("surveys.id")
   end
+
+  def self.filter(params)
+    query = params[:status].nil? || params[:status] == "published" ? published : closed
+    unless params[:search].nil?
+      query = query.where('lower(question) like ?', "%#{params[:search].downcase}%")
+    end
+    unless params[:sort_by].nil?
+      query = query.order(params[:sort_by] == "newest" ? "start" : '"end"')
+    end
+    return query
+  end
+
+  def published?
+    status == STATUS_PUBLISHED
+  end
 end
