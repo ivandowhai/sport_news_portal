@@ -43,3 +43,7 @@ en:
   edited: 'edited'
   most_popular: 'Most Popular'
   most_commented: 'Most Commented'
+  first_name: 'First name'
+  last_name: 'Last name'
+  avatar: 'Avatar'
+  save: 'Save'

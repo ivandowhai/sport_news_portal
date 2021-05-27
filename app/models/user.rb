@@ -8,14 +8,25 @@ class User < ApplicationRecord
   has_many :likes, -> { where reactions: {like: true} }, class_name: "Reaction"
   has_many :dislikes, -> { where reactions: {like: false} }, class_name: "Reaction"
 
+  mount_uploader :avatar, AvatarUploader
+
   ROLE_ADMIN = "admin"
   ROLE_USER = "user"
 
-  def is_admin?
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def admin?
     role == ROLE_ADMIN
   end
 
   def self.get_roles
     [ROLE_ADMIN, ROLE_USER]
+  end
+
+  def self.filter(filter_by, value)
+    return all unless filter_by == "enabled"
+    where(filter_by => value)
   end
 end

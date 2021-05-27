@@ -7,16 +7,16 @@ class CommentPolicy
   end
 
   def create?
-    user.nil? == false
+    user.nil? == false && user.enabled
   end
 
   def update?
     return false if user.nil?
-    user.id == comment.user_id
+    user.id == comment.user_id && user.enabled
   end
 
   def destroy?
     return false if user.nil?
-    user.id == comment.user_id || user.is_admin?
+    (user.id == comment.user_id && user.enabled) || user.admin?
   end
 end

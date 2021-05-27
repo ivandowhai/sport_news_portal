@@ -2,7 +2,9 @@ class Admin::UsersController < Admin::AdminController
   PER_PAGE = 20
 
   def index
-    @users = User.limit(PER_PAGE)
+    # TODO: pagination
+    @users = params[:filter_by] ? User.filter(params[:filter_by], params[:value]) : User.limit(PER_PAGE)
+
     @roles = [
       {title: "Users", slug: User::ROLE_USER},
       {title: "Admins", slug: User::ROLE_ADMIN}
@@ -39,7 +41,7 @@ class Admin::UsersController < Admin::AdminController
 
   def update
     if user.update(user_params)
-      redirect_to admin_user_path user, notice: "User was successfully updated."
+      render json: {}, status: :ok
     else
       render :edit, status: :unprocessable_entity
     end
@@ -57,6 +59,6 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def user_params
-    params.require(:user).permit(:email, :role)
+    params.require(:user).permit(:email, :role, :enabled)
   end
 end
