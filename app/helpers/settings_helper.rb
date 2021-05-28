@@ -6,6 +6,6 @@ module SettingsHelper
   end
 
   def show_newsletter_col(site_settings)
-    current_user.nil? == false && site_settings[SiteSetting::NEWSLETTERS_SUBSCRIPTION].parameters["enabled"]
+    current_user && site_settings[SiteSetting::NEWSLETTERS_SUBSCRIPTION].parameters["enabled"]
   end
 end
