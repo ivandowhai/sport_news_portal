@@ -21,7 +21,7 @@ html
             = render 'layouts/footer'
           .col-md-2
             = render 'layouts/banners'
-            #survey-place
+            #survey-place[data-show="#{show_newest_survey?}"]
       .container-fluid.site-footer
         .row
           .col-md-2

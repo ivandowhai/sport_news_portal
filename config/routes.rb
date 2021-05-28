@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :reactions
   resources :surveys
 
+  get '/survey/show_newest', to: 'surveys#show_newest'
+
   get '/profile', to: 'users#edit'
   put '/profile', to: 'users#update'
   patch '/newsletter/subscribe', to: 'users#subscribe_to_newsletter'

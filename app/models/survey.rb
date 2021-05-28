@@ -19,12 +19,19 @@ class Survey < ApplicationRecord
   def self.filter(params)
     query = params[:status].nil? || params[:status] == "published" ? published : closed
     unless params[:search].nil?
-      query = query.where('lower(question) like ?', "%#{params[:search].downcase}%")
+      query = query.where("lower(question) like ?", "%#{params[:search].downcase}%")
     end
     unless params[:sort_by].nil?
       query = query.order(params[:sort_by] == "newest" ? "start" : '"end"')
     end
-    return query
+    query
+  end
+
+  def self.newest_published_unvoted(user)
+    published.where
+      .not(id: user.answers.pluck(:survey_id))
+      .order(start: :desc)
+      .first
   end
 
   def published?

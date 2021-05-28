@@ -16,10 +16,17 @@ class SurveysController < PortalController
     render "surveys/show", layout: false
   end
 
+  def show_newest
+    @survey = Survey.newest_published_unvoted(current_user)
+    @user_answer = nil
+    @answers = @survey.answers
+    render "surveys/show", layout: false
+  end
+
   def update
     answer = Answer.find(params[:survey][:answer_id].to_i)
     current_user.answers << answer
-    redirect_to surveys_path
+    redirect_back fallback_location: root_path
   end
 
   private
