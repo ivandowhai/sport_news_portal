@@ -21,7 +21,7 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def is_admin?
+  def admin?
     role == ROLE_ADMIN
   end
 
@@ -31,13 +31,13 @@ class User < ApplicationRecord
 
   def self.filtered_list(params)
     query = order(:created_at)
-    unless params[:role].nil? || ![ROLE_ADMIN, ROLE_USER].include?(params[:role])
+    if [ROLE_ADMIN, ROLE_USER].include?(params[:role])
       query = query.where(role: params[:role])
     end
-    unless params[:enabled].nil?
+    if params[:enabled]
       query = query.where(enabled: params[:enabled])
     end
-    unless params[:online].nil?
+    if params[:online]
       query = query.where(online: params[:online])
     end
     query.paginate(page: params[:page], per_page: PER_PAGE)

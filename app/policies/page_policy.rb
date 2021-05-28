@@ -7,6 +7,6 @@ class PagePolicy
   end
 
   def delete?
-    user.is_admin? && page.can_delete?
+    user.admin? && page.can_delete?
   end
 end

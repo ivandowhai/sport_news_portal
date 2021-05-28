@@ -4,7 +4,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   def check_is_admin
-    unless current_user.is_admin?
+    unless current_user.admin?
       redirect_to root_path
     end
   end
