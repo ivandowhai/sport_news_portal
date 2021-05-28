@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   def self.filtered_list(params)
     query = order(:created_at)
-    unless [ROLE_ADMIN, ROLE_USER].exclude?(params[:role])
+    if [ROLE_ADMIN, ROLE_USER].include?(params[:role])
       query = query.where(role: params[:role])
     end
     if params[:enabled]
