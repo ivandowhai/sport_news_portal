@@ -14,6 +14,8 @@ class User < ApplicationRecord
   ROLE_ADMIN = "admin"
   ROLE_USER = "user"
 
+  PER_PAGE = 20
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -31,10 +33,10 @@ class User < ApplicationRecord
     unless [ROLE_ADMIN, ROLE_USER].exclude?(params[:role])
       query = query.where(role: params[:role])
     end
-    if params[:enabled].present?
+    if params[:enabled]
       query = query.where(enabled: params[:enabled])
     end
-    if params[:online].present?
+    if params[:online]
       query = query.where(online: params[:online])
     end
     query.paginate(page: params[:page], per_page: PER_PAGE)
