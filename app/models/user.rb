@@ -28,13 +28,13 @@ class User < ApplicationRecord
 
   def self.filtered_list(params)
     query = order(:created_at)
-    unless params[:role].nil? || ![ROLE_ADMIN, ROLE_USER].include?(params[:role])
+    unless [ROLE_ADMIN, ROLE_USER].exclude?(params[:role])
       query = query.where(role: params[:role])
     end
-    unless params[:enabled].nil?
+    if params[:enabled].present?
       query = query.where(enabled: params[:enabled])
     end
-    unless params[:online].nil?
+    if params[:online].present?
       query = query.where(online: params[:online])
     end
     query.paginate(page: params[:page], per_page: PER_PAGE)

@@ -2,15 +2,15 @@ require "rails_helper"
 
 RSpec.describe User, type: :model do
   context "Is user has admin role" do
-    it "Not admin" do
+    it "returns false when user does not have admin role" do
       user = User.new
       user.role = User::ROLE_USER
-      expect(false).to be user.admin?
+      expect(user.admin?).to be false
     end
-    it "Is admin" do
+    it "returns true when user does not have admin role" do
       user = User.new
       user.role = User::ROLE_ADMIN
-      expect(true).to be user.admin?
+      expect(user.admin?).to be true
     end
   end
 end
