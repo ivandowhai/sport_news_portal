@@ -35,7 +35,19 @@ $(window).on('load', function () {
   })
 
   ClassicEditor
-    .create( document.querySelector( '#page_body' ) )
+    .create( document.querySelector( '#page_body' ), {
+      removePlugins: [
+        'CKFinder',
+        'Image',
+        'ImageCaption',
+        'ImageStyle',
+        'ImageToolbar',
+        'ImageUpload',
+        'Table',
+        'TableToolbar',
+        'EasyImage'
+      ]
+    } )
     .catch( error => {
       console.error( error );
     } );
