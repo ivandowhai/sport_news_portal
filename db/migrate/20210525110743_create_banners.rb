@@ -4,7 +4,7 @@ class CreateBanners < ActiveRecord::Migration[6.1]
       t.string :name
       t.integer :status, default: 0
       t.string :image
-      t.datetime :closed
+      t.datetime :closed_at
       t.belongs_to :category
       t.timestamps
     end

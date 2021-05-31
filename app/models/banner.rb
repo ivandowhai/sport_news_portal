@@ -1,22 +1,20 @@
 class Banner < ApplicationRecord
   belongs_to :category
   mount_uploader :image, BannerImageUploader
-  scope :pending_and_published, -> { where(status: [STATUS_PENDING, STATUS_PUBLISHED]) }
-  scope :published, -> { where(status: STATUS_PUBLISHED) }
-  scope :closed, -> { where(status: STATUS_CLOSED) }
+  scope :pending_or_published, -> { where(status: [:pending, :published]) }
+  scope :published, -> { where(status: :published) }
+  scope :closed, -> { where(status: :closed) }
 
-  STATUS_PENDING = 0
-  STATUS_PUBLISHED = 1
-  STATUS_CLOSED = 2
+  enum status: {pending: 0, published: 1, closed: 2}
 
   def publish
-    self.status = STATUS_PUBLISHED
+    self.published!
     save
   end
 
   def close
-    self.status = STATUS_CLOSED
-    self.closed = Time.now.getutc
+    self.closed!
+    self.closed_at = Time.now.getutc
     save
   end
 end

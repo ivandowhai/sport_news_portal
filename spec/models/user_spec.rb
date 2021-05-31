@@ -5,12 +5,12 @@ RSpec.describe User, type: :model do
     it "Not admin" do
       user = User.new
       user.role = User::ROLE_USER
-      expect(false).to be user.admin?
+      expect(user.admin?).to be false
     end
     it "Is admin" do
       user = User.new
       user.role = User::ROLE_ADMIN
-      expect(true).to be user.admin?
+      expect(user.admin?).to be true
     end
   end
 end

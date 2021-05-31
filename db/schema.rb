@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_110743) do
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "closed_at", precision: 6, null: false
     t.index ["category_id"], name: "index_banners_on_category_id"
   end
 

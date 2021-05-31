@@ -1,20 +1,20 @@
 module Admin::BannersHelper
   def status(banner)
     statuses = {
-      Banner::STATUS_PENDING => {
+      pending: {
         text: "Not published",
         class: "btn-info"
       },
-      Banner::STATUS_PUBLISHED => {
+      published: {
         text: "Published",
         class: "btn-success"
       },
-      Banner::STATUS_CLOSED => {
+      closed: {
         text: "Closed",
         class: "btn-dark"
       }
     }
-    statuses[banner.status]
+    statuses[banner.status.to_sym]
   end
 
   def banners

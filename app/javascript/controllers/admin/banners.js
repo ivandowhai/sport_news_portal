@@ -7,7 +7,7 @@ $(window).on('load', function () {
 
     $('.banner').on('click', function (event) {
       $.ajax({
-        url: `/admin/banners/${event.target.dataset.action}/${event.target.dataset.id}`,
+        url: `/admin/banners/${event.target.dataset.id}/${event.target.dataset.action}`,
         method: 'PUT',
         headers: headers,
         success: function () {
