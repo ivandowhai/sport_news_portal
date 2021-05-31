@@ -19,7 +19,7 @@ class SurveysController < PortalController
   def show_newest
     @survey = Survey.newest_published_unvoted(current_user)
     @user_answer = nil
-    @answers = @survey.answers
+    @answers = @survey.answers if @survey.present?
     render "surveys/show", layout: false
   end
 
