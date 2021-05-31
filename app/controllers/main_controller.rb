@@ -4,6 +4,7 @@ class MainController < PortalController
   def index
     @most_popular_articles = Article.most_popular
     @most_commented_articles = Article.most_commented
+    @photo_of_the_day = PhotoOfTheDay.first
   end
 
   def locale

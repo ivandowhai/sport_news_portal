@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_093222) do
+ActiveRecord::Schema.define(version: 2021_05_31_082054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,6 +108,17 @@ ActiveRecord::Schema.define(version: 2021_05_26_093222) do
     t.index ["page_category_id"], name: "index_pages_on_page_category_id"
   end
 
+  create_table "photo_of_the_days", force: :cascade do |t|
+    t.string "picture"
+    t.string "alt"
+    t.string "title"
+    t.string "description"
+    t.string "author"
+    t.boolean "show"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reactions", force: :cascade do |t|
     t.boolean "like"
     t.bigint "comment_id"
@@ -125,7 +136,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_093222) do
 
   create_table "surveys", force: :cascade do |t|
     t.string "question"
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "start"
     t.datetime "end"
     t.datetime "created_at", precision: 6, null: false
