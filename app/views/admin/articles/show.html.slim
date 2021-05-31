@@ -13,7 +13,7 @@ p
 p
   strong
     | Body: 
-  = @article.body
+  = sanitize @article.body
 p
   strong
     | Category: 

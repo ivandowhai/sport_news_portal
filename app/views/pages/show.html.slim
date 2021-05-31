@@ -1,4 +1,4 @@
 h1
   = @page.name
 div
-  = @page.body
+  = sanitize @page.body
