@@ -36,7 +36,7 @@ div
                 = banner.category.name
               - unless @status_opened
                 td
-                  = banner.closed.strftime('%y/%m/%d')
+                  = banner.closed_at.strftime('%y/%m/%d')
               td
                 = link_to admin_banner_path(banner), class: 'btn btn-sm', method: :delete, data: { confirm: 'Are you sure?' }
                   svg.bi.bi-basket-fill[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"]
