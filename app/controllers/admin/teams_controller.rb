@@ -42,7 +42,6 @@ class Admin::TeamsController < Admin::AdminController
     redirect_to admin_teams_path, notice: "Team was successfully destroyed."
   end
 
-
   private
 
   def team
