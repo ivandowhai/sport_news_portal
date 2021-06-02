@@ -2,7 +2,9 @@ class Survey < ApplicationRecord
   include Statusable
   include ActiveModel::Validations
 
-  has_many :answers
+  has_many :answers, dependent: :delete_all
+
+  accepts_nested_attributes_for :answers
 
   validates :question, presence: true
   validates :start, presence: true
@@ -12,7 +14,7 @@ class Survey < ApplicationRecord
   def self.surveys_list_by_statuses(status_opened)
     query = status_opened ? pending_and_published : closed
     query.select("surveys.*, count(answers_users.user_id) as responses")
-      .joins("left join answers on answers.survey_id = surveys.id left join answers_users on answers_users.answer_id = answers.id")
+      .left_outer_joins(answers: [:answers_users])
       .group("surveys.id")
   end
 

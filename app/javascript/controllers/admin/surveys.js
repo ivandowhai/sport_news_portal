@@ -6,7 +6,7 @@ $(window).on('load', function () {
     }
 
     $('#add-answer').on('click', function () {
-      $('#answers').append('<div class="form-group"><input type="text" name="survey[answers][]" class="form-control"></div>')
+      $('#answers').append('<div class="form-group"><input type="text" name="survey[answers_attributes][][answer]" class="form-control"></div>')
     })
 
   $('.survey').on('click', function (event) {

@@ -1,7 +1,5 @@
 module SurveysHelper
   def self.calculate_total(answers)
-    total = 0
-    answers.each { |answer| total += answer.votes }
-    total
+    answers.reduce(0) { |sum, answer| sum += answer.votes }
   end
 end
