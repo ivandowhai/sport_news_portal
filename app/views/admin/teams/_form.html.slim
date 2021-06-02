@@ -1,0 +1,27 @@
+= form_with(model: team, url: url) do |form|
+  - if team.errors.any?
+    #error_explanation
+      h2
+        = pluralize(team.errors.count, "error")
+        |  prohibited this article from being saved:
+      ul
+        - team.errors.each do |error|
+          li
+            = error.full_message
+  .form-group
+    = form.label :location, class: 'label'
+    = form.text_field :location, class: 'form-control'
+  .form-group
+    = form.label :team, class: 'label'
+    = form.text_field :team, class: 'form-control'
+  .form-group
+    = form.label :category_id, class: 'label'
+    = form.select :category_id, options_from_collection_for_select(@categories, :id, :name, team.category_id), {}, class: 'form-control', id: 'category_select'
+  .form-group
+    = form.label :subcategory_id, class: 'label'
+    = form.select :subcategory_id, options_from_collection_for_select(@subcategories, :id, :name, team.category_id), {}, class: 'form-control', id: 'subcategory_select'
+  .form-group
+    = form.label :logo, class: 'label'
+    = form.file_field :logo
+  .form-group
+    = form.submit nil, class: 'btn btn-primary'

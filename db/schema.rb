@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_31_082054) do
+ActiveRecord::Schema.define(version: 2021_06_02_073907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,9 @@ ActiveRecord::Schema.define(version: 2021_05_31_082054) do
     t.string "caption"
     t.integer "views_count"
     t.integer "comments_count"
+    t.bigint "team_id"
     t.index ["category_id"], name: "index_articles_on_category_id"
+    t.index ["team_id"], name: "index_articles_on_team_id"
   end
 
   create_table "banners", force: :cascade do |t|
@@ -56,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_05_31_082054) do
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "closed"
+    t.datetime "closed_at"
     t.index ["category_id"], name: "index_banners_on_category_id"
   end
 
@@ -143,6 +145,18 @@ ActiveRecord::Schema.define(version: 2021_05_31_082054) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "teams", force: :cascade do |t|
+    t.string "location"
+    t.bigint "category_id"
+    t.bigint "subcategory_id"
+    t.string "team"
+    t.string "logo"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_teams_on_category_id"
+    t.index ["subcategory_id"], name: "index_teams_on_subcategory_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -167,4 +181,5 @@ ActiveRecord::Schema.define(version: 2021_05_31_082054) do
   end
 
   add_foreign_key "articles", "categories"
+  add_foreign_key "teams", "categories", column: "subcategory_id"
 end

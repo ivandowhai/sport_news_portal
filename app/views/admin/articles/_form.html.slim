@@ -19,7 +19,10 @@
     = form.text_area :body, class: 'form-control', id: 'article_body'
   .form-group
     = form.label :category_id, class: 'label'
-    = form.select :category_id, options_for_select(@categories, @article.category_id), {}, class: 'form-control'
+    = form.select :category_id, options_from_collection_for_select(@categories, :id, :name, article.category_id), {}, class: 'form-control'
+  .form-group
+    = form.label :team_id, class: 'label'
+    = form.select :team_id, options_from_collection_for_select(@teams, :id, :team, article.team_id), {}, class: 'form-control'
   .form-group
     = form.label :image, class: 'label'
     = form.file_field :image

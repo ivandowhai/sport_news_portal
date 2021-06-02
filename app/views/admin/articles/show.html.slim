@@ -20,6 +20,10 @@ p
   = @article.category.name
 p
   strong
+    | Team:
+  = @article.team.team
+p
+  strong
     | Image: 
   - unless @article.image.file.nil?
     = image_tag @article.image.url

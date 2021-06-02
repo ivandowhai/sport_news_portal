@@ -1,0 +1,56 @@
+p#notice
+  = notice
+= render 'admin/title', title: 'Teams', link_text: '+ Add team', link_path: new_admin_team_path
+= render 'layouts/categories_list'
+div
+  .row
+    div
+      = form_tag admin_teams_path, method: :get
+        div.d-flex.flex-row
+          div[style="margin: 10px;"]
+            = label_tag :team, nil, {class: 'label'}
+          div[style="margin: 10px;"]
+            = text_field_tag :team, @params[:team], {class: 'form-control'}
+          div[style="margin: 10px;"]
+            = label_tag :location, nil, {class: 'label'}
+          div[style="margin: 10px;"]
+            = text_field_tag :location, @params[:location], {class: 'form-control'}
+          div[style="margin: 10px;"]
+            = label_tag :category_id, nil, { class: 'label' }
+          div[style="margin: 10px;"]
+            = select_tag :category_id, options_from_collection_for_select(@categories, :id, :name, @params[:category_id]), { class: 'form-control', id: 'category_select' }
+          div[style="margin: 10px;"]
+            = label_tag :subcategory_id, nil, { class: 'label' }
+          div[style="margin: 10px;"]
+            = select_tag :subcategory_id, options_from_collection_for_select(@subcategories, :id, :name, @params[:subcategory_id]), { class: 'form-control', id: 'subcategory_select' }
+          div[style="margin: 10px;"]
+            = submit_tag 'Filter', class: 'btn btn-primary'
+    - if @teams.present?
+      table.table
+        thead
+          tr
+            th
+              | Team
+            th
+              | Category
+            th
+              | Subcategory
+            th
+              | Location
+            th
+        tbody
+          - @teams.each do |team|
+            tr
+              td
+                = link_to team.team, edit_admin_team_path(team)
+              td
+                = team.category.name
+              td
+                = team.subcategory.name
+              td
+                = team.location
+              td
+                = link_to admin_team_path(team), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm' do
+                  svg.bi.bi-basket-fill[xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16"]
+                    path[d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z"]
+  = will_paginate

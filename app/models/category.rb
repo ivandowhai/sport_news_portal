@@ -5,4 +5,5 @@ class Category < ApplicationRecord
   belongs_to :category, optional: true
   validates :priority, numericality: {only_integer: true}
   scope :enabled, -> { where(enabled: true).order(:priority) }
+  scope :first_level, -> { enabled.where(category_id: nil) }
 end

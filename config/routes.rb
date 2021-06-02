@@ -35,12 +35,16 @@ Rails.application.routes.draw do
     put '/settings/:key', to: 'home#update'
     post 'home/photo_of_the_day', to: 'home#photo_of_the_day'
     resources :categories do
+      member do
+        get 'subcategories', to: 'categories#subcategories'
+      end
       resources :articles
     end
     resources :users
     resources :locales
     resources :banners
     resources :surveys
+    resources :teams
 
     put '/banners/publish/:id', to: 'banners#publish'
     put '/banners/close/:id', to: 'banners#close'

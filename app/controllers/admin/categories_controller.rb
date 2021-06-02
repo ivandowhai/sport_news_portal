@@ -41,6 +41,10 @@ class Admin::CategoriesController < Admin::AdminController
     redirect_to admin_categories_url, notice: "Category was successfully destroyed."
   end
 
+  def subcategories
+    render json: Category.enabled.where(category_id: params[:id])
+  end
+
   private
 
   def categories_for_list

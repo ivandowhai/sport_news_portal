@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :category
+  belongs_to :team
   has_many :comments, dependent: :delete_all
   has_many :article_views, dependent: :delete_all
   mount_uploader :image, ImageUploader
