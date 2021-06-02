@@ -12,14 +12,14 @@ class SurveysController < PortalController
     @answers = Answer.answers_with_votes_count(survey.id)
     @total = SurveysHelper.calculate_total(@answers)
     @user_answer = current_user.answers.where(id: @answers.pluck(:id)).first
-    render "surveys/show", layout: false
+    render :show, layout: false
   end
 
   def show_newest
     @survey = Survey.newest_published_unvoted(current_user)
     @user_answer = nil
     @answers = @survey ? @survey.answers : []
-    render "surveys/show", layout: false
+    render :show, layout: false
   end
 
   def update
