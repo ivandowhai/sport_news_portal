@@ -14,6 +14,8 @@ class Admin::TeamsController < Admin::AdminController
 
   def create
     @team = Team.new(team_params)
+    @categories = Category.first_level
+    @subcategories = []
     if @team.save
       redirect_to admin_teams_path, notice: "Team was successfully created."
     else
