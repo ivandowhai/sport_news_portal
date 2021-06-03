@@ -1,9 +1,9 @@
 .dropdown
-  - if survey.status == Survey::STATUS_PENDING || survey.status == Survey::STATUS_PUBLISHED
+  - if survey.pending? || survey.published?
     button[type="button" data-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton#{survey.id}" class=" btn dropdown-toggle #{status(survey)[:class]}"]
       = status(survey)[:text]
     ul.dropdown-menu[aria-labelledby="dropdownMenuButton"]
-      - if survey.status == Survey::STATUS_PENDING
+      - if survey.pending?
         li
           span.survey.dropdown-item[data-id="#{survey.id}" data-action="publish"]
             | Publish

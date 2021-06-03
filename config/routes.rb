@@ -47,10 +47,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :surveys
-
-    put '/surveys/publish/:id', to: 'surveys#publish'
-    put '/surveys/close/:id', to: 'surveys#close'
+    resources :surveys do
+      member do
+        put 'publish', to: 'surveys#publish'
+        put 'close', to: 'surveys#close'
+      end
+    end
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'

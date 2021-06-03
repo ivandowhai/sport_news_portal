@@ -5,7 +5,7 @@ class Banner < ApplicationRecord
   mount_uploader :image, BannerImageUploader
 
   def close
-    self.closed!
+    closed!
     self.closed_at = Time.now.getutc
     save
   end

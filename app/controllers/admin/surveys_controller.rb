@@ -6,7 +6,7 @@ class Admin::SurveysController < Admin::AdminController
   def index
     @status_opened = params[:status].nil? || params[:status] == "opened"
     @surveys = Survey.surveys_list_by_statuses(@status_opened).paginate(page: params[:page], per_page: PER_PAGE)
-    @opened = Survey.pending_and_published.count
+    @opened = Survey.pending_or_published.count
     @closed = Survey.closed.count
   end
 

@@ -1,19 +1,19 @@
 module Admin::StatusableHelper
   def status(model)
     statuses = {
-      0 => {
+      pending: {
         text: "Not published",
         class: "btn-info"
       },
-      1 => {
+      published: {
         text: "Published",
         class: "btn-success"
       },
-      2 => {
+      closed: {
         text: "Closed",
         class: "btn-dark"
       }
     }
-    statuses[model.status]
+    statuses[model.status.to_sym]
   end
 end

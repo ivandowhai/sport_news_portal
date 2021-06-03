@@ -9,10 +9,10 @@ class Survey < ApplicationRecord
   validates :question, presence: true
   validates :start, presence: true
   validates :end, presence: true
-  validates_with SurveyValidator
+  validates_with SurveyValidator, on: :create
 
   def self.surveys_list_by_statuses(status_opened)
-    query = status_opened ? pending_and_published : closed
+    query = status_opened ? pending_or_published : closed
     query.select("surveys.*, count(answers_users.user_id) as responses")
       .left_outer_joins(answers: [:answers_users])
       .group("surveys.id")
@@ -34,9 +34,5 @@ class Survey < ApplicationRecord
       .not(id: user.answers.pluck(:survey_id))
       .order(start: :desc)
       .first
-  end
-
-  def published?
-    status == STATUS_PUBLISHED
   end
 end

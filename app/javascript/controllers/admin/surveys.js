@@ -11,7 +11,7 @@ $(window).on('load', function () {
 
   $('.survey').on('click', function (event) {
     $.ajax({
-      url: `/admin/surveys/${event.target.dataset.action}/${event.target.dataset.id}`,
+      url: `/admin/surveys/${event.target.dataset.id}/${event.target.dataset.action}`,
       method: 'PUT',
       headers: headers,
       success: function () {
