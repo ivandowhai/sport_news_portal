@@ -1,6 +1,7 @@
 class Survey < ApplicationRecord
   include Statusable
   include ActiveModel::Validations
+  include AASM
 
   has_many :answers, dependent: :delete_all
 
@@ -10,6 +11,19 @@ class Survey < ApplicationRecord
   validates :start, presence: true
   validates :end, presence: true
   validates_with SurveyValidator, on: :create
+
+  aasm column: :status, enum: true do
+    state :pending, initial: true
+    state :published, :closed
+
+    event :published do
+      transitions from: :pending, to: :published
+    end
+
+    event :closed do
+      transitions from: :published, to: :closed
+    end
+  end
 
   def self.surveys_list_by_statuses(status_opened)
     query = status_opened ? pending_or_published : closed
