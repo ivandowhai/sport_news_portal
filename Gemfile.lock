@@ -370,7 +370,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aasm
   bootsnap (>= 1.4.4)
   bootstrap-sass
   brakeman
