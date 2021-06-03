@@ -1,4 +1,22 @@
 div
+  - if @photo_of_the_day.present? && @photo_of_the_day.show
+    .row
+      .col-md-12
+        hr
+        h4
+          = t('photo_of_the_day')
+        div.d-flex.align-items-end.photo-of-the-day[style="background-image: url('#{@photo_of_the_day.picture.url}'); height: #{@photo_of_the_day.picture.height.to_i}px!important;" title="#{@photo_of_the_day.alt}"]
+          div
+            h4
+              = @photo_of_the_day.title
+            p
+              = @photo_of_the_day.description
+            p
+              strong
+                = t('author') + ': '
+              i
+                = @photo_of_the_day.author
+        hr
   .row
     .col-md-6
       - if @site_settings[:most_popular].parameters['enabled']

@@ -33,4 +33,22 @@ $(window).on('load', function () {
   $("#addFooterButton").on('click', function () {
     $('#category').val($('.nav-link.active')[0].dataset.category_id)
   })
+
+  ClassicEditor
+    .create( document.querySelector( '#page_body' ), {
+      removePlugins: [
+        'CKFinder',
+        'Image',
+        'ImageCaption',
+        'ImageStyle',
+        'ImageToolbar',
+        'ImageUpload',
+        'Table',
+        'TableToolbar',
+        'EasyImage'
+      ]
+    } )
+    .catch( error => {
+      console.error( error );
+    } );
 })

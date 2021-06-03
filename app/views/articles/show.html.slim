@@ -14,7 +14,7 @@ h4
     .col-md-12
       iframe[width="560" height="315" src="#{@article.video_link}" title="YouTube video player" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen]
 div
-  = @article.body
+  = sanitize @article.body
 br
 .comments
   .comments-header

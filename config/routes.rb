@@ -1,3 +1,4 @@
+
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
   namespace 'admin' do
     root 'home#index'
     put '/settings/:key', to: 'home#update'
+    post 'home/photo_of_the_day', to: 'home#photo_of_the_day'
     resources :categories do
       resources :articles
     end

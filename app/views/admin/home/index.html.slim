@@ -43,3 +43,44 @@
         input.form-check-input.enable[type="checkbox" placeholder="Enabled" checked="checked" data-key="newsletter_subscription"] Enabled
       - else
         input.form-check-input.enable[type="checkbox" placeholder="Enabled" data-key="newsletter_subscription"] Enabled
+.row
+  .col-md-12
+    hr
+.row
+  .col-md-12
+    div
+      strong
+        | Photo of the day
+.row
+  .col-md-12
+    div
+      = form_with model: @photo_of_the_day, url: admin_home_photo_of_the_day_url, method: :post, id: 'photo_of_the_day' do |f|
+        - if flash[:errors] && flash[:errors].any?
+          #error_explanation.alert.alert-danger
+            h2
+              = pluralize(flash[:errors].count, "error")
+              |  prohibited this article from being saved:
+            ul
+              - flash[:errors].each do |error|
+                li
+                  = "#{error[0]}: #{error[1][0]}"
+        .form-group
+          = f.label :picture, class: 'label'
+          = f.file_field :picture
+        .form-group
+          = f.label :alt, class: 'label'
+          = f.text_field :alt, class: 'form-control'
+        .form-group
+          = f.label :title, class: 'label'
+          = f.text_field :title, class: 'form-control'
+        .form-group
+          = f.label :description, class: 'label'
+          = f.text_field :description, class: 'form-control'
+        .form-group
+          = f.label :author, class: 'label'
+          = f.text_field :author, class: 'form-control'
+        .form-group
+          = f.label :show, class: 'label'
+          = f.check_box :show
+        .form-group
+          = f.submit 'Publish', class: 'btn btn-primary'

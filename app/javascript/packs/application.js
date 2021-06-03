@@ -4,10 +4,10 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap"
+import "@ckeditor/ckeditor5-build-classic/build/ckeditor.js"
 import "../../assets/stylesheets/application.scss"
 import "../controllers/admin/footer"
 import "../controllers/admin/locales"
@@ -15,10 +15,10 @@ import "../controllers/admin/home"
 import "../controllers/admin/users"
 import "../controllers/admin/banners"
 import "../controllers/admin/surveys"
+import "../controllers/admin/article"
 import "../controllers/application"
 import "../controllers/article"
 import "../controllers/surveys"
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()

@@ -16,7 +16,7 @@
     = form.text_field :caption, class: 'form-control'
   .form-group
     = form.label :body, class: 'label'
-    = form.text_area :body, class: 'form-control'
+    = form.text_area :body, class: 'form-control', id: 'article_body'
   .form-group
     = form.label :category_id, class: 'label'
     = form.select :category_id, options_for_select(@categories, @article.category_id), {}, class: 'form-control'
