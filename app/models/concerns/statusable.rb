@@ -7,6 +7,7 @@ module Statusable
 
   included do
     scope :pending_and_published, -> { where(status: [STATUS_PENDING, STATUS_PUBLISHED]) }
+    scope :pending, -> { where(status: STATUS_PENDING) }
     scope :published, -> { where(status: STATUS_PUBLISHED) }
     scope :closed, -> { where(status: STATUS_CLOSED) }
   end
