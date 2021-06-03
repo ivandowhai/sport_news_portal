@@ -14,7 +14,10 @@ import "../controllers/admin/locales"
 import "../controllers/admin/home"
 import "../controllers/admin/users"
 import "../controllers/admin/banners"
+import "../controllers/admin/surveys"
+import "../controllers/application"
 import "../controllers/article"
+import "../controllers/surveys"
 
 Rails.start()
 Turbolinks.start()

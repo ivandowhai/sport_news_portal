@@ -12,11 +12,15 @@ Rails.application.routes.draw do
     resources :articles do
       resources :comments
     end
+    resources :banners, only: :index
   end
 
   get '/search', to: 'articles#search'
 
   resources :reactions
+  resources :surveys
+
+  get '/survey/show_newest', to: 'surveys#show_newest'
 
   get '/profile', to: 'users#edit'
   put '/profile', to: 'users#update'
@@ -41,6 +45,10 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :surveys
+
+    put '/surveys/publish/:id', to: 'surveys#publish'
+    put '/surveys/close/:id', to: 'surveys#close'
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'

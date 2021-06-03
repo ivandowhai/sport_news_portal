@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_110743) do
+ActiveRecord::Schema.define(version: 2021_05_26_093222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string "answer"
+    t.bigint "survey_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["survey_id"], name: "index_answers_on_survey_id"
+  end
+
+  create_table "answers_users", id: false, force: :cascade do |t|
+    t.bigint "answer_id", null: false
+    t.bigint "user_id", null: false
+  end
 
   create_table "article_views", force: :cascade do |t|
     t.bigint "article_id"
@@ -38,7 +51,7 @@ ActiveRecord::Schema.define(version: 2021_05_25_110743) do
 
   create_table "banners", force: :cascade do |t|
     t.string "name"
-    t.integer "status"
+    t.integer "status", limit: 2, default: 0
     t.string "image"
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
@@ -108,6 +121,15 @@ ActiveRecord::Schema.define(version: 2021_05_25_110743) do
   create_table "site_settings", force: :cascade do |t|
     t.string "key"
     t.json "parameters"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.string "question"
+    t.integer "status"
+    t.datetime "start"
+    t.datetime "end"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

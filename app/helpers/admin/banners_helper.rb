@@ -1,25 +1,7 @@
 module Admin::BannersHelper
-  def status(banner)
-    statuses = {
-      pending: {
-        text: "Not published",
-        class: "btn-info"
-      },
-      published: {
-        text: "Published",
-        class: "btn-success"
-      },
-      closed: {
-        text: "Closed",
-        class: "btn-dark"
-      }
-    }
-    statuses[banner.status.to_sym]
-  end
+  extend Admin::StatusableHelper
 
-  def banners
-    path = Rails.application.routes.recognize_path(request.env["PATH_INFO"])
-    return [] unless path[:controller] == "articles"
-    Banner.published.where(category_id: path[:category_id])
+  def show_banners?
+    Rails.application.routes.recognize_path(request.env["PATH_INFO"])[:controller] == "articles"
   end
 end

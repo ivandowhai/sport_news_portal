@@ -1,4 +1,6 @@
 class Admin::BannersController < Admin::AdminController
+  include Admin::Concerns::Statusable
+
   PER_PAGE = 20
 
   def index
@@ -24,24 +26,8 @@ class Admin::BannersController < Admin::AdminController
     end
   end
 
-  def publish
-    if banner.publish
-      render json: banner
-    else
-      render json: {error: "Failed to save."}, status: :bad_request
-    end
-  end
-
-  def close
-    if banner.close
-      render json: banner
-    else
-      render json: {error: "Failed to save."}, status: :bad_request
-    end
-  end
-
   def destroy
-    banner.destroy
+    model.destroy
     redirect_to admin_banners_path, notice: "Banner was successfully destroyed."
   end
 
@@ -51,7 +37,7 @@ class Admin::BannersController < Admin::AdminController
     params.require(:banner).permit(:name, :image, :category_id)
   end
 
-  def banner
-    @banner ||= Banner.find(params[:id])
+  def model
+    @model ||= Banner.find(params[:id])
   end
 end

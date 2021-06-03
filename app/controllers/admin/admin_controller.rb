@@ -16,7 +16,8 @@ class Admin::AdminController < ApplicationController
       {title: "Users", url: admin_users_path},
       {title: "Footer", url: admin_pages_path},
       {title: "Locales", url: admin_locales_path},
-      {title: "Banners", url: admin_banners_path}
+      {title: "Banners", url: admin_banners_path},
+      {title: "Surveys", url: admin_surveys_path}
     ]
   end
 
