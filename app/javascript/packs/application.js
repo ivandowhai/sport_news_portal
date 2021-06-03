@@ -13,6 +13,7 @@ import "../controllers/admin/footer"
 import "../controllers/admin/locales"
 import "../controllers/admin/home"
 import "../controllers/admin/users"
+import "../controllers/admin/banners"
 import "../controllers/article"
 
 Rails.start()

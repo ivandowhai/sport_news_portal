@@ -34,6 +34,13 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :locales
+    resources :banners do
+      member do
+        put 'publish', to: 'banners#publish'
+        put 'close', to: 'banners#close'
+      end
+    end
+
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'
