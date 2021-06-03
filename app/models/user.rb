@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   ROLE_ADMIN = "admin"
   ROLE_USER = "user"
+  PER_PAGE = 20
 
   def full_name
     "#{first_name} #{last_name}"
