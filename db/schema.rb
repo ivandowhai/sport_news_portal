@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_073907) do
+ActiveRecord::Schema.define(version: 2021_06_04_121859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 2021_06_02_073907) do
     t.index ["team_id"], name: "index_articles_on_team_id"
   end
 
+  create_table "articles_ckeditor_assets", id: false, force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.bigint "ckeditor_asset_id", null: false
+  end
+
   create_table "banners", force: :cascade do |t|
     t.string "name"
     t.integer "status", limit: 2, default: 0
@@ -58,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_073907) do
     t.bigint "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "closed_at", precision: 6, null: false
+    t.datetime "closed_at"
     t.index ["category_id"], name: "index_banners_on_category_id"
   end
 
@@ -70,6 +75,16 @@ ActiveRecord::Schema.define(version: 2021_06_02_073907) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_categories_on_category_id"
+  end
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -155,6 +170,11 @@ ActiveRecord::Schema.define(version: 2021_06_02_073907) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_teams_on_category_id"
     t.index ["subcategory_id"], name: "index_teams_on_subcategory_id"
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "user_id", null: false
   end
 
   create_table "users", force: :cascade do |t|

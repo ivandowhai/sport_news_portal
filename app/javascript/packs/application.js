@@ -20,6 +20,7 @@ import "../controllers/admin/teams"
 import "../controllers/application"
 import "../controllers/article"
 import "../controllers/surveys"
+import "../controllers/teams"
 
 Rails.start()
 ActiveStorage.start()

@@ -1,0 +1,19 @@
+.row
+  .col-md-9
+    = text_field_tag :team, nil, {class: 'form-control', id: 'search_teams'}
+  .col-md-3
+    = form_tag nil, method: :post, id: 'attach_to_user_form'
+      = submit_tag 'Follow', {class: 'btn btn-primary', id: 'follow_team'}
+  #teams_wrapper[style="padding: 15px; border: 1 px solid grey;"]
+.row
+  .d-flex.flex-column
+  - if @teams.present?
+    - @teams.each do |team|
+      .p-2
+        div.d-flex.flex-row
+          .p-2
+            img.avatar-tiny[src="#{team.logo.thumb.url}"]
+          h5.p-2
+            = team.team
+          .p-2
+            = link_to t('delete'), team_path(team), method: :delete
