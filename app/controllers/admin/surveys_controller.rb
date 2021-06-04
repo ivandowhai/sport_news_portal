@@ -6,7 +6,7 @@ class Admin::SurveysController < Admin::AdminController
   def index
     @status_opened = params[:status].nil? || params[:status] == "opened"
     @surveys = Survey.surveys_list_by_statuses(@status_opened).paginate(page: params[:page], per_page: PER_PAGE)
-    @opened = Survey.pending_and_published.count
+    @opened = Survey.pending_or_published.count
     @closed = Survey.closed.count
   end
 
@@ -17,9 +17,6 @@ class Admin::SurveysController < Admin::AdminController
   def create
     @survey = Survey.new(survey_params)
     if @survey.save
-      params[:survey][:answers].each do |answer|
-        @survey.answers.create!(answer: answer)
-      end
       redirect_to admin_surveys_path, notice: "Survey was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -34,7 +31,7 @@ class Admin::SurveysController < Admin::AdminController
   private
 
   def survey_params
-    params.require(:survey).permit(:question, :start, :end)
+    params.require(:survey).permit(:question, :start, :end, answers_attributes: [:answer])
   end
 
   def model

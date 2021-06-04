@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :articles do
       resources :comments
     end
+    resources :banners, only: :index
   end
 
   get '/search', to: 'articles#search'
@@ -42,15 +43,20 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :locales
-    resources :banners
-    resources :surveys
+    resources :banners do
+      member do
+        put 'publish', to: 'banners#publish'
+        put 'close', to: 'banners#close'
+      end
+    end
     resources :teams
 
-    put '/banners/publish/:id', to: 'banners#publish'
-    put '/banners/close/:id', to: 'banners#close'
-
-    put '/surveys/publish/:id', to: 'surveys#publish'
-    put '/surveys/close/:id', to: 'surveys#close'
+    resources :surveys do
+      member do
+        put 'publish', to: 'surveys#publish'
+        put 'close', to: 'surveys#close'
+      end
+    end
 
     put '/locales/enable/:id', to: 'locales#enable'
     put '/locales/disable/:id', to: 'locales#disable'

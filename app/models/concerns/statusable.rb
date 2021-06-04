@@ -1,23 +1,21 @@
 module Statusable
   extend ActiveSupport::Concern
 
-  STATUS_PENDING = 0
-  STATUS_PUBLISHED = 1
-  STATUS_CLOSED = 2
-
   included do
-    scope :pending_and_published, -> { where(status: [STATUS_PENDING, STATUS_PUBLISHED]) }
-    scope :published, -> { where(status: STATUS_PUBLISHED) }
-    scope :closed, -> { where(status: STATUS_CLOSED) }
+    enum status: [:pending, :published, :closed]
+    scope :pending_or_published, -> { where(status: [:pending, :published]) }
+    scope :pending, -> { where(status: :pending) }
+    scope :published, -> { where(status: :published) }
+    scope :closed, -> { where(status: :closed) }
   end
 
   def publish
-    self.status = STATUS_PUBLISHED
+    published!
     save
   end
 
   def close
-    self.status = STATUS_CLOSED
+    closed!
     save
   end
 end

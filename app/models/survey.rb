@@ -1,18 +1,34 @@
 class Survey < ApplicationRecord
   include Statusable
   include ActiveModel::Validations
+  include AASM
 
-  has_many :answers
+  has_many :answers, dependent: :delete_all
+
+  accepts_nested_attributes_for :answers
 
   validates :question, presence: true
   validates :start, presence: true
   validates :end, presence: true
-  validates_with SurveyValidator
+  validates_with SurveyValidator, on: :create
+
+  aasm column: :status, enum: true do
+    state :pending, initial: true
+    state :published, :closed
+
+    event :published do
+      transitions from: :pending, to: :published
+    end
+
+    event :closed do
+      transitions from: :published, to: :closed
+    end
+  end
 
   def self.surveys_list_by_statuses(status_opened)
-    query = status_opened ? pending_and_published : closed
+    query = status_opened ? pending_or_published : closed
     query.select("surveys.*, count(answers_users.user_id) as responses")
-      .joins("left join answers on answers.survey_id = surveys.id left join answers_users on answers_users.answer_id = answers.id")
+      .left_outer_joins(answers: [:answers_users])
       .group("surveys.id")
   end
 
@@ -32,9 +48,5 @@ class Survey < ApplicationRecord
       .not(id: user.answers.pluck(:survey_id))
       .order(start: :desc)
       .first
-  end
-
-  def published?
-    status == STATUS_PUBLISHED
   end
 end

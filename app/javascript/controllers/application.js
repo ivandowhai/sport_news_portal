@@ -13,5 +13,15 @@ $(window).on('load', function () {
         }
       })
     }
+
+  if (document.getElementById('banner-place').dataset.show == 'true') {
+    const categoryId = document.getElementById('category_id').dataset.category_id
+    $.ajax(`/categories/${categoryId}/banners`, {
+      headers: headers,
+      success: function (data) {
+        $('#banner-place').html(data)
+      }
+    })
+  }
   }
 )

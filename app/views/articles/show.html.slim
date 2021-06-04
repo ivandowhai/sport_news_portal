@@ -1,4 +1,4 @@
-h1
+h1#category_id[data-category_id="#{@article.category.id}"]
   = @article.title
 h4
   = link_to @article.category.name, category_articles_url(@article.category)
