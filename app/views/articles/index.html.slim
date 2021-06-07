@@ -12,3 +12,5 @@ h1#category_id[data-category_id="#{@category.id}"]
           p.card-text
             = article.caption
 = will_paginate @articles
+= content_for :banner_place do
+  #banner-place
