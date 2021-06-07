@@ -3,6 +3,11 @@ class TeamsController < PortalController
     @teams = current_user.teams
   end
 
+  def team_hub
+    @teams = current_user.teams
+    @articles = Article.where(team_id: @teams.pluck(:id))
+  end
+
   def attach_to_user
     if team.users.exclude? current_user
       team.users << current_user

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   get '/teams-search', to: 'teams#search'
+  get '/team-hub', to: 'teams#team_hub'
 
   get '/survey/show_newest', to: 'surveys#show_newest'
 
