@@ -3,6 +3,8 @@ class Admin::AdminController < ApplicationController
 
   layout "admin"
 
+  private
+
   def check_is_admin
     unless current_user.admin?
       redirect_to root_path
