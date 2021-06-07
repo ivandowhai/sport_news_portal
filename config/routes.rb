@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     post 'home/photo_of_the_day', to: 'home#photo_of_the_day'
     resources :categories do
       member do
-        get 'subcategories', to: 'categories#subcategories'
+        get 'subcategories'
       end
       resources :articles
     end

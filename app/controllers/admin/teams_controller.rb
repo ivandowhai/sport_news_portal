@@ -1,6 +1,6 @@
 class Admin::TeamsController < Admin::AdminController
+  before_action :first_level_categories, except: [:update, :destroy]
   def index
-    @categories = Category.first_level
     @subcategories = params[:category_id] ? Category.where(category_id: params[:category_id]) : []
     @teams = Team.filter(params)
     @params = params
@@ -8,13 +8,11 @@ class Admin::TeamsController < Admin::AdminController
 
   def new
     @team = Team.new
-    @categories = Category.first_level
     @subcategories = []
   end
 
   def create
     @team = Team.new(team_params)
-    @categories = Category.first_level
     @subcategories = []
     if @team.save
       redirect_to admin_teams_path, notice: "Team was successfully created."
@@ -25,7 +23,6 @@ class Admin::TeamsController < Admin::AdminController
 
   def edit
     team
-    @categories = Category.first_level
     @subcategories = Category.where(category_id: team.category_id)
   end
 
@@ -43,6 +40,10 @@ class Admin::TeamsController < Admin::AdminController
   end
 
   private
+
+  def first_level_categories
+    @categories = Category.first_level
+  end
 
   def team
     @team ||= Team.find(params[:id])

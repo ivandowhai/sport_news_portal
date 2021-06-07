@@ -14,13 +14,7 @@ class Banner < ApplicationRecord
     end
 
     event :closed do
-      transitions from: :published, to: :closed
+      transitions from: :published, to: :closed, after: proc { self.closed_at = Time.now.getutc }
     end
-  end
-
-  def close
-    closed!
-    self.closed_at = Time.now.getutc
-    save
   end
 end

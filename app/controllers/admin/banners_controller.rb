@@ -7,8 +7,8 @@ class Admin::BannersController < Admin::AdminController
     @status_opened = params[:status].nil? || params[:status] == "opened"
     query = @status_opened ? Banner.pending_or_published : Banner.closed
     @banners = query.includes([:category]).paginate(page: params[:page], per_page: PER_PAGE)
-    @opened = Banner.pending_or_published.count
-    @closed = Banner.closed.count
+    @opened_count = Banner.pending_or_published.count
+    @closed_count = Banner.closed.count
   end
 
   def new
