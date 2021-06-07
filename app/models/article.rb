@@ -5,8 +5,8 @@ class Article < ApplicationRecord
   has_many :article_views, dependent: :delete_all
   mount_uploader :image, ImageUploader
   before_save :prepare_video_link
-  scope :most_popular, -> { order(views_count: :desc).limit(3) }
-  scope :most_commented, -> { order(comments_count: :desc).limit(3) }
+  scope :most_popular, -> { order(:views_count).limit(3) }
+  scope :most_commented, -> { order(:comments_count).limit(3) }
 
   def self.search(query)
     where("lower(title) like :query or lower(body) like :query ", query: "%#{query}%")

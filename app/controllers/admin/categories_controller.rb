@@ -1,6 +1,6 @@
 class Admin::CategoriesController < Admin::AdminController
   def index
-    @categories = Category.order(:priority)
+    @categories = Category.includes([:category]).order(:priority)
   end
 
   def show
