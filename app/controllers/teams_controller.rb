@@ -6,6 +6,8 @@ class TeamsController < PortalController
   def team_hub
     @teams = current_user.teams
     @articles = Article.where(team_id: @teams.pluck(:id))
+    @most_popular_articles = Article.where(team_id: @teams.pluck(:id)).most_popular
+    @most_commented_articles = Article.where(team_id: @teams.pluck(:id)).most_commented
   end
 
   def attach_to_user

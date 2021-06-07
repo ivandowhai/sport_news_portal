@@ -1,6 +1,8 @@
 - @teams.each do |team|
   h1
     = team.team
+  div
+    = link_to t('unfollow'), team_path(team), method: :delete
   .articles-container
     - @articles.each do |article|
       - if article.team_id == team.id
@@ -13,3 +15,7 @@
                 = article.title
               p.card-text
                 = article.caption
+
+.row
+  = render "components/most_popular", site_settings: @site_settings, most_popular_articles: @most_popular_articles
+  = render "components/most_commented", site_settings: @site_settings, most_commented_articles: @most_commented_articles

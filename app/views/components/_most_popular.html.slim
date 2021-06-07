@@ -1,0 +1,6 @@
+.col-md-6
+  - if site_settings[:most_popular].parameters['enabled']
+    h4.main-page-header
+      = t('most_popular')
+    - most_popular_articles.each do |article|
+      = render "main/article_card", article: article
