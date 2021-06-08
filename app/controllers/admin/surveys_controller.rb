@@ -31,7 +31,7 @@ class Admin::SurveysController < Admin::AdminController
   private
 
   def survey_params
-    params.require(:survey).permit(:question, :start, :end, answers_attributes: [:answer])
+    params.require(:survey).permit(:question, :start_at, :end_at, answers_attributes: [:answer])
   end
 
   def model

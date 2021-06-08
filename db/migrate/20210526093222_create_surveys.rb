@@ -3,8 +3,8 @@ class CreateSurveys < ActiveRecord::Migration[6.1]
     create_table :surveys do |t|
       t.string :question
       t.integer :status, default: 0
-      t.datetime :start
-      t.datetime :end
+      t.datetime :start_at
+      t.datetime :end_at
       t.timestamps
     end
 
