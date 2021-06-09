@@ -31,13 +31,15 @@ class Article < ApplicationRecord
 
   private
 
+  YOUTUBE_URL = "https://www.youtube-nocookie.com/embed/"
+
   def prepare_video_link
     return if video_link.nil?
     matches = video_link.match(/watch\?v=([\w\-]*)/)
-    unless matches.nil?
+    if matches.present?
       self.video_link = matches.captures.nil? ?
       nil :
-      "https://www.youtube-nocookie.com/embed/#{matches.captures.first}"
+      "#{YOUTUBE_URL}#{matches.captures.first}"
     end
   end
 end

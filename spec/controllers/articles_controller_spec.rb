@@ -23,7 +23,7 @@ RSpec.describe ArticlesController, type: :request do
     articles = create_list(:article, 2, category: category)
     must_be_founded = create(:article, category: category, title: "Article I want to find")
 
-    visit '/search?query=find'
+    visit "/search?query=find"
     articles.each do |article|
       expect(page).to have_no_content(article.title)
     end

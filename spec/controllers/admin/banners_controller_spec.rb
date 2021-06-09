@@ -21,14 +21,13 @@ RSpec.describe Admin::ArticlesController, type: :request do
       end
 
       it "Closed banners list" do
-        visit admin_banners_path(status: 'closed')
+        visit admin_banners_path(status: "closed")
 
         expect(page).to have_no_content(@pending_banner.name)
         expect(page).to have_no_content(@published_banner.name)
         expect(page).to have_content(@closed_banner.name)
       end
     end
-
 
     it "Should create new banner" do
       categories = create_list(:category, 2)

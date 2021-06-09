@@ -34,10 +34,10 @@ class Survey < ApplicationRecord
 
   def self.filter(params)
     query = params[:status].nil? || params[:status] == "published" ? published : closed
-    unless params[:search].nil?
+    if params[:search].present?
       query = query.where("lower(question) like ?", "%#{params[:search].downcase}%")
     end
-    unless params[:sort_by].nil?
+    if params[:sort_by].present?
       query = query.order(params[:sort_by] == "newest" ? "start_at" : "end_at")
     end
     query

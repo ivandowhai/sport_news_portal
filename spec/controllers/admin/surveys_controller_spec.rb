@@ -20,7 +20,7 @@ RSpec.describe Admin::ArticlesController, type: :request do
       end
 
       it "Closed surveys list" do
-        visit admin_surveys_path(status: 'closed')
+        visit admin_surveys_path(status: "closed")
 
         expect(page).to have_no_content(@pending_survey.question)
         expect(page).to have_no_content(@published_survey.question)
