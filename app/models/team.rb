@@ -2,6 +2,7 @@ class Team < ApplicationRecord
   belongs_to :category
   belongs_to :subcategory, foreign_key: :subcategory_id, class_name: "Category"
   has_many :articles
+  has_and_belongs_to_many :users
   mount_uploader :logo, LogoUploader
 
   validates :team, presence: true
@@ -26,5 +27,11 @@ class Team < ApplicationRecord
       query = query.where(subcategory_id: params[:subcategory_id])
     end
     query.paginate(page: params[:page], per_page: PER_PAGE)
+  end
+
+  def self.find_by_name(team)
+    where("lower(team) like ?", "%#{team}%")
+      .includes(:users)
+      .limit(10)
   end
 end

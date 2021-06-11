@@ -20,7 +20,7 @@ html
             .line
             = render 'layouts/footer'
           .col-md-2
-            #banner-place[data-show="#{show_banners?}"]
+            = yield :banner_place
             #survey-place[data-show="#{show_newest_survey?}"]
       .container-fluid.site-footer
         .row

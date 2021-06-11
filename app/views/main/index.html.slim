@@ -18,15 +18,5 @@ div
                 = @photo_of_the_day.author
         hr
   .row
-    .col-md-6
-      - if @site_settings[:most_popular].parameters['enabled']
-        h4.main-page-header
-          = t('most_popular')
-        - @most_popular_articles.each do |article|
-          = render "article_card", article: article
-    .col-md-6
-      - if @site_settings[:most_commented].parameters['enabled']
-        h4.main-page-header
-          = t('most_commented')
-        - @most_commented_articles.each do |article|
-          = render "article_card", article: article
+    = render "components/most_popular", site_settings: @site_settings, most_popular_articles: @most_popular_articles
+    = render "components/most_commented", site_settings: @site_settings, most_commented_articles: @most_commented_articles

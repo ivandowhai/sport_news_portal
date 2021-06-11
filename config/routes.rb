@@ -20,6 +20,14 @@ Rails.application.routes.draw do
 
   resources :reactions
   resources :surveys
+  resources :teams, only: [:index, :destroy] do
+    member do
+      post 'attach-to-user', to: 'teams#attach_to_user'
+    end
+  end
+
+  get '/teams-search', to: 'teams#search'
+  get '/team-hub', to: 'teams#team_hub'
 
   get '/survey/show_newest', to: 'surveys#show_newest'
 

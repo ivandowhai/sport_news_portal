@@ -31,3 +31,5 @@ br
       - @comments_details.comments.each do |comment|
         = render "articles/comment", comment: comment
       = will_paginate @comments_details.comments
+= content_for :banner_place do
+  #banner-place

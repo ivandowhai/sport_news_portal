@@ -1,0 +1,21 @@
+- @teams.each do |team|
+  h1
+    = team.team
+  div
+    = link_to t('unfollow'), team_path(team), method: :delete
+  .articles-container
+    - @articles.each do |article|
+      - if article.team_id == team.id
+        = link_to category_article_url(article.category_id, article.id) do
+          .card.article-item
+            - unless article.image.file.nil?
+              = image_tag article.image.thumb.url, class: "card-img-top"
+            .card-body
+              h5.card-title
+                = article.title
+              p.card-text
+                = article.caption
+
+.row
+  = render "components/most_popular", site_settings: @site_settings, most_popular_articles: @most_popular_articles
+  = render "components/most_commented", site_settings: @site_settings, most_commented_articles: @most_commented_articles
