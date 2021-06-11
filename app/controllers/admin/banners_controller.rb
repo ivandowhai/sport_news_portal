@@ -13,11 +13,11 @@ class Admin::BannersController < Admin::AdminController
 
   def new
     @banner = Banner.new
-    @categories = Category.all.map { |category| [category.name, category.id] }
+    @categories = Category.all
   end
 
   def create
-    @categories = Category.all.map { |category| [category.name, category.id] }
+    @categories = Category.all
     @banner = Banner.new(banner_params)
     if @banner.save
       redirect_to admin_banners_path, notice: "Article was successfully created."

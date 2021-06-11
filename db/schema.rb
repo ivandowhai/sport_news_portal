@@ -154,8 +154,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_121859) do
   create_table "surveys", force: :cascade do |t|
     t.string "question"
     t.integer "status", default: 0
-    t.datetime "start"
-    t.datetime "end"
+    t.datetime "start_at"
+    t.datetime "end_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

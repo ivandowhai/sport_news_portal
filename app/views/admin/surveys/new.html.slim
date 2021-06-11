@@ -14,11 +14,11 @@
     = form.label :question, class: 'label'
     = form.text_field :question, class: 'form-control'
   .form-group
-    = form.label :start, class: 'label'
-    input.form-control[type="date" name="survey[start]"]
+    = form.label :start_at, class: 'label'
+    input.form-control[type="date" name="survey[start_at]"]
   .form-group
-    = form.label :end, class: 'label'
-    input.form-control[type="date" name="survey[end]"]
+    = form.label :end_at, class: 'label'
+    input.form-control[type="date" name="survey[end_at]"]
   = form.label 'Answers', class: 'label'
   #answers
     .form-group

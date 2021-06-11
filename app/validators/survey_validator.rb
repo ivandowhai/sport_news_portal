@@ -1,10 +1,10 @@
 class SurveyValidator < ActiveModel::Validator
   def validate(record)
-    unless record.start >= Date.today
-      record.errors[:start] << "Start can't be in the past"
+    unless record.start_at >= Date.today
+      record.errors[:start_at] << "Start can't be in the past"
     end
-    unless record.end > record.start
-      record.errors[:end] << "End must be greater than start"
+    unless record.end_at > record.start_at
+      record.errors[:end_at] << "End must be greater than start"
     end
   end
 end

@@ -8,8 +8,8 @@ class Survey < ApplicationRecord
   accepts_nested_attributes_for :answers
 
   validates :question, presence: true
-  validates :start, presence: true
-  validates :end, presence: true
+  validates :start_at, presence: true
+  validates :end_at, presence: true
   validates_with SurveyValidator, on: :create
 
   aasm column: :status, enum: true do
@@ -34,11 +34,11 @@ class Survey < ApplicationRecord
 
   def self.filter(params)
     query = params[:status].nil? || params[:status] == "published" ? published : closed
-    unless params[:search].nil?
+    if params[:search].present?
       query = query.where("lower(question) like ?", "%#{params[:search].downcase}%")
     end
-    unless params[:sort_by].nil?
-      query = query.order(params[:sort_by] == "newest" ? "start" : '"end"')
+    if params[:sort_by].present?
+      query = query.order(params[:sort_by] == "newest" ? "start_at" : "end_at")
     end
     query
   end
@@ -46,7 +46,7 @@ class Survey < ApplicationRecord
   def self.newest_published_unvoted(user)
     published.where
       .not(id: user.answers.pluck(:survey_id))
-      .order(start: :desc)
+      .order(start_at: :desc)
       .first
   end
 end

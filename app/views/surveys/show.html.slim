@@ -2,7 +2,7 @@
   div.survey-wrapper
     .survey-body
       h5
-        = @survey.start.strftime('%d %^b') + ' - ' + @survey.end.strftime('%d %^b')
+        = @survey.start_at.strftime('%d %^b') + ' - ' + @survey.end_at.strftime('%d %^b')
       h6
         = @survey.question
       - if @user_answer.nil? && @survey.published?

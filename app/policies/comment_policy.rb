@@ -7,7 +7,7 @@ class CommentPolicy
   end
 
   def create?
-    user.nil? == false && user.enabled
+    user.present? && user.enabled
   end
 
   def update?
